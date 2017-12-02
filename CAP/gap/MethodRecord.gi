@@ -49,7 +49,8 @@ Lift := rec(
   io_type := [ [ "alpha", "beta" ], [ "alpha_source", "beta_source" ] ],
   cache_name := "Lift",
   return_type := "morphism_or_fail",
-  dual_operation := "Colift" ),
+  dual_operation := "Colift",
+  is_merely_set_theoretic := true ),
 
 Colift := rec(
   installation_name := "Colift",
@@ -57,7 +58,24 @@ Colift := rec(
   io_type := [ [ "alpha", "beta" ], [ "alpha_range", "beta_range" ] ],
   cache_name := "Colift",
   return_type := "morphism_or_fail",
-  dual_operation := "Lift" ),
+  dual_operation := "Lift",
+  is_merely_set_theoretic := true  ),
+
+ProjectiveLift := rec(
+  installation_name := "ProjectiveLift",
+  filter_list := [ "morphism", "morphism" ],
+  io_type := [ [ "alpha", "beta" ], [ "alpha_source", "beta_source" ] ],
+  cache_name := "ProjectiveLift",
+  return_type := "morphism_or_fail",
+  dual_operation := "InjectiveColift" ),
+
+InjectiveColift := rec(
+  installation_name := "InjectiveColift",
+  filter_list := [ "morphism", "morphism" ],
+  io_type := [ [ "alpha", "beta" ], [ "alpha_range", "beta_range" ] ],
+  cache_name := "InjectiveColift",
+  return_type := "morphism_or_fail",
+  dual_operation := "ProjectiveLift" ),
 
 IdentityMorphism := rec(
   installation_name := "IdentityMorphism",
@@ -2677,6 +2695,61 @@ DirectSumProjectionInPushout := rec(
   return_type := "morphism",
   dual_operation := "FiberProductEmbeddingInDirectSum",
   no_with_given := true ),
+
+SomeProjectiveObject := rec(
+  installation_name := "SomeProjectiveObject",
+  filter_list := [ "object" ],
+  return_type := "object",
+  dual_operation := "SomeInjectiveObject",
+  is_merely_set_theoretic := true ),
+
+EpimorphismFromSomeProjectiveObject := rec(
+  installation_name := "EpimorphismFromSomeProjectiveObject",
+  filter_list := [ "object" ],
+  io_type := [ [ "A" ], [ "epsilon" ] ],
+  universal_object_position := "Source",
+  universal_type := "Limit", #FIXME: this is not a limit, but on a technical level, it behaves as if it was
+  return_type := "morphism",
+  dual_operation := "MonomorphismIntoSomeInjectiveObject",
+  is_merely_set_theoretic := true ),
+
+EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject := rec(
+  installation_name := "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+  filter_list := [ "object", "object" ],
+  io_type := [ [ "A", "P" ], [ "epsilon" ] ],
+  universal_type := "Limit", #FIXME: this is not a limit, but on a technical level, it behaves as if it was
+  cache_name := "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+  return_type := "morphism",
+  dual_operation := "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+  is_merely_set_theoretic := true ),
+
+SomeInjectiveObject := rec(
+  installation_name := "SomeInjectiveObject",
+  filter_list := [ "object" ],
+  return_type := "object",
+  dual_operation := "SomeProjectiveObject",
+  is_merely_set_theoretic := true ),
+
+MonomorphismIntoSomeInjectiveObject := rec(
+  installation_name := "MonomorphismIntoSomeInjectiveObject",
+  filter_list := [ "object" ],
+  io_type := [ [ "A" ], [ "iota" ] ],
+  universal_object_position := "Range",
+  universal_type := "Colimit", #FIXME: this is not a colimit, but on a technical level, it behaves as if it was
+  return_type := "morphism",
+  dual_operation := "EpimorphismFromSomeProjectiveObject",
+  is_merely_set_theoretic := true ),
+
+MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject := rec(
+  installation_name := "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+  filter_list := [ "object", "object" ],
+  io_type := [ [ "A", "I" ], [ "iota" ] ],
+  cache_name := "MonomorphismIntoSomeInjectiveObjectWithGivenSomeInjectiveObject",
+  universal_type := "Colimit", #FIXME: this is not a colimit, but on a technical level, it behaves as if it was
+  return_type := "morphism",
+  dual_operation := "EpimorphismFromSomeProjectiveObjectWithGivenSomeProjectiveObject",
+  is_merely_set_theoretic := true ),
+
 
   ) );
 

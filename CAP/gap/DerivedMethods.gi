@@ -980,6 +980,17 @@ AddDerivationToCAP( LiftAlongMonomorphism,
 end : Description := "LiftAlongMonomorphism using Lift" );
 
 ##
+AddDerivationToCAP( ProjectiveLift,
+                    [ [ Lift, 1 ] ],
+                    
+  function( alpha, beta )
+    
+    return Lift( alpha, beta );
+    
+end : Description := "ProjectiveLift using Lift" );
+
+
+##
 AddDerivationToCAP( ColiftAlongEpimorphism,
                     [ [ Colift, 1 ] ],
                     
@@ -988,6 +999,17 @@ AddDerivationToCAP( ColiftAlongEpimorphism,
     return Colift( alpha, beta );
     
 end : Description := "ColiftAlongEpimorphism using Colift" );
+
+##
+AddDerivationToCAP( InjectiveColift,
+                    [ [ Colift, 1 ] ],
+                    
+  function( alpha, beta )
+    
+    return Colift( alpha, beta );
+    
+end : Description := "InjectiveColift using Colift" );
+
 
 ##
 AddDerivationToCAP( IsomorphismFromKernelOfCokernelToImageObject,
@@ -1984,6 +2006,27 @@ AddDerivationToCAP( Coimage,
     return Source( IsomorphismFromCoimageToCokernelOfKernel( morphism ) );
     
 end : Description := "Coimage as the source of IsomorphismFromCoimageToCokernelOfKernel" );
+
+##
+AddDerivationToCAP( SomeProjectiveObject,
+                    [ [ EpimorphismFromSomeProjectiveObject, 1 ] ],
+                    
+  function( obj )
+    
+    return Source( EpimorphismFromSomeProjectiveObject( obj ) );
+    
+end : Description := "SomeProjectiveObject as the source of EpimorphismFromSomeProjectiveObject" );
+
+##
+AddDerivationToCAP( SomeInjectiveObject,
+                    [ [ MonomorphismIntoSomeInjectiveObject, 1 ] ],
+                    
+  function( obj )
+    
+    return Range( MonomorphismIntoSomeInjectiveObject( obj ) );
+    
+end : Description := "SomeInjectiveObject as the range of MonomorphismIntoSomeInjectiveObject" );
+
 
 ###########################
 ##
