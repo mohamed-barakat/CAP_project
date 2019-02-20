@@ -20,7 +20,7 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCoclosedMonoidalCategory  := Conca
 ##
 #! @Description
 #! The arguments are two objects $a,b$.
-#! The output is the internal hom object $\mathrm{\underline{coHom}}(a,b)$.
+#! The output is the internal cohom object $\mathrm{\underline{coHom}}(a,b)$.
 #! @Returns an object
 #! @Arguments a, b
 DeclareOperation( "InternalCoHomOnObjects",
@@ -47,7 +47,7 @@ DeclareOperation( "AddInternalCoHomOnObjects",
 
 #! @Description
 #! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$.
-#! The output is the internal hom morphism
+#! The output is the internal cohom morphism
 #! $\mathrm{\underline{coHom}}(\alpha,\beta): \mathrm{\underline{coHom}}(a,b') \rightarrow \mathrm{\underline{coHom}}(a',b)$.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
 #! @Arguments alpha, beta
@@ -58,7 +58,7 @@ DeclareOperation( "InternalCoHomOnMorphisms",
 #! The arguments are an object $s = \mathrm{\underline{coHom}}(a,b')$,
 #! two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$,
 #! and an object $r = \mathrm{\underline{coHom}}(a',b)$.
-#! The output is the internal hom morphism
+#! The output is the internal cohom morphism
 #! $\mathrm{\underline{coHom}}(\alpha,\beta): \mathrm{\underline{coHom}}(a,b') \rightarrow \mathrm{\underline{coHom}}(a',b)$.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
 #! @Arguments s, alpha, beta, r
