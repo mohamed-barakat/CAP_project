@@ -205,6 +205,60 @@ end );
 #
 # end );
 
+##
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromInternalCoHomToObject :=
+  [ [ "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom", 1 ],
+    [ "TensorUnit", 1 ],
+    [ "InternalCoHomOnObjects", 1 ] ];
+##
+InstallMethod( IsomorphismFromInternalCoHomToObject,
+               [ IsCapCategoryObject ],
 
+  function( object )
+    local category;
+
+    category := CapCategory( object );
+
+    return IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom( object, InternalCoHomOnObjects( object, TensorUnit( category ) ) );
+
+end );
+
+##
+InstallMethod( IsomorphismFromInternalCoHomToObject,
+               [ IsCapCategoryObject and IsCellOfSkeletalCategory ],
+
+  function( object )
+
+    return IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom( object, object );
+
+end );
+
+##
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromObjectToInternalCoHom :=
+  [ [ "IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom", 1 ],
+    [ "TensorUnit", 1 ],
+    [ "InternalCoHomOnObjects", 1 ] ];
+##
+InstallMethod( IsomorphismFromObjectToInternalCoHom,
+               [ IsCapCategoryObject ],
+
+  function( object )
+    local category;
+
+    category := CapCategory( object );
+
+    return IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom( object, InternalCoHomOnObjects( object, TensorUnit( category ) ) );
+
+end );
+
+##
+InstallMethod( IsomorphismFromObjectToInternalCoHom,
+               [ IsCapCategoryObject and IsCellOfSkeletalCategory ],
+
+  function( object )
+
+    return IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom( object, object );
+
+end );
 
 CAP_INTERNAL_ADD_REPLACEMENTS_FOR_METHOD_RECORD( CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS );

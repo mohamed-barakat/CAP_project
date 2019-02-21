@@ -715,3 +715,77 @@ DeclareOperation( "AddCoLambdaElimination",
 
 DeclareOperation( "AddCoLambdaElimination",
                   [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The argument is an object $a$.
+#! The output is the natural isomorphism $a \rightarrow \mathrm{\underline{coHom}}(a,1)$.
+#! @Returns a morphism in $\mathrm{coHom}(a, \mathrm{\underline{coHom}}(a,1))$.
+#! @Arguments a
+DeclareAttribute( "IsomorphismFromObjectToInternalCoHom",
+                  IsCapCategoryObject );
+
+#! @Description
+#! The argument is an object $a$,
+#! and an object $r = \mathrm{\underline{coHom}}(a,1)$.
+#! The output is the natural isomorphism $a \rightarrow \mathrm{\underline{coHom}}(a,1)$.
+#! @Returns a morphism in $\mathrm{coHom}(a, \mathrm{\underline{coHom}}(a,1))$.
+#! @Arguments a,r
+DeclareOperation( "IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom</C>.
+#! $F: ( a, \mathrm{\underline{coHom}}(a,1) ) \mapsto ( a \rightarrow \mathrm{\underline{coHom}}(a,1) )$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+                  [ IsCapCategory, IsFunction ] );
+
+DeclareOperation( "AddIsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+                  [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The argument is an object $a$.
+#! The output is the natural isomorphism $\mathrm{\underline{coHom}}(a,1) \rightarrow a$.
+#! @Returns a morphism in $\mathrm{coHom}(\mathrm{\underline{coHom}}(a,1), a)$.
+#! @Arguments a
+DeclareAttribute( "IsomorphismFromInternalCoHomToObject",
+                  IsCapCategoryObject );
+
+#! @Description
+#! The argument is an object $a$,
+#! and an object $s = \mathrm{\underline{Hom}}(1,a)$.
+#! The output is the natural isomorphism $\mathrm{\underline{coHom}}(a,1) \rightarrow a$.
+#! @Returns a morphism in $\mathrm{coHom}(\mathrm{\underline{coHom}}(a,1), a)$.
+#! @Arguments a,s
+DeclareOperation( "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+                  [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom</C>.
+#! $F: ( a, \mathrm{\underline{coHom}}(a,1) ) \mapsto ( \mathrm{\underline{coHom}}(a,1) \rightarrow a )$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+                  [ IsCapCategory, IsFunction ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+                  [ IsCapCategory, IsList ] );

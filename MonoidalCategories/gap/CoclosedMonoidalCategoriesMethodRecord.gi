@@ -146,6 +146,21 @@ CoLambdaElimination := rec(
   cache_name := "CoLambdaElimination",
   return_type := "morphism",
   no_with_given := true ),
+
+IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom := rec(
+  installation_name := "IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+  filter_list := [ "object", "object" ],
+  io_type := [ [ "a", "r" ], [ "a", "r" ] ],
+  cache_name := "IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom",
+  return_type := "morphism" ),
+
+IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom := rec(
+  installation_name := "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+  filter_list := [ "object", "object" ],
+  io_type := [ [ "a", "s" ], [ "s", "a" ] ],
+  cache_name := "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
+  return_type := "morphism" ),
+
 ) );
 
 CAP_INTERNAL_ENHANCE_NAME_RECORD( COCLOSED_MONOIDAL_CATEGORIES_METHOD_NAME_RECORD );
