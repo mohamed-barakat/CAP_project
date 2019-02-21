@@ -85,6 +85,43 @@ MorphismToCoBidualWithGivenCoBidual := rec(
   io_type := [ [ "a", "r" ], [ "a", "r" ] ],
   cache_name := "MorphismToCoBidualWithGivenCoBidual",
   return_type := "morphism" ),
+
+# TensorProductInternalHomCompatibilityMorphismWithGivenObjects := rec(
+#   installation_name := "TensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#   filter_list := [ "object", "object", "object", "object", IsList ],
+#   io_type := [ [ "a", "ap", "b", "bp", "L" ], [ "L_1", "L_2" ] ],
+#   cache_name := "TensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#   return_type := "morphism" ),
+#
+# TensorProductDualityCompatibilityMorphismWithGivenObjects := rec(
+#   installation_name := "TensorProductDualityCompatibilityMorphismWithGivenObjects",
+#   filter_list := [ "object", "object", "object", "object" ],
+#   io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
+#   cache_name := "TensorProductDualityCompatibilityMorphismWithGivenObjects",
+#   return_type := "morphism" ),
+#
+# MorphismFromTensorProductToInternalHomWithGivenObjects := rec(
+#   installation_name := "MorphismFromTensorProductToInternalHomWithGivenObjects",
+#   filter_list := [ "object", "object", "object", "object" ],
+#   io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
+#   cache_name := "MorphismFromTensorProductToInternalHomWithGivenObjects",
+#   return_type := "morphism" ),
+
+IsomorphismFromCoDualToInternalCoHom := rec(
+  installation_name := "IsomorphismFromCoDualToInternalCoHom",
+  filter_list := [ "object" ],
+  io_type := [ [ "a" ], [ "i", "d" ] ],
+  cache_name := "IsomorphismFromCoDualToInternalCoHom",
+  return_type := "morphism",
+  no_with_given := true ),
+
+IsomorphismFromInternalCoHomToCoDual := rec(
+  installation_name := "IsomorphismFromInternalCoHomToCoDual",
+  filter_list := [ "object" ],
+  io_type := [ [ "a" ], [ "d", "i" ] ],
+  cache_name := "IsomorphismFromInternalCoHomToCoDual",
+  return_type := "morphism",
+  no_with_given := true ),
 ) );
 
 CAP_INTERNAL_ENHANCE_NAME_RECORD( COCLOSED_MONOIDAL_CATEGORIES_METHOD_NAME_RECORD );

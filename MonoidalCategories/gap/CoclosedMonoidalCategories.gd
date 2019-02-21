@@ -445,3 +445,183 @@ DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
 
 DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
                   [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The arguments are four objects $a, a', b, b'$.
+#! The output is the natural morphism
+#! $\mathrm{TensorProductInternalHomCompatibilityMorphismWithGivenObjects}_{a,a',b,b'}: \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b') \rightarrow \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b')$.
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b'), \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b'))$.
+#! @Arguments a,a',b,b'
+# DeclareOperation( "TensorProductInternalHomCompatibilityMorphism",
+#                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ] );
+
+##
+## The new_source and new_range arguments are the first and second element of the list.
+## This construction is due to the fact that the maximal number of arguments for an operation is 6,
+## but a basic operation with 6 arguments would install a setter having 7 arguments.
+#! @Description
+#! The arguments are four objects $a, a', b, b'$,
+#! and a list $L = [ \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b'), \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b') ]$.
+#! The output is the natural morphism
+#! $\mathrm{TensorProductInternalHomCompatibilityMorphismWithGivenObjects}_{a,a',b,b'}: \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b') \rightarrow \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b')$.
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b'), \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b'))$.
+#! @Arguments a,a',b,b',L
+# DeclareOperation( "TensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>TensorProductInternalHomCompatibilityMorphismWithGivenObjects</C>.
+#! $F: ( a,a',b,b', [ \mathrm{\underline{Hom}}(a,a') \otimes \mathrm{\underline{Hom}}(b,b'), \mathrm{\underline{Hom}}(a \otimes b,a' \otimes b') ]) \mapsto \mathrm{TensorProductInternalHomCompatibilityMorphismWithGivenObjects}_{a,a',b,b'}$.
+#! @Returns nothing
+#! @Arguments C, F
+# DeclareOperation( "AddTensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsFunction ] );
+#
+# DeclareOperation( "AddTensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsFunction, IsInt ] );
+#
+# DeclareOperation( "AddTensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsList, IsInt ] );
+#
+# DeclareOperation( "AddTensorProductInternalHomCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The arguments are two objects $a,b$.
+#! The output is the natural morphism
+#! $\mathrm{TensorProductDualityCompatibilityMorphismWithGivenObjects}: a^{\vee} \otimes b^{\vee} \rightarrow (a \otimes b)^{\vee}$.
+#! @Returns a morphism in $\mathrm{Hom}( a^{\vee} \otimes b^{\vee}, (a \otimes b)^{\vee} )$.
+#! @Arguments a,b
+# DeclareOperation( "TensorProductDualityCompatibilityMorphism",
+#                   [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $s = a^{\vee} \otimes b^{\vee}$,
+#! two objects $a,b$,
+#! and an object $r = (a \otimes b)^{\vee}$.
+#! The output is the natural morphism
+#! $\mathrm{TensorProductDualityCompatibilityMorphismWithGivenObjects}_{a,b}: a^{\vee} \otimes b^{\vee} \rightarrow (a \otimes b)^{\vee}$.
+#! @Returns a morphism in $\mathrm{Hom}( a^{\vee} \otimes b^{\vee}, (a \otimes b)^{\vee} )$.
+#! @Arguments s,a,b,r
+# DeclareOperation( "TensorProductDualityCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>TensorProductDualityCompatibilityMorphismWithGivenObjects</C>.
+#! $F: ( a^{\vee} \otimes b^{\vee}, a, b, (a \otimes b)^{\vee} ) \mapsto \mathrm{TensorProductDualityCompatibilityMorphismWithGivenObjects}_{a,b}$.
+#! @Returns nothing
+#! @Arguments C, F
+# DeclareOperation( "AddTensorProductDualityCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsFunction ] );
+#
+# DeclareOperation( "AddTensorProductDualityCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsFunction, IsInt ] );
+#
+# DeclareOperation( "AddTensorProductDualityCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsList, IsInt ] );
+#
+# DeclareOperation( "AddTensorProductDualityCompatibilityMorphismWithGivenObjects",
+#                   [ IsCapCategory, IsList ] );
+
+
+##
+#! @Description
+#! The arguments are two objects $a,b$.
+#! The output is the natural morphism $\mathrm{MorphismFromTensorProductToInternalHomWithGivenObjects}_{a,b}: a^{\vee} \otimes b \rightarrow \mathrm{\underline{Hom}}(a,b)$.
+#! @Returns a morphism in $\mathrm{Hom}( a^{\vee} \otimes b, \mathrm{\underline{Hom}}(a,b) )$.
+#! @Arguments a,b
+# DeclareOperation( "MorphismFromTensorProductToInternalHom",
+#                   [ IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $s = a^{\vee} \otimes b$,
+#! two objects $a,b$,
+#! and an object $r = \mathrm{\underline{Hom}}(a,b)$.
+#! The output is the natural morphism $\mathrm{MorphismFromTensorProductToInternalHomWithGivenObjects}_{a,b}: a^{\vee} \otimes b \rightarrow \mathrm{\underline{Hom}}(a,b)$.
+#! @Returns a morphism in $\mathrm{Hom}( a^{\vee} \otimes b, \mathrm{\underline{Hom}}(a,b) )$.
+#! @Arguments s,a,b,r
+# DeclareOperation( "MorphismFromTensorProductToInternalHomWithGivenObjects",
+#                   [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>MorphismFromTensorProductToInternalHomWithGivenObjects</C>.
+#! $F: ( a^{\vee} \otimes b, a, b, \mathrm{\underline{Hom}}(a,b) ) \mapsto \mathrm{MorphismFromTensorProductToInternalHomWithGivenObjects}_{a,b}$.
+#! @Returns nothing
+#! @Arguments C, F
+# DeclareOperation( "AddMorphismFromTensorProductToInternalHomWithGivenObjects",
+#                   [ IsCapCategory, IsFunction ] );
+#
+# DeclareOperation( "AddMorphismFromTensorProductToInternalHomWithGivenObjects",
+#                   [ IsCapCategory, IsFunction, IsInt ] );
+#
+# DeclareOperation( "AddMorphismFromTensorProductToInternalHomWithGivenObjects",
+#                   [ IsCapCategory, IsList, IsInt ] );
+#
+# DeclareOperation( "AddMorphismFromTensorProductToInternalHomWithGivenObjects",
+#                   [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The argument is an object $a$.
+#! The output is the isomorphism
+#! $\mathrm{IsomorphismFromCoDualToInternalCoHom}_{a}: a_{\vee} \rightarrow \mathrm{\underline{coHom}}(1,a)$.
+#! @Returns a morphism in $\mathrm{Hom}(a_{\vee}, \mathrm{\underline{coHom}}(1,a))$.
+#! @Arguments a
+DeclareAttribute( "IsomorphismFromCoDualToInternalCoHom",
+                  IsCapCategoryObject );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>IsomorphismFromCoDualToInternalCoHom</C>.
+#! $F: a \mapsto \mathrm{IsomorphismFromCoDualToInternalCoHom}_{a}$
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromCoDualToInternalCoHom",
+                  [ IsCapCategory, IsFunction ] );
+
+DeclareOperation( "AddIsomorphismFromCoDualToInternalCoHom",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromCoDualToInternalCoHom",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromCoDualToInternalCoHom",
+                  [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#! The argument is an object $a$.
+#! The output is the isomorphism
+#! $\mathrm{IsomorphismFromInternalCoHomToCoDual}_{a}: \mathrm{\underline{coHom}}(1,a) \rightarrow a_{\vee}$.
+#! @Returns a morphism in $\mathrm{coHom}(\mathrm{\underline{coHom}}(1,a), a_{\vee})$.
+#! @Arguments a
+DeclareAttribute( "IsomorphismFromInternalCoHomToCoDual",
+                  IsCapCategoryObject );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operations adds the given function $F$
+#! to the category for the basic operation <C>IsomorphismFromInternalCoHomToCoDual</C>.
+#! $F: a \mapsto \mathrm{IsomorphismFromInternalCoHomToCoDual}_{a}$
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromInternalCoHomToCoDual",
+                  [ IsCapCategory, IsFunction ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToCoDual",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToCoDual",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+DeclareOperation( "AddIsomorphismFromInternalCoHomToCoDual",
+                  [ IsCapCategory, IsList ] );
