@@ -88,7 +88,7 @@ DeclareOperation( "AddInternalCoHomOnMorphismsWithGivenInternalCoHoms",
 #! @Description
 #! The arguments are two objects $a, b$.
 #! The output is the coevaluation morphism $\mathrm{coev}_{a,b}: a \rightarrow b \otimes \mathrm{\underline{coHom}}(a,b)$, i.e.,
-#! the unit of the tensor cohom adjunction.
+#! the unit of the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}( a, b \otimes \mathrm{\underline{Hom}}(a,b) )$.
 #! @Arguments a,b
 DeclareOperation( "CoEvaluationMorphism",
@@ -98,7 +98,7 @@ DeclareOperation( "CoEvaluationMorphism",
 #! @Description
 #! The arguments are two objects $a,b$ and an object $r = b \otimes \mathrm{\underline{coHom}}(a,b)$.
 #! The output is the coevaluation morphism $\mathrm{coev}_{a,b}: a \rightarrow b \otimes \mathrm{\underline{coHom}}(a,b)$, i.e.,
-#! the unit of the tensor cohom adjunction.
+#! the unit of the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}( a, b \otimes \mathrm{\underline{coHom}}(a,b) )$.
 #! @Arguments a,b, r
 DeclareOperation( "CoEvaluationMorphismWithGivenRange",
@@ -127,7 +127,7 @@ DeclareOperation( "AddCoEvaluationMorphismWithGivenRange",
 #! @Description
 #! The arguments are two objects $a,b$.
 #! The output is the dual coevaluation morphism $\mathrm{dcoev}_{a,b}: \mathrm{\underline{coHom}}(a, b \otimes a) \rightarrow b$, i.e.,
-#! the counit of the tensor cohom adjunction.
+#! the counit of the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}( \mathrm{\underline{coHom}}(a \otimes b, a), b )$.
 #! @Arguments a,b
 DeclareOperation( "DualCoEvaluationMorphism",
@@ -137,7 +137,7 @@ DeclareOperation( "DualCoEvaluationMorphism",
 #! @Description
 #! The arguments are two objects $a,b$ and an object $s = \mathrm{\underline{coHom}(a \otimes b, a)}$.
 #! The output is the dual coevaluation morphism $\mathrm{dcoev}_{a,b}: \mathrm{\underline{coHom}}(a \otimes b, a) \rightarrow b$, i.e.,
-#! the unit of the tensor cohom adjunction.
+#! the unit of the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}( \mathrm{\underline{coHom}}(a \otimes b, a), b )$.
 #! @Arguments a,b,s
 DeclareOperation( "DualCoEvaluationMorphismWithGivenSource",
@@ -166,7 +166,7 @@ DeclareOperation( "AddDualCoEvaluationMorphismWithGivenSource",
 #! @Description
 #! The arguments are objects $a,b$ and a morphism $f: \mathrm{\underline{coHom}}(a,b) \rightarrow c$.
 #! The output is a morphism $g: a \rightarrow b \otimes c$ corresponding to $f$ under the
-#! tensor cohom adjunction.
+#! cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}(a, b \otimes c)$.
 #! @Arguments a, b, f
 DeclareOperation( "InternalCoHomToTensorProductAdjunctionMap",
@@ -194,7 +194,7 @@ DeclareOperation( "AddInternalCoHomToTensorProductAdjunctionMap",
 #! @Description
 #! The arguments are objects $b,c$ and a morphism $g: a \rightarrow b \otimes c$.
 #! The output is a morphism $f: \mathrm{\underline{coHom}}(a,b) \rightarrow c$
-#! corresponding to $g$ under the tensor cohom adjunction.
+#! corresponding to $g$ under the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{coHom}( \mathrm{\underline{coHom}}(a,b), c )$.
 #! @Arguments b, c, g
 DeclareOperation( "TensorProductToInternalCoHomAdjunctionMap",
