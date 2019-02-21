@@ -44,6 +44,47 @@ TensorProductToInternalHomAdjunctionMap := rec(
   return_type := "morphism",
   no_with_given := true ),
 
+MonoidalPreCoComposeMorphismWithGivenObjects := rec(
+  installation_name := "MonoidalPreCoComposeMorphismWithGivenObjects",
+  filter_list := [ "object", "object", "object", "object", "object" ],
+  io_type := [ [ "s", "a", "b", "c", "r" ], [ "s", "r" ] ],
+  cache_name := "MonoidalPreCoComposeMorphismWithGivenObjects",
+  return_type := "morphism" ),
+
+MonoidalPostCoComposeMorphismWithGivenObjects := rec(
+  installation_name := "MonoidalPostCoComposeMorphismWithGivenObjects",
+  filter_list := [ "object", "object", "object", "object", "object" ],
+  io_type := [ [ "s", "a", "b", "c", "r" ], [ "s", "r" ] ],
+  cache_name := "MonoidalPostCoComposeMorphismWithGivenObjects",
+  return_type := "morphism" ),
+
+CoDualOnObjects := rec(
+  installation_name := "CoDualOnObjects",
+  filter_list := [ "object" ],
+  io_type := [ [ "a" ], [ "acd" ] ],
+  cache_name := "CoDualOnObjects",
+  return_type := "object" ),
+
+CoDualOnMorphismsWithGivenCoDuals := rec(
+  installation_name := "CoDualOnMorphismsWithGivenCoDuals",
+  io_type := [ [ "s", "alpha", "r" ], [ "s", "r" ] ],
+  filter_list := [ "object", "morphism", "object" ],
+  cache_name := "CoDualOnMorphismsWithGivenCoDuals",
+  return_type := "morphism" ),
+
+CoEvaluationForCoDualWithGivenTensorProduct := rec(
+  installation_name := "CoEvaluationForCoDualWithGivenTensorProduct",
+  filter_list := [ "object", "object", "object" ],
+  io_type := [ [ "s", "a", "r" ], [ "s", "r" ] ],
+  cache_name := "CoEvaluationForCoDualWithGivenTensorProduct",
+  return_type := "morphism" ),
+
+MorphismToCoBidualWithGivenCoBidual := rec(
+  installation_name := "MorphismToCoBidualWithGivenCoBidual",
+  filter_list := [ "object", "object" ],
+  io_type := [ [ "a", "r" ], [ "a", "r" ] ],
+  cache_name := "MorphismToCoBidualWithGivenCoBidual",
+  return_type := "morphism" ),
 ) );
 
 CAP_INTERNAL_ENHANCE_NAME_RECORD( COCLOSED_MONOIDAL_CATEGORIES_METHOD_NAME_RECORD );
