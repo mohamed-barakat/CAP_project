@@ -147,63 +147,63 @@ InstallMethod( MorphismToCoBidual,
 
 end );
 
-# ##
-# CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.TensorProductInternalHomCompatibilityMorphism :=
-#   [ [ "TensorProductInternalHomCompatibilityMorphismWithGivenObjects", 1 ],
-#     [ "TensorProductOnObjects", 3 ],
-#     [ "InternalHomOnObjects", 3 ] ];
-# ##
-# InstallMethod( TensorProductInternalHomCompatibilityMorphism,
-#                [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ],
-#
-#   function( object_1_1, object_1_2, object_2_1, object_2_2 )
-#
-#     return TensorProductInternalHomCompatibilityMorphismWithGivenObjects(
-#              object_1_1, object_1_2, object_2_1, object_2_2,
-#              [ TensorProductOnObjects( InternalHomOnObjects( object_1_1, object_1_2 ), InternalHomOnObjects( object_2_1, object_2_2 ) ),
-#                InternalHomOnObjects( TensorProductOnObjects( object_1_1, object_2_1 ), TensorProductOnObjects( object_1_2, object_2_2 ) ) ]
-#            );
-#
-# end );
-#
-# ##
-# CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.TensorProductDualityCompatibilityMorphism :=
-#   [ [ "TensorProductDualityCompatibilityMorphismWithGivenObjects", 1 ],
-#     [ "DualOnObjects", 3 ],
-#     [ "TensorProductOnObjects", 2 ] ];
-# ##
-# InstallMethod( TensorProductDualityCompatibilityMorphism,
-#                [ IsCapCategoryObject, IsCapCategoryObject ],
-#
-#   function( object_1, object_2 )
-#
-#     return TensorProductDualityCompatibilityMorphismWithGivenObjects(
-#              DualOnObjects( TensorProductOnObjects( object_1, object_2 ) ),
-#              object_1, object_2,
-#              TensorProductOnObjects( DualOnObjects( object_1 ), DualOnObjects( object_2 ) )
-#            );
-#
-# end );
-#
-# ##
-# CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromTensorProductToInternalHom :=
-#   [ [ "MorphismFromTensorProductToInternalHomWithGivenObjects", 1 ],
-#     [ "DualOnObjects", 1 ],
-#     [ "TensorProductOnObjects", 1 ],
-#     [ "InternalHomOnObjects", 1 ] ];
-# ##
-# InstallMethod( MorphismFromTensorProductToInternalHom,
-#                [ IsCapCategoryObject, IsCapCategoryObject ],
-#
-#   function( object_1, object_2 )
-#
-#     return MorphismFromTensorProductToInternalHomWithGivenObjects(
-#              TensorProductOnObjects( DualOnObjects( object_1 ), object_2 ),
-#              object_1, object_2,
-#              InternalHomOnObjects( object_1, object_2 )
-#            );
-#
-# end );
+##
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.InternalCoHomTensorProductCompatibilityMorphism :=
+  [ [ "InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects", 1 ],
+    [ "TensorProductOnObjects", 3 ],
+    [ "InternalCoHomOnObjects", 3 ] ];
+##
+InstallMethod( InternalCoHomTensorProductCompatibilityMorphism,
+               [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryObject ],
+
+  function( object_1_1, object_1_2, object_2_1, object_2_2 )
+
+    return InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects(
+             object_1_1, object_1_2, object_2_1, object_2_2,
+             [ InternalCoHomOnObjects( TensorProductOnObjects( object_1_1, object_1_2 ), TensorProductOnObjects( object_2_1, object_2_2 ) ),
+               TensorProductOnObjects( InternalCoHomOnObjects( object_1_1, object_2_1 ), InternalCoHomOnObjects( object_1_2, object_2_2 ) ) ]
+           );
+
+end );
+
+##
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoDualityTensorProductCompatibilityMorphism :=
+  [ [ "CoDualityTensorProductCompatibilityMorphismWithGivenObjects", 1 ],
+    [ "CoDualOnObjects", 3 ],
+    [ "TensorProductOnObjects", 2 ] ];
+##
+InstallMethod( CoDualityTensorProductCompatibilityMorphism,
+               [ IsCapCategoryObject, IsCapCategoryObject ],
+
+  function( object_1, object_2 )
+
+    return CoDualityTensorProductCompatibilityMorphismWithGivenObjects(
+             CoDualOnObjects( TensorProductOnObjects( object_1, object_2 ) ),
+             object_1, object_2,
+             TensorProductOnObjects( CoDualOnObjects( object_1 ), CoDualOnObjects( object_2 ) )
+           );
+
+end );
+
+##
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromInternalCoHomToTensorProduct :=
+  [ [ "MorphismFromInternalCoHomToTensorProductWithGivenObjects", 1 ],
+    [ "DualOnObjects", 1 ],
+    [ "TensorProductOnObjects", 1 ],
+    [ "InternalHomOnObjects", 1 ] ];
+##
+InstallMethod( MorphismFromInternalCoHomToTensorProduct,
+               [ IsCapCategoryObject, IsCapCategoryObject ],
+
+  function( object_1, object_2 )
+
+    return MorphismFromInternalCoHomToTensorProductWithGivenObjects(
+             InternalCoHomOnObjects( object_1, object_2 ),
+             object_1, object_2,
+             TensorProductOnObjects( object_1, DualOnObjects( object_2 ) )
+           );
+
+end );
 
 ##
 CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromInternalCoHomToObject :=

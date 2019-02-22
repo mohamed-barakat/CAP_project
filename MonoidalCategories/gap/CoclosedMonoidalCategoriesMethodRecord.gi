@@ -86,26 +86,26 @@ MorphismToCoBidualWithGivenCoBidual := rec(
   cache_name := "MorphismToCoBidualWithGivenCoBidual",
   return_type := "morphism" ),
 
-# TensorProductInternalHomCompatibilityMorphismWithGivenObjects := rec(
-#   installation_name := "TensorProductInternalHomCompatibilityMorphismWithGivenObjects",
-#   filter_list := [ "object", "object", "object", "object", IsList ],
-#   io_type := [ [ "a", "ap", "b", "bp", "L" ], [ "L_1", "L_2" ] ],
-#   cache_name := "TensorProductInternalHomCompatibilityMorphismWithGivenObjects",
-#   return_type := "morphism" ),
-#
-# TensorProductDualityCompatibilityMorphismWithGivenObjects := rec(
-#   installation_name := "TensorProductDualityCompatibilityMorphismWithGivenObjects",
-#   filter_list := [ "object", "object", "object", "object" ],
-#   io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
-#   cache_name := "TensorProductDualityCompatibilityMorphismWithGivenObjects",
-#   return_type := "morphism" ),
-#
-# MorphismFromTensorProductToInternalHomWithGivenObjects := rec(
-#   installation_name := "MorphismFromTensorProductToInternalHomWithGivenObjects",
-#   filter_list := [ "object", "object", "object", "object" ],
-#   io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
-#   cache_name := "MorphismFromTensorProductToInternalHomWithGivenObjects",
-#   return_type := "morphism" ),
+InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects := rec(
+  installation_name := "InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects",
+  filter_list := [ "object", "object", "object", "object", IsList ],
+  io_type := [ [ "a", "ap", "b", "bp", "L" ], [ "L_1", "L_2" ] ],
+  cache_name := "InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects",
+  return_type := "morphism" ),
+
+CoDualityTensorProductCompatibilityMorphismWithGivenObjects := rec(
+  installation_name := "CoDualityTensorProductCompatibilityMorphismWithGivenObjects",
+  filter_list := [ "object", "object", "object", "object" ],
+  io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
+  cache_name := "CoDualityTensorProductCompatibilityMorphismWithGivenObjects",
+  return_type := "morphism" ),
+
+MorphismFromInternalCoHomToTensorProductWithGivenObjects := rec(
+  installation_name := "MorphismFromInternalCoHomToTensorProductWithGivenObjects",
+  filter_list := [ "object", "object", "object", "object" ],
+  io_type := [ [ "s", "a", "b", "r" ], [ "s", "r" ] ],
+  cache_name := "MorphismFromInternalCoHomToTensorProductWithGivenObjects",
+  return_type := "morphism" ),
 
 IsomorphismFromCoDualToInternalCoHom := rec(
   installation_name := "IsomorphismFromCoDualToInternalCoHom",
