@@ -131,3 +131,33 @@ AddDerivationToCAP( CoEvaluationForCoDualWithGivenTensorProduct,
 
 end : CategoryFilter := IsSymmetricClosedMonoidalCategory,
       Description := "CoEvaluationForCoDualWithGivenTensorProduct using the cohom tensor adjunction and IsomorphismFromInternalCoHomToCoDual" );
+
+##
+AddDerivationToCAP( CoLambdaIntroduction,
+
+  function( morphism )
+    local result_morphism, category, source;
+
+    category := CapCategory( morphism );
+
+    range := Range( morphism );
+
+    result_morphism := PreCompose( morphism, RightUnitorInverse( range ) );
+
+    return TensorProductToInternalCoHomAdjunctionMap( range, TensorUnit( category ), result_morphism );
+
+end : CategoryFilter := IsSymmetricClosedMonoidalCategory,
+      Description := "CoLambdaIntroduction using the cohom tensor adjunction and right unitor" );
+
+##
+AddDerivationToCAP( CoLambdaElimination,
+
+  function( object_1, object_2, morphism )
+    local result_morphism;
+
+    result_morphism := InternalCoHomToTensorProductAdjunctionMap( object_1, object_2, morphism );
+
+    return PreCompose( result_morphism, RightUnitor( object_2 ) );
+
+end : CategoryFilter := IsSymmetricClosedMonoidalCategory,
+      Description := "CoLambdaElimination using the cohom tensor adjunction and right unitor" );
