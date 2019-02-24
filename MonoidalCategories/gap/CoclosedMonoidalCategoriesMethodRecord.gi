@@ -36,7 +36,7 @@ InternalCoHomToTensorProductAdjunctionMap := rec(
   return_type := "morphism",
   no_with_given := true ),
 
-TensorProductToInternalHomAdjunctionMap := rec(
+TensorProductToInternalCoHomAdjunctionMap := rec(
   installation_name := "TensorProductToInternalCoHomAdjunctionMap",
   filter_list := [ "object", "object", "morphism" ],
   io_type := [ [ "b", "c", "g" ], [ "i", "c" ] ],
