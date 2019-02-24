@@ -629,7 +629,7 @@ DeclareOperation( "AddIsomorphismFromInternalCoHomToCoDual",
 
 ##
 #! @Description
-#! The arguments are two objects $t,a$,
+#! The arguments are two objects $a,t$,
 #! and a morphism $\alpha: 1 \rightarrow a \otimes t$.
 #! The output is the morphism $a_{\vee} \rightarrow t$
 #! given by the universal property of $a_{\vee}$.
