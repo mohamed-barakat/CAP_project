@@ -79,11 +79,11 @@ CoEvaluationForCoDualWithGivenTensorProduct := rec(
   cache_name := "CoEvaluationForCoDualWithGivenTensorProduct",
   return_type := "morphism" ),
 
-MorphismToCoBidualWithGivenCoBidual := rec(
-  installation_name := "MorphismToCoBidualWithGivenCoBidual",
+MorphismFromCoBidualWithGivenCoBidual := rec(
+  installation_name := "MorphismFromCoBidualWithGivenCoBidual",
   filter_list := [ "object", "object" ],
-  io_type := [ [ "a", "r" ], [ "a", "r" ] ],
-  cache_name := "MorphismToCoBidualWithGivenCoBidual",
+  io_type := [ [ "s", "a" ], [ "s", "a" ] ],
+  cache_name := "MorphismFromCoBidualWithGivenCoBidual",
   return_type := "morphism" ),
 
 InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects := rec(

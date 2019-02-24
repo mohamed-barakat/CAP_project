@@ -411,39 +411,39 @@ DeclareOperation( "AddCoEvaluationForCoDualWithGivenTensorProduct",
 
 ##
 #! @Description
-#! The argument is an object $a$.
-#! The output is the morphism to the cobidual $a \rightarrow (a_{\vee})_{\vee}$.
-#! @Returns a morphism in $\mathrm{coHom}(a, (a_{\vee})_{\vee})$.
-#! @Arguments a
-DeclareAttribute( "MorphismToCoBidual",
+#! The argument is a cobidual object $(a_{\vee})_{\vee}$.
+#! The output is the morphism from the cobidual $(a_{\vee})_{\vee} \rightarrow a$.
+#! @Returns a morphism in $\mathrm{coHom}((a_{\vee})_{\vee}, a)$.
+#! @Arguments avv
+DeclareAttribute( "MorphismFromCoBidual",
                   IsCapCategoryObject );
 
 #! @Description
-#! The arguments are an object $a$,
-#! and an object $r = (a_{\vee})_{\vee}$.
-#! The output is the morphism to the cobidual $a \rightarrow (a_{\vee})_{\vee}$.
-#! @Returns a morphism in $\mathrm{coHom}(a, (a_{\vee})_{\vee})$.
-#! @Arguments a, r
-DeclareOperation( "MorphismToCoBidualWithGivenCoBidual",
+#! The arguments are an object $s = (a_{\vee})_{\vee}$,
+#! and an object $a$.
+#! The output is the morphism from the cobidual $(a_{\vee})_{\vee} \rightarrow a$.
+#! @Returns a morphism in $\mathrm{coHom}((a_{\vee})_{\vee}, a)$.
+#! @Arguments s, a
+DeclareOperation( "MorphismFromCoBidualWithGivenCoBidual",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
 
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operations adds the given function $F$
-#! to the category for the basic operation <C>MorphismToCoBidualWithGivenCoBidual</C>.
-#! $F: (a, (a_{\vee})_{\vee}) \mapsto (a \rightarrow (a_{\vee})_{\vee})$.
+#! to the category for the basic operation <C>MorphismFromCoBidualWithGivenCoBidual</C>.
+#! $F: ((a_{\vee})_{\vee}, a) \mapsto ((a_{\vee})_{\vee} \rightarrow a)$.
 #! @Returns nothing
 #! @Arguments C, F
-DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
+DeclareOperation( "AddMorphismFromCoBidualWithGivenCoBidual",
                   [ IsCapCategory, IsFunction ] );
 
-DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
+DeclareOperation( "AddMorphismFromCoBidualWithGivenCoBidual",
                   [ IsCapCategory, IsFunction, IsInt ] );
 
-DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
+DeclareOperation( "AddMorphismFromCoBidualWithGivenCoBidual",
                   [ IsCapCategory, IsList, IsInt ] );
 
-DeclareOperation( "AddMorphismToCoBidualWithGivenCoBidual",
+DeclareOperation( "AddMorphismFromCoBidualWithGivenCoBidual",
                   [ IsCapCategory, IsList ] );
 
 ##

@@ -134,16 +134,16 @@ InstallMethod( CoEvaluationForCoDual,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismToCoBidual :=
-  [ [ "MorphismToCoBidualWithGivenCoBidual", 1 ],
+CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromCoBidual :=
+  [ [ "MorphismFromCoBidualWithGivenCoBidual", 1 ],
     [ "CoDualOnObjects", 2 ] ];
 ##
-InstallMethod( MorphismToCoBidual,
+InstallMethod( MorphismFromCoBidual,
                [ IsCapCategoryObject ],
 
   function( object )
 
-    return MorphismToCoBidualWithGivenCoBidual( object, CoDualOnObjects( CoDualOnObjects( object ) ) );
+    return MorphismFromCoBidualWithGivenCoBidual( CoDualOnObjects( CoDualOnObjects( object ) ), object );
 
 end );
 
