@@ -89,7 +89,7 @@ DeclareOperation( "AddInternalCoHomOnMorphismsWithGivenInternalCoHoms",
 #! The arguments are two objects $a, b$.
 #! The output is the coevaluation morphism $\mathrm{coev}_{a,b}: a \rightarrow b \otimes \mathrm{\underline{coHom}}(a,b)$, i.e.,
 #! the unit of the cohom tensor adjunction.
-#! @Returns a morphism in $\mathrm{coHom}( a, b \otimes \mathrm{\underline{Hom}}(a,b) )$.
+#! @Returns a morphism in $\mathrm{coHom}( a, b \otimes \mathrm{\underline{coHom}}(a,b) )$.
 #! @Arguments a,b
 DeclareOperation( "CoEvaluationMorphism",
                   [ IsCapCategoryObject, IsCapCategoryObject ] );
@@ -764,7 +764,7 @@ DeclareAttribute( "IsomorphismFromInternalCoHomToObject",
 
 #! @Description
 #! The argument is an object $a$,
-#! and an object $s = \mathrm{\underline{Hom}}(1,a)$.
+#! and an object $s = \mathrm{\underline{coHom}}(1,a)$.
 #! The output is the natural isomorphism $\mathrm{\underline{coHom}}(a,1) \rightarrow a$.
 #! @Returns a morphism in $\mathrm{coHom}(\mathrm{\underline{coHom}}(a,1), a)$.
 #! @Arguments a,s
