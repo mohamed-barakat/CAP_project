@@ -47,7 +47,7 @@ DeclareOperation( "AddInternalCoHomOnObjects",
 #! The arguments are two morphisms $\alpha: a \rightarrow a', \beta: b \rightarrow b'$.
 #! The output is the internal hom morphism
 #! $\mathrm{\underline{coHom}}(\alpha,\beta): \mathrm{\underline{coHom}}(a,b') \rightarrow \mathrm{\underline{coHom}}(a',b)$.
-#! @Returns a morphism in $\mathrm{coHom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
 #! @Arguments alpha, beta
 DeclareOperation( "InternalCoHomOnMorphisms",
                   [ IsCapCategoryMorphism, IsCapCategoryMorphism ] );
@@ -58,7 +58,7 @@ DeclareOperation( "InternalCoHomOnMorphisms",
 #! and an object $r = \mathrm{\underline{coHom}}(a',b)$.
 #! The output is the internal hom morphism 
 #! $\mathrm{\underline{coHom}}(\alpha,\beta): \mathrm{\underline{coHom}}(a,b') \rightarrow \mathrm{\underline{coHom}}(a',b)$.
-#! @Returns a morphism in $\mathrm{coHom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a,b'), \mathrm{\underline{coHom}}(a',b) )$
 #! @Arguments s, alpha, beta, r
 DeclareOperation( "InternalCoHomOnMorphismsWithGivenInternalCoHoms",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
