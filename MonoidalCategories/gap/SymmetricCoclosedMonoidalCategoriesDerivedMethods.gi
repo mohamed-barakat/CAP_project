@@ -257,8 +257,8 @@ AddDerivationToCAP( IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom,
     
     return PreCompose(
              InternalCoHomOnMorphisms(
-               LeftUnitorInverse( object ) ),
-               IdentityMorphism( unit ),
+               LeftUnitorInverse( object ),
+               IdentityMorphism( unit ) ),
              DualCoEvaluationMorphism( unit, object ));
     
 end : CategoryFilter := IsSymmetricClosedMonoidalCategory,

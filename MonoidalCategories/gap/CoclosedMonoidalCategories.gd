@@ -774,7 +774,7 @@ DeclareOperation( "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operations adds the given function $F$
-#! to the category for the basic operation <C>IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom</C>.
+#! to the category for the basic operation <C>IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom</C>.
 #! $F: ( a, \mathrm{\underline{coHom}}(a,1) ) \mapsto ( \mathrm{\underline{coHom}}(a,1) \rightarrow a )$.
 #! @Returns nothing
 #! @Arguments C, F
