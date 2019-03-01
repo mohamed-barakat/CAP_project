@@ -23,7 +23,7 @@ end : CategoryFilter := IsSymmetricCoclosedMonoidalCategory,
       Description := "InternalCoHomToTensorProductAdjunctionMap using TensorProductOnMorphisms and CoEvaluationMorphism" );
 
 ##
-AddDerivationToCAP( UniversalPropertyOfDual,
+AddDerivationToCAP( UniversalPropertyOfCoDual,
 
   function( object_1, object_2, test_morphism )
     
