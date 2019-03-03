@@ -19,7 +19,7 @@ InstallMethod( InternalCoHomOnMorphisms,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoEvaluationMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoEvaluationMorphism :=
   [ [ "CoEvaluationMorphismWithGivenRange", 1 ],
     [ "TensorProductOnObjects", 1 ],
     [ "InternalCoHomOnObjects", 1 ] ];
@@ -37,7 +37,7 @@ InstallMethod( CoEvaluationMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.DualCoEvaluationMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.DualCoEvaluationMorphism :=
   [ [ "DualCoEvaluationMorphismWithGivenSource", 1 ],
     [ "TensorProductOnObjects", 1 ],
     [ "InternalCoHomOnObjects", 1 ] ];
@@ -55,7 +55,7 @@ InstallMethod( DualCoEvaluationMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MonoidalPreCoComposeMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MonoidalPreCoComposeMorphism :=
   [ [ "MonoidalPreCoComposeMorphismWithGivenObjects", 1 ],
     [ "TensorProductOnObjects", 1 ],
     [ "InternalCoHomOnObjects", 3 ] ];
@@ -74,7 +74,7 @@ InstallMethod( MonoidalPreCoComposeMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MonoidalPostCoComposeMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MonoidalPostCoComposeMorphism :=
   [ [ "MonoidalPostCoComposeMorphismWithGivenObjects", 1 ],
     [ "TensorProductOnObjects", 1 ],
     [ "InternalCoHomOnObjects", 3 ] ];
@@ -93,7 +93,7 @@ InstallMethod( MonoidalPostCoComposeMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoDualOnMorphisms :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoDualOnMorphisms :=
   [ [ "CoDualOnMorphismsWithGivenCoDuals", 1 ],
     [ "CoDualOnObjects", 2 ] ];
 ##
@@ -111,7 +111,7 @@ InstallMethod( CoDualOnMorphisms,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoEvaluationForCoDual :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoEvaluationForCoDual :=
   [ [ "CoEvaluationForCoDualWithGivenTensorProduct", 1 ],
     [ "TensorProductOnObjects", 1 ],
     [ "CoDualOnObjects", 1 ],
@@ -134,7 +134,7 @@ InstallMethod( CoEvaluationForCoDual,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromCoBidual :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromCoBidual :=
   [ [ "MorphismFromCoBidualWithGivenCoBidual", 1 ],
     [ "CoDualOnObjects", 2 ] ];
 ##
@@ -148,7 +148,7 @@ InstallMethod( MorphismFromCoBidual,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.InternalCoHomTensorProductCompatibilityMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.InternalCoHomTensorProductCompatibilityMorphism :=
   [ [ "InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects", 1 ],
     [ "TensorProductOnObjects", 3 ],
     [ "InternalCoHomOnObjects", 3 ] ];
@@ -167,7 +167,7 @@ InstallMethod( InternalCoHomTensorProductCompatibilityMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoDualityTensorProductCompatibilityMorphism :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.CoDualityTensorProductCompatibilityMorphism :=
   [ [ "CoDualityTensorProductCompatibilityMorphismWithGivenObjects", 1 ],
     [ "CoDualOnObjects", 3 ],
     [ "TensorProductOnObjects", 2 ] ];
@@ -186,7 +186,7 @@ InstallMethod( CoDualityTensorProductCompatibilityMorphism,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromInternalCoHomToTensorProduct :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromInternalCoHomToTensorProduct :=
   [ [ "MorphismFromInternalCoHomToTensorProductWithGivenObjects", 1 ],
     [ "DualOnObjects", 1 ],
     [ "TensorProductOnObjects", 1 ],
@@ -206,7 +206,7 @@ InstallMethod( MorphismFromInternalCoHomToTensorProduct,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromInternalCoHomToObject :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromInternalCoHomToObject :=
   [ [ "IsomorphismFromInternalCoHomToObjectWithGivenInternalCoHom", 1 ],
     [ "TensorUnit", 1 ],
     [ "InternalCoHomOnObjects", 1 ] ];
@@ -234,7 +234,7 @@ InstallMethod( IsomorphismFromInternalCoHomToObject,
 end );
 
 ##
-CAP_INTERNAL_CLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromObjectToInternalCoHom :=
+CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.IsomorphismFromObjectToInternalCoHom :=
   [ [ "IsomorphismFromObjectToInternalCoHomWithGivenInternalCoHom", 1 ],
     [ "TensorUnit", 1 ],
     [ "InternalCoHomOnObjects", 1 ] ];
