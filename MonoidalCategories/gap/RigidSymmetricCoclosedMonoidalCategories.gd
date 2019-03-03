@@ -193,7 +193,7 @@ DeclareOperation( "AddDualCoEvaluationForCoDualWithGivenTensorProduct",
 
 ##
 #! @Description
-#! The argument is a morphism $\alpha$.
+#! The argument is an endomorphism $\alpha: A \rightarrow A$.
 #! The output is the cotrace morphism $\mathrm{cotrace}_{\alpha}: 1 \rightarrow 1$.
 #! @Returns a morphism in $\mathrm{Hom}(1,1)$.
 #! @Arguments alpha
