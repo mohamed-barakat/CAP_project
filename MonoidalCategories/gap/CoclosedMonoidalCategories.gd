@@ -126,7 +126,7 @@ DeclareOperation( "AddCoEvaluationMorphismWithGivenRange",
 ## TODO: Find a better name!
 #! @Description
 #! The arguments are two objects $a,b$.
-#! The output is the dual coevaluation morphism $\mathrm{dcoev}_{a,b}: \mathrm{\underline{coHom}}(a, b \otimes a) \rightarrow b$, i.e.,
+#! The output is the dual coevaluation morphism $\mathrm{dcoev}_{a,b}: \mathrm{\underline{coHom}}(a \otimes b, a) \rightarrow b$, i.e.,
 #! the counit of the cohom tensor adjunction.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a \otimes b, a), b )$.
 #! @Arguments a,b
