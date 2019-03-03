@@ -335,8 +335,8 @@ DeclareOperation( "AddCoDualOnObjects",
 ##
 #! @Description
 #! The argument is a morphism $\alpha: a \rightarrow b$.
-#! The output is its codual morphism $\alpha_{\vee}: b^{\vee} \rightarrow a^{\vee}$.
-#! @Returns a morphism in $\mathrm{Hom}( b^{\vee}, a^{\vee} )$.
+#! The output is its codual morphism $\alpha_{\vee}: b_{\vee} \rightarrow a_{\vee}$.
+#! @Returns a morphism in $\mathrm{Hom}( b_{\vee}, a_{\vee} )$.
 #! @Arguments alpha
 DeclareAttribute( "CoDualOnMorphisms",
                   IsCapCategoryMorphism );
