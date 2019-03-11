@@ -273,7 +273,7 @@ AddDerivationToCAP( InternalCoHomTensorProductCompatibilityMorphismInverseWithGi
     return Inverse( InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects( a1, a2, b1, b2, new_source_and_range_list ) );
     
 end : CategoryFilter := IsRigidSymmetricCoclosedMonoidalCategory,
-      Description := "InternalCoHomTensorProductCompatibilityMorphismInverseWithGivenObjects as the inverse of TensorProductInternalHomCompatibilityMorphismWithGivenObjects" );
+      Description := "InternalCoHomTensorProductCompatibilityMorphismInverseWithGivenObjects as the inverse of InternalCoHomTensorProductCompatibilityMorphismWithGivenObjects" );
 
 ####################################
 ## Final derived methods
