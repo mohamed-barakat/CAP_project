@@ -32,6 +32,8 @@ InstallMethod( MatrixCategory,
     
     SetIsRigidSymmetricClosedMonoidalCategory( category, true );
     
+    SetIsRigidSymmetricCoclosedMonoidalCategory( category, true );
+    
     SetIsStrictMonoidalCategory( category, true );
     
     SetIsLinearCategoryOverCommutativeRing( category, true );
@@ -637,7 +639,6 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
     
     ##
     AddTensorProductOnMorphismsWithGivenTensorProducts( category,
-      
       function( new_source, morphism_1, morphism_2, new_range )
         
         return VectorSpaceMorphism( new_source,
@@ -648,7 +649,6 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
     
     ##
     AddTensorUnit( category,
-      
       function( )
         
         return VectorSpaceObject( 1, homalg_field );
@@ -678,6 +678,7 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
         
     end );
     
+    ## Basic Operations for Closed Monoidal Categories
     ##
     AddDualOnObjects( category, space -> space );
     
@@ -724,7 +725,6 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
     
     ##
     AddCoevaluationForDualWithGivenTensorProduct( category,
-      
       function( unit, object, tensor_object )
         local dimension, row, zero_row, i;
         
@@ -763,6 +763,93 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
                                     bidual_of_object
                                   );
         
+    end );
+    
+    ## Basic Operations for Coclosed Monoidal Categories
+    ##
+    AddCoDualOnObjects( category, space -> space );
+    
+    ##
+    AddCoDualOnMorphismsWithGivenCoDuals( category,
+      function( codual_source, morphism, codual_range )
+        
+        return VectorSpaceMorphism( codual_source,
+                                    Involution( UnderlyingMatrix( morphism ) ),
+                                    codual_range );
+        
+    end );
+    
+    ##
+    AddCoclosedEvaluationForCoDualWithGivenTensorProduct( category,
+      function( unit, object, tensor_object )
+        local dimension, row, zero_row, i;
+        
+        dimension := Dimension( object );
+        
+        row := [ ];
+        
+        zero_row := List( [ 1 .. dimension ], i -> 0 );
+        
+        for i in [ 1 .. dimension - 1 ] do
+          
+          Add( row, 1 );
+          
+          Append( row, zero_row );
+          
+        od;
+        
+        if dimension > 0 then
+          
+          Add( row, 1 );
+          
+        fi;
+        
+        return VectorSpaceMorphism( unit,
+                                    HomalgMatrix( row, 1, Dimension( tensor_object ), homalg_field ),
+                                    tensor_object );
+        
+    end );
+    
+    ##
+    AddCoclosedCoevaluationForCoDualWithGivenTensorProduct( category,
+      function( tensor_object, object, unit )
+        local dimension, column, zero_column, i;
+        
+        dimension := Dimension( object );
+        
+        column := [ ];
+        
+        zero_column := List( [ 1 .. dimension ], i -> 0 );
+        
+        for i in [ 1 .. dimension - 1 ] do
+          
+          Add( column, 1 );
+          
+          Append( column, zero_column );
+          
+        od;
+        
+        if dimension > 0 then
+          
+          Add( column, 1 );
+          
+        fi;
+        
+        return VectorSpaceMorphism( tensor_object,
+                                    HomalgMatrix( column, Dimension( tensor_object ), 1, homalg_field ),
+                                    unit );
+                                    
+    end );
+    
+    ##
+    AddMorphismFromCoBidualWithGivenCoBidual( category,
+      function( object, cobidual_of_object )
+        
+        return VectorSpaceMorphism( cobidual_of_object,
+                                    HomalgIdentityMatrix( Dimension( object ), homalg_field ),
+                                    object
+                                  );
+                                  
     end );
     
     ## Homomorphism structure
@@ -854,7 +941,3 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_MATRIX_CATEGORY,
     end );
     
 end );
-
-
-
-
