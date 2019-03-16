@@ -566,7 +566,7 @@ AddDerivationToCAP( MonoidalPreCoComposeMorphismWithGivenObjects,
              TensorProductOnObjects( cohom_x_y, cohom_y_z ),
              morphism );
     
-end : CategoryFilter := IsSymmetricClosedMonoidalCategory and IsStrictMonoidalCategory,
+end : CategoryFilter := IsSymmetricCoclosedMonoidalCategory and IsStrictMonoidalCategory,
       Description := "MonoidalPreCoComposeMorphismWithGivenObjects using braiding, coclosed evaluation, and cohom tensor adjunction" );
 
 ##
