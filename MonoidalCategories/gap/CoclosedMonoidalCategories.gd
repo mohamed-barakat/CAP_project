@@ -246,7 +246,7 @@ DeclareOperation( "MonoidalPreCoComposeMorphismWithGivenObjects",
 #! The arguments are a category $C$ and a function $F$.
 #! This operations adds the given function $F$
 #! to the category for the basic operation <C>MonoidalPreCoComposeMorphismWithGivenObjects</C>.
-#! $F: (\mathrm{\underline{Hom}}(a,c),a,b,c,\mathrm{\underline{coHom}}(a,b) \otimes \mathrm{\underline{coHom}}(b,c)) \mapsto \mathrm{MonoidalPreCoComposeMorphismWithGivenObjects}_{a,b,c}$.
+#! $F: (\mathrm{\underline{coHom}}(a,c),a,b,c,\mathrm{\underline{coHom}}(a,b) \otimes \mathrm{\underline{coHom}}(b,c)) \mapsto \mathrm{MonoidalPreCoComposeMorphismWithGivenObjects}_{a,b,c}$.
 #! @Returns nothing
 #! @Arguments C, F
 DeclareOperation( "AddMonoidalPreCoComposeMorphismWithGivenObjects",
@@ -276,7 +276,7 @@ DeclareOperation( "MonoidalPostCoComposeMorphism",
 #! The arguments are
 #! an object $s = \mathrm{\underline{coHom}}(a,c)$,
 #! three objects $a,b,c$,
-#! and an object $r = \mathrm{\underline{Hom}}(b,c) \otimes \mathrm{\underline{coHom}}(a,b)$.
+#! and an object $r = \mathrm{\underline{coHom}}(b,c) \otimes \mathrm{\underline{coHom}}(a,b)$.
 #! The output is the postcocomposition morphism
 #! $\mathrm{MonoidalPostCoComposeMorphismWithGivenObjects}_{a,b,c}: \mathrm{\underline{coHom}}(a,c) \rightarrow \mathrm{\underline{coHom}}(b,c) \otimes \mathrm{\underline{coHom}}(a,b)$.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{\underline{coHom}}(a,c), \mathrm{\underline{coHom}}(b,c) \otimes \mathrm{\underline{coHom}}(a,b) )$.
