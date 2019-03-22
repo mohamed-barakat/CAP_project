@@ -188,9 +188,9 @@ end );
 ##
 CAP_INTERNAL_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismFromInternalCoHomToTensorProduct :=
   [ [ "MorphismFromInternalCoHomToTensorProductWithGivenObjects", 1 ],
-    [ "DualOnObjects", 1 ],
+    [ "CoDualOnObjects", 1 ],
     [ "TensorProductOnObjects", 1 ],
-    [ "InternalHomOnObjects", 1 ] ];
+    [ "InternalCoHomOnObjects", 1 ] ];
 ##
 InstallMethod( MorphismFromInternalCoHomToTensorProduct,
                [ IsCapCategoryObject, IsCapCategoryObject ],
@@ -200,7 +200,7 @@ InstallMethod( MorphismFromInternalCoHomToTensorProduct,
     return MorphismFromInternalCoHomToTensorProductWithGivenObjects(
              InternalCoHomOnObjects( object_1, object_2 ),
              object_1, object_2,
-             TensorProductOnObjects( object_1, DualOnObjects( object_2 ) )
+             TensorProductOnObjects( object_1, CoDualOnObjects( object_2 ) )
            );
 
 end );
