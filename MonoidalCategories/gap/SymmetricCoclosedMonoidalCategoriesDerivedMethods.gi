@@ -107,8 +107,6 @@ AddDerivationToCAP( CoDualOnMorphismsWithGivenCoDuals,
     
     category := CapCategory( morphism );
     
-    result_morphism := InternalCoHomOnMorphisms( IdentityMorphism( TensorUnit( category ) ), morphism );
-    
     result_morphism := PreCompose( [
                          IsomorphismFromCoDualToInternalCoHom( Range( morphism ) ),
                          
