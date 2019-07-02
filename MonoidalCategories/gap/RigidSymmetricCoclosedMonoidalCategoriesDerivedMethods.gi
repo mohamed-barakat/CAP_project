@@ -113,9 +113,9 @@ end : CategoryFilter := IsRigidSymmetricCoclosedMonoidalCategory and IsStrictMon
 AddDerivationToCAP( CoclosedCoevaluationMorphismWithGivenSource,
                     
   function( object_1, object_2, internal_cohom )
-    local morphism, dual_1, id_2;
+    local morphism, codual_1, id_2;
     
-    dual_1 := DualOnObjects( object_1 );
+    codual_1 := CoDualOnObjects( object_1 );
     
     id_2 := IdentityMorphism( object_2 );
     
@@ -126,13 +126,13 @@ AddDerivationToCAP( CoclosedCoevaluationMorphismWithGivenSource,
                     
                   TensorProductOnMorphisms(
                     Braiding( object_1, object_2 ),
-                    IdentityMorphism( dual_1 ) ),
+                    IdentityMorphism( codual_1 ) ),
                     
-                  AssociatorLeftToRight( object_2, object_1, dual_1 ),
+                  AssociatorLeftToRight( object_2, object_1, codual_1 ),
                     
                   TensorProductOnMorphisms(
                     id_2,
-                    Braiding( object_1, dual_1 ) ),
+                    Braiding( object_1, codual_1 ) ),
                     
                   TensorProductOnMorphisms(
                     id_2,
@@ -150,9 +150,9 @@ end : CategoryFilter := IsRigidSymmetricCoclosedMonoidalCategory,
 AddDerivationToCAP( CoclosedCoevaluationMorphismWithGivenSource,
                     
   function( object_1, object_2, internal_cohom )
-    local morphism, dual_1, id_2;
+    local morphism, codual_1, id_2;
     
-    dual_1 := DualOnObjects( object_1 );
+    codual_1 := DualOnObjects( object_1 );
     
     id_2 := IdentityMorphism( object_2 );
     
@@ -163,11 +163,11 @@ AddDerivationToCAP( CoclosedCoevaluationMorphismWithGivenSource,
                     
                   TensorProductOnMorphisms(
                     Braiding( object_1, object_2 ),
-                    IdentityMorphism( dual_1 ) ),
+                    IdentityMorphism( codual_1 ) ),
                     
                   TensorProductOnMorphisms(
                     id_2,
-                    Braiding( object_1, dual_1 ) ),
+                    Braiding( object_1, codual_1 ) ),
                     
                   TensorProductOnMorphisms(
                     id_2,
