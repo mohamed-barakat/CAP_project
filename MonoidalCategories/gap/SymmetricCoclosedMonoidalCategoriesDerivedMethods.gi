@@ -9,10 +9,6 @@ AddDerivationToCAP( TensorProductToInternalCoHomAdjunctionMap,
     coclosed_coevaluation := CoclosedCoevaluationMorphism( object_1, object_2 );
     
     return PreCompose( internal_cohom_on_morphisms, coclosed_coevaluation );
-    
-    return PreCompose( 
-             InternalCoHomOnMorphisms( morphism, IdentityMorphism( object_1 ) ),
-             CoclosedCoevaluationMorphism( object_1, object_2 ) );
              
 end : CategoryFilter := IsSymmetricCoclosedMonoidalCategory,
       Description := "TensorProductToInternalCoHomAdjunctionMap using CoclosedCoevaluationMorphism and InternalCoHom" );
