@@ -25,7 +25,7 @@ end );
 ##
 CAP_INTERNAL_RIGID_SYMMETRIC_COCLOSED_MONOIDAL_CATEGORIES_BASIC_OPERATIONS.MorphismToCoBidual := 
   [ [ "MorphismToCoBidualWithGivenCoBidual", 1 ],
-    [ "DualOnObjects", 2 ] ];
+    [ "CoDualOnObjects", 2 ] ];
 ##
 InstallMethod( MorphismToCoBidual,
                [ IsCapCategoryObject ],
