@@ -593,4 +593,4 @@ AddDerivationToCAP( MonoidalPostCoComposeMorphismWithGivenObjects,
              morphism );
     
 end : CategoryFilter := IsSymmetricCoclosedMonoidalCategory and IsStrictMonoidalCategory,
-      Description := "MonoidalPostCoComposeMorphismWithGivenObjects using coclosed evluation, and cohom tensor adjunction" );
+      Description := "MonoidalPostCoComposeMorphismWithGivenObjects using coclosed evaluation, and cohom tensor adjunction" );
