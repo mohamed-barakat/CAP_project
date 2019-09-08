@@ -152,7 +152,7 @@ AddDerivationToCAP( CoclosedCoevaluationMorphismWithGivenSource,
   function( object_1, object_2, internal_cohom )
     local morphism, codual_1, id_2;
     
-    codual_1 := DualOnObjects( object_1 );
+    codual_1 := CoDualOnObjects( object_1 );
     
     id_2 := IdentityMorphism( object_2 );
     
