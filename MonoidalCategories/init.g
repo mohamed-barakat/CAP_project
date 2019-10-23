@@ -9,6 +9,8 @@ ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesDoc.gd" );
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesTensorProductOnObjectsAndUnitObject.gd" );
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategories.gd" );
 
+ReadPackage( "MonoidalCategories", "gap/Enrichement.gd" );
+
 ReadPackage( "MonoidalCategories", "gap/AdditiveMonoidalCategories.gd" );
 
 ReadPackage( "MonoidalCategories", "gap/BraidedMonoidalCategoriesDoc.gd" );

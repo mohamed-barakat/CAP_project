@@ -11,6 +11,9 @@ ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesTensorProductOnObjects
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesMethodRecord.gi" );
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategories.gi" );
 
+ReadPackage( "MonoidalCategories", "gap/EnrichementMethodRecord.gi" );
+ReadPackage( "MonoidalCategories", "gap/Enrichement.gi" );
+
 ReadPackage( "MonoidalCategories", "gap/AdditiveMonoidalCategoriesMethodRecord.gi" );
 ReadPackage( "MonoidalCategories", "gap/AdditiveMonoidalCategories.gi" );
 
