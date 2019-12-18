@@ -788,3 +788,39 @@ DeclareOperation( "AddIsomorphismFromInternalHomToObjectWithGivenInternalHom",
 
 DeclareOperation( "AddIsomorphismFromInternalHomToObjectWithGivenInternalHom",
                   [ IsCapCategory, IsList ] );
+
+##
+#! @Description
+#!  The argument is an epimorphism $\pi: a \rightarrow b$.
+#!  The output is the internal sections object $\mathrm{\underline{Sec}}(\pi)$.
+#!  It is naturally isomorphic to the pullback of
+#!  $$
+#!     \mathrm{\underline{Hom}}(b,a)
+#!     \xrightarrow{\mathrm{\underline{Hom}}(\mathrm{id}_b, \pi)}
+#!     \mathrm{\underline{Hom}}(b,b)
+#!     \xleftarrow{\mathrm{LambdaIntroduction}(\mathrm{id}_b)}
+#!     1 \mbox{.}
+#!  $$
+#! @Arguments pi
+#! @Returns an object.
+DeclareAttribute( "InternalSectionsOfEpi",
+                  IsCapCategoryMorphism );
+
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation <C>InternalSectionsOfEpi</C>.
+#! $F: ( \pi: a \rightarrow b ) \mapsto \mathrm{\underline{Sec}}(\pi)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddInternalSectionsOfEpi",
+                  [ IsCapCategory, IsFunction ] );
+
+DeclareOperation( "AddInternalSectionsOfEpi",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+
+DeclareOperation( "AddInternalSectionsOfEpi",
+                  [ IsCapCategory, IsList, IsInt ] );
+
+DeclareOperation( "AddInternalSectionsOfEpi",
+                  [ IsCapCategory, IsList ] );
