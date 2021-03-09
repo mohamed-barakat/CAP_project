@@ -4,13 +4,19 @@ InternalCoHomOnObjects := rec(
   filter_list := [ "category", "object", "object" ],
   io_type := [ [ "a", "b" ], [ "i" ] ],
   cache_name := "InternalCoHomOnObjects",
-  return_type := "object" ),
+  return_type := "object",
+  dual_operation := "InternalHomOnObjects",
+  dual_arguments_reversed := true,
+),
 
 InternalCoHomOnMorphismsWithGivenInternalCoHoms := rec(
   filter_list := [ "category", "object", "morphism", "morphism", "object" ],
   io_type := [ [ "s", "alpha", "beta", "r" ], [ "s", "r" ] ],
   cache_name := "InternalCoHomOnMorphismsWithGivenInternalCoHoms",
-  return_type := "morphism" ),
+  return_type := "morphism",
+  dual_operation := "InternalHomOnMorphismsWithGivenInternalHoms",
+  dual_arguments_reversed := true,
+),
 
 CoclosedEvaluationMorphismWithGivenRange := rec(
   filter_list := [ "category", "object", "object", "object" ],
