@@ -74,7 +74,7 @@ end );
 InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_CAP_CATEGORY_OF_GRADED_ROWS,
 
   function( category, checks )
-    local underlying_graded_ring;
+    local underlying_graded_ring, B;
     
     underlying_graded_ring := UnderlyingGradedRing( category );
     
@@ -1149,8 +1149,91 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_CAP_CATEGORY_OF_GRADED_ROWS,
 
     end );    
     
+    
+    
+    ######################################################################
+    #
+    # @Section Homomorphism Structure from the Closed Structure
+    #
+    ######################################################################
+    
+    B := UnderlyingNonGradedRing( BaseRing( underlying_graded_ring ) );
+    
+    SetCommutativeRingOfLinearCategory( category, B );
+    
+    SetRangeCategoryOfHomomorphismStructure( category, CategoryOfRows( B ) );
+    
+    ##
+    AddMorphismUniquelyLiftingMorphismsFromTensorUnit( category,
+      function( object )
+        local S, z, eta;
+        
+        S := UnderlyingGradedRing( CapCategory( object ) );
+        
+        z := TheZeroElement( DegreeGroup( S ) );
+        
+        eta := MonomialMatrix( z, S, -UnzipDegreeList( object ), true ); ## left := true
+        
+        return GradedRowOrColumnMorphism( GradedRow( [ [ z, NrRows( eta ) ] ], S ), eta, object );
+        
+    end );
+    
+    ##
+    AddInterpretAsObjectInRangeCategoryOfHomomorphismStructure( category,
+      function( object )
+        local twists;
+        
+        twists := DegreeList( object );
+        
+        if twists = [ ] then
+            twists := [ [ 0, 0 ] ];
+        elif Length( twists ) > 1 then
+            Error( "there are other twists than 0\n" );
+        elif not IsZero( twists[1][1] ) then
+            Error( "we can only interpret free nontwisted modules\n" );
+        fi;
+        
+        return CategoryOfRowsObject( twists[1][2], RangeCategoryOfHomomorphismStructure( CapCategory( object ) ) );
+        
+    end );
+    
+    ##
+    AddInterpretAsMorphismInRangeCategoryOfHomomorphismStructure( category,
+      function( morphism )
+        
+        return CategoryOfRowsMorphism(
+                       InterpretAsObjectInRangeCategoryOfHomomorphismStructure( Source( morphism ) ),
+                       B * UnderlyingHomalgMatrix( morphism ),
+                       InterpretAsObjectInRangeCategoryOfHomomorphismStructure( Range( morphism ) ) );
+        
+    end );
+    
+    ##
+    AddInterpretObjectFromRangeCategoryOfHomomorphismStructure( category,
+      function( category, object )
+        local S, z;
+        
+        S := UnderlyingGradedRing( category );
+        
+        z := TheZeroElement( DegreeGroup( S ) );
+        
+        return GradedRow( [ [ z, RankOfObject( object ) ] ], S );
+        
+    end );
+    
+    ##
+    AddInterpretMorphismFromRangeCategoryOfHomomorphismStructure( category,
+      function( category, morphism )
+        
+        return GradedRowOrColumnMorphism(
+                       InterpretObjectFromRangeCategoryOfHomomorphismStructure( category, Source( morphism ) ),
+                       underlying_graded_ring * UnderlyingMatrix( morphism ),
+                       InterpretObjectFromRangeCategoryOfHomomorphismStructure( category, Range( morphism ) ) );
+        
+    end );
+    
     fi;
-
+    
 end );
 
 ##
