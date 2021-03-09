@@ -3,7 +3,10 @@ InstallValue( COCLOSED_MONOIDAL_CATEGORIES_METHOD_NAME_RECORD, rec(
 InternalCoHomOnObjects := rec(
   filter_list := [ "category", "object", "object" ],
   io_type := [ [ "a", "b" ], [ "i" ] ],
-  return_type := "object" ),
+  return_type := "object",
+  dual_operation := "InternalHomOnObjects",
+  dual_arguments_reversed := true,
+),
 
 InternalCoHomOnMorphisms := rec(
   filter_list := [ "category", "morphism", "morphism" ],
@@ -16,7 +19,10 @@ InternalCoHomOnMorphisms := rec(
 InternalCoHomOnMorphismsWithGivenInternalCoHoms := rec(
   filter_list := [ "category", "object", "morphism", "morphism", "object" ],
   io_type := [ [ "s", "alpha", "beta", "r" ], [ "s", "r" ] ],
-  return_type := "morphism" ),
+  return_type := "morphism",
+  dual_operation := "InternalHomOnMorphismsWithGivenInternalHoms",
+  dual_arguments_reversed := true,
+),
 
 CoclosedEvaluationMorphism := rec(
   filter_list := [ "category", "object", "object" ],

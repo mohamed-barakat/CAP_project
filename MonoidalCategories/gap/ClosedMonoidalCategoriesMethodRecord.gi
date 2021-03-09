@@ -3,7 +3,10 @@ InstallValue( CLOSED_MONOIDAL_CATEGORIES_METHOD_NAME_RECORD, rec(
 InternalHomOnObjects := rec(
   filter_list := [ "category", "object", "object" ],
   io_type := [ [ "a", "b" ], [ "i" ] ],
-  return_type := "object" ),
+  return_type := "object",
+  dual_operation := "InternalCoHomOnObjects",
+  dual_arguments_reversed := true,
+),
 
 InternalHomOnMorphisms := rec(
   filter_list := [ "category", "morphism", "morphism" ],
@@ -16,7 +19,10 @@ InternalHomOnMorphisms := rec(
 InternalHomOnMorphismsWithGivenInternalHoms := rec(
   filter_list := [ "category", "object", "morphism", "morphism", "object" ],
   io_type := [ [ "s", "alpha", "beta", "r" ], [ "s", "r" ] ],
-  return_type := "morphism" ),
+  return_type := "morphism",
+  dual_operation := "InternalCoHomOnMorphismsWithGivenInternalCoHoms",
+  dual_arguments_reversed := true,
+),
 
 EvaluationMorphism := rec(
   filter_list := [ "category", "object", "object" ],
