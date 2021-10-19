@@ -1343,3 +1343,1078 @@ InstallGlobalFunction( ENHANCED_SYNTAX_TREE_CODE, function ( tree )
     return func;
     
 end );
+
+BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
+  local orig_tree, stat, seen_function_ids, bindings_to_statements, result_func, additional_arguments_func, code;
+    
+    # to simplify debugging in break loops, we keep a reference to the original input
+    orig_tree := tree;
+    
+    if not IsRecord( tree ) then
+        
+        # COVERAGE_IGNORE_NEXT_LINE
+        Error( "the syntax tree must be a record" );
+        
+    fi;
+    
+    if tree.type <> "EXPR_DECLARATIVE_FUNC" then
+        
+        # COVERAGE_IGNORE_BLOCK_START
+        Error( "The syntax tree is not of type EXPR_FUNC. However, if you type 'return;', it will be wrapped in a dummy function." );
+        
+        if StartsWith( tree.type, "EXPR" ) then
+            
+            stat := rec(
+                type := "STAT_RETURN_OBJ",
+                obj := tree,
+            );
+            
+        else
+            
+            stat := tree;
+            
+        fi;
+        
+        tree := rec(
+            type := "EXPR_FUNC",
+            narg := 0,
+            nloc := 0,
+            id := -1,
+            nams := [ ],
+            variadic := false,
+            stats := rec(
+                type := "STAT_SEQ_STAT",
+                statements := AsSyntaxTreeList( [
+                    stat,
+                ] ),
+            ),
+        );
+        # COVERAGE_IGNORE_BLOCK_END
+        
+    fi;
+    
+    tree := StructuralCopy( tree );
+    
+    # check if a function ID is used more than once
+    seen_function_ids := [ ];
+    
+    #pre_func := function ( tree, additional_arguments )
+    #  local path, func_stack, func, statements, used_by_paths, pre_func, additional_arguments_func, name_of_immediate_child, binding_names, ordered_binding_names, name, value, pos_RETURN_VALUE, first_six_statements, new_statements, func_pos, level, branch;
+    #    
+    #    path := additional_arguments[1];
+    #    func_stack := additional_arguments[2];
+    #    
+    #    Assert( 0, IsRecord( tree ) );
+    #    Assert( 0, IsBound( tree.type ) );
+    #    
+    #    # check that the input is a proper tree, i.e. acyclic
+    #    if IsBound( tree.touched ) then
+    #        
+    #        # COVERAGE_IGNORE_NEXT_LINE
+    #        Error( "this subtree can be reached via at least two different paths, i.e. the input contains a cycle and thus is not a proper tree" );
+    #        
+    #    else
+    #        
+    #        tree.touched := true;
+    #        
+    #    fi;
+    #    
+    #    if tree.type = "SYNTAX_TREE_LIST" then
+    #        
+    #        tree := List( [ 1 .. tree.length ], i -> tree.(i) );
+    #        
+    #    else
+    #        
+    #        # check that function IDs are unique (except dummy ID -1)
+    #        if tree.type = "EXPR_DECLARATIVE_FUNC" and tree.id <> -1 then
+    #            
+    #            if tree.id in seen_function_ids then
+    #                
+    #                # COVERAGE_IGNORE_NEXT_LINE
+    #                Error( "tree contains multiple functions with the same ID" );
+    #                
+    #            else
+    #                
+    #                Add( seen_function_ids, tree.id );
+    #                
+    #            fi;
+    #            
+    #            func := tree;
+    #            
+    #            Assert( 0, "RETURN_VALUE" in func.nams );
+    #            
+    #            Assert( 0, IsSubset( func.nams, func.bindings.names ) );
+    #            
+    #            statements := [ ];
+    #            
+    #            # Order bindings by the relation "is used by" and store the result in <ordered_binding_names>.
+    #            # <name_of_immediate_child> chooses a name in <children> which is only used by the bindings with names in <parents>, i.e. an "immediate" child of <parents>
+    #            # and is applied iteratively to the already ordered bindings and the not yet ordered bindings.
+    #            # We always have a starting point because "RETURN_VALUE" must not be used explicitly.
+    #            
+    #            used_by_paths := rec( );
+    #            
+    #            for name in func.nams do
+    #                
+    #                used_by_paths.(name) := [ ];
+    #                
+    #            od;
+    #            
+    #            pre_func := function ( tree, path )
+    #                
+    #                if tree.type = "EXPR_REF_FVAR" and tree.func_id = func.id then
+    #                    
+    #                    Assert( 0, tree.name in func.nams );
+    #                    
+    #                    Add( used_by_paths.(tree.name), path );
+    #                    
+    #                fi;
+    #                
+    #                return tree;
+    #                
+    #            end;
+    #            
+    #            additional_arguments_func := function ( tree, key, path )
+    #                
+    #                return Concatenation( path, [ key ] );
+    #                
+    #            end;
+    #            
+    #            CapJitIterateOverTree( func.bindings, pre_func, ReturnTrue, additional_arguments_func, [ ] );
+    #            
+    #            Assert( 0, IsEmpty( used_by_paths.RETURN_VALUE ) );
+    #            
+    #            name_of_immediate_child := function ( parents, children )
+    #                
+    #                # take last child because this better reflects what the user would expect
+    #                # the sublist removes "BINDING_" from path[1]
+    #                return Last( Filtered( children, child -> ForAll( used_by_paths.(child), path -> path[1]{[ 9 .. Length( path[1] ) ]} in parents ) ) );
+    #                
+    #            end;
+    #            
+    #            # is modified below
+    #            binding_names := ShallowCopy( func.bindings.names );
+    #            
+    #            ordered_binding_names := [ ];
+    #            
+    #            while Length( binding_names ) > 0 do
+    #                
+    #                name := name_of_immediate_child( ordered_binding_names, binding_names );
+    #                
+    #                if name = fail then
+    #                    
+    #                    # COVERAGE_IGNORE_NEXT_LINE
+    #                    Error( "The relation \"is used by\" between bindings does not give rise to a partial order, i.e. a DAG. This is not supported." );
+    #                    
+    #                fi;
+    #                
+    #                RemoveSet( binding_names, name );
+    #                
+    #                Add( ordered_binding_names, name );
+    #                
+    #            od;
+    #            
+    #            # for each binding A not of type EXPR_CASE which is used in a binding B of EXPR_CASE:
+    #            # check if A is used solely in a single branch of B
+    #            # if yes: add A as a subbinding of this branch of B, i.e. the STAT_ASS_FVAR corresponding to A should be placed inside the branch
+    #            # and remove it from <ordered_binding_names> because it will be handled separately
+    #            ordered_binding_names := Filtered( ordered_binding_names, function ( name )
+    #              local value, paths, path1, used_by_name, used_by_value, branch_number, key, i;
+    #                
+    #                value := CapJitValueOfBinding( func.bindings, name );
+    #                
+    #                if value.type <> "EXPR_CASE" and not IsEmpty( used_by_paths.(name) ) then
+    #                    
+    #                    paths := used_by_paths.(name);
+    #                    path1 := paths[1];
+    #                    
+    #                    Assert( 0, StartsWith( path1[1], "BINDING_" ) );
+    #                    
+    #                    # remove "BINDING_" from the start
+    #                    used_by_name := path1[1]{[ 9 .. Length( path1[1] ) ]};
+    #                    used_by_value := CapJitValueOfBinding( func.bindings, used_by_name );
+    #                    
+    #                    # if used_by_value.type = "EXPR_CASE", then each path is of the form [ BINDING_<binding_name>, "branches", <branch_number>, "condition"/"value" ]
+    #                    # check if binding names and branch numbers coincide for all paths, and if the variable is only used in the value
+    #                    if used_by_value.type = "EXPR_CASE" and ForAll( paths, path -> path[1] = path1[1] and path[3] = path1[3] and path[4] = "value" ) then
+    #                        
+    #                        branch_number := path1[3];
+    #                        
+    #                        if not IsBound( used_by_value.branches.(branch_number).subbinding_names ) then
+    #                            
+    #                            used_by_value.branches.(branch_number).subbinding_names := [ ];
+    #                            
+    #                        fi;
+    #                        
+    #                        # prepend name because we work from the back to the front
+    #                        Add( used_by_value.branches.(branch_number).subbinding_names, name, 1 );
+    #                        
+    #                        # for A and B as above: replace path to A by path to B
+    #                        for key in func.nams do
+    #                            
+    #                            for i in [ 1 .. Length( used_by_paths.(key) ) ] do
+    #                                
+    #                                if used_by_paths.(key)[i][1] = Concatenation( "BINDING_", name ) then
+    #                                    
+    #                                    # we are only interested in the first 4 keys anyway, see above
+    #                                    used_by_paths.(key)[i] := path1{[ 1 .. 4 ]};
+    #                                    
+    #                                fi;
+    #                                
+    #                            od;
+    #                            
+    #                        od;
+    #                        
+    #                        return false;
+    #                        
+    #                    fi;
+    #                    
+    #                fi;
+    #                
+    #                return true;
+    #                
+    #            end );
+    #            
+    #            for name in ordered_binding_names do
+    #                
+    #                # turning "RETURN_VALUE := ...;" into "return ...;" will be done below
+    #                
+    #                value := CapJitValueOfBinding( tree.bindings, name );
+    #                
+    #                if value.type = "EXPR_CASE" then
+    #                    
+    #                    for branch in value.branches do
+    #                        
+    #                        if not IsBound( branch.subbinding_names ) then
+    #                            
+    #                            branch.subbinding_names := [ ];
+    #                            
+    #                        fi;
+    #                        
+    #                    od;
+    #                    
+    #                    # prepend new statement
+    #                    Add( statements, rec(
+    #                        type := "STAT_IF_ELIF",
+    #                        branches := List( value.branches, branch -> rec(
+    #                            type := "BRANCH_IF",
+    #                            condition := branch.condition,
+    #                            body := rec(
+    #                                type := "STAT_SEQ_STAT",
+    #                                statements := AsSyntaxTreeList(
+    #                                    Concatenation(
+    #                                        List( branch.subbinding_names, subbinding_name ->
+    #                                            rec(
+    #                                                type := "STAT_ASS_FVAR",
+    #                                                func_id := func.id,
+    #                                                name := subbinding_name,
+    #                                                rhs := CapJitValueOfBinding( func.bindings, subbinding_name ),
+    #                                            )
+    #                                        ),
+    #                                        [ rec(
+    #                                            type := "STAT_ASS_FVAR",
+    #                                            func_id := func.id,
+    #                                            name := name,
+    #                                            rhs := branch.value,
+    #                                        ) ]
+    #                                    )
+    #                                ),
+    #                            ),
+    #                        ) ),
+    #                    ), 1 );
+    #                    
+    #                else
+    #                    
+    #                    # prepend new statement
+    #                    Add( statements, rec(
+    #                        type := "STAT_ASS_FVAR",
+    #                        func_id := func.id,
+    #                        name := name,
+    #                        rhs := value,
+    #                    ), 1 );
+    #                    
+    #                fi;
+    #                
+    #            od;
+    #            
+    #            # Recall: tree = func
+    #            tree.type := "EXPR_FUNC";
+    #            Unbind( tree.bindings );
+    #            tree.stats := rec(
+    #                type := "STAT_SEQ_STAT",
+    #                statements := AsSyntaxTreeList( statements ),
+    #            );
+    #            
+    #            pos_RETURN_VALUE := Position( tree.nams, "RETURN_VALUE" );
+    #            
+    #            Assert( 0, pos_RETURN_VALUE <> fail );
+    #            
+    #            Remove( tree.nams, pos_RETURN_VALUE );
+    #            
+    #            # append position of function in stack to nams for unique names (the function is not yet on the stack at this point, so we have to add 1)
+    #            tree.nams := List( tree.nams, name -> Concatenation( name, "_", String( Length( func_stack ) + 1 ) ) );
+    #            
+    #            tree.nloc := Length( tree.nams ) - tree.narg;
+    #            
+    #        fi;
+    #        
+    #        if tree.type = "STAT_ASS_FVAR" and tree.name = "RETURN_VALUE" then
+    #            
+    #            tree.type := "STAT_RETURN_OBJ";
+    #            tree.obj := tree.rhs;
+    #            Unbind( tree.func_id );
+    #            Unbind( tree.name );
+    #            Unbind( tree.rhs );
+    #            
+    #        fi;
+    #        
+    #        # assert that short types are used and replace by verbose types
+    #        if StartsWith( tree.type, "STAT_SEQ_STAT" ) then
+    #            
+    #            if tree.type <> "STAT_SEQ_STAT" then
+    #                
+    #                # COVERAGE_IGNORE_NEXT_LINE
+    #                Error( "enhanced syntax trees can only be used with short types" );
+    #                
+    #            fi;
+
+    #            # handled below
+    #        
+    #        elif StartsWith( tree.type, "EXPR_FUNCCALL" ) then
+    #            
+    #            if tree.type <> "EXPR_FUNCCALL" then
+    #                
+    #                # COVERAGE_IGNORE_NEXT_LINE
+    #                Error( "enhanced syntax trees can only be used with short types" );
+    #                
+    #            fi;
+    #            
+    #            if tree.args.length > 6 then
+    #                
+    #                tree.type := "EXPR_FUNCCALL_XARGS";
+    #                
+    #            else
+    #                
+    #                tree.type := Concatenation( "EXPR_FUNCCALL_", String( tree.args.length ), "ARGS" );
+    #                
+    #            fi;
+    #        
+    #        elif StartsWith( tree.type, "STAT_PROCCALL" ) then
+    #            
+    #            if tree.type <> "STAT_PROCCALL" then
+    #                
+    #                # COVERAGE_IGNORE_NEXT_LINE
+    #                Error( "enhanced syntax trees can only be used with short types" );
+    #                
+    #            fi;
+    #            
+    #            if tree.args.length > 6 then
+    #                
+    #                tree.type := "STAT_PROCCALL_XARGS";
+    #                
+    #            else
+    #                
+    #                tree.type := Concatenation( "STAT_PROCCALL_", String( tree.args.length ), "ARGS" );
+    #                
+    #            fi;
+    #            
+    #        elif StartsWith( tree.type, "STAT_FOR" ) then
+    #            
+    #            if tree.type <> "STAT_FOR" then
+    #                
+    #                # COVERAGE_IGNORE_NEXT_LINE
+    #                Error( "enhanced syntax trees can only be used with short types" );
+    #                
+    #            fi;
+    #            
+    #            # check if we range over a local variable
+    #            if tree.collection.type = "EXPR_RANGE" and tree.variable.type = "EXPR_REF_FVAR" and tree.variable.func_id = Last( func_stack ).id then
+    #                
+    #                tree.type := "STAT_FOR_RANGE";
+    #                
+    #            fi;
+    #            
+    #            if tree.body.length = 2 or tree.body.length = 3 then
+    #                
+    #                tree.type := Concatenation( tree.type, String( tree.body.length ) );
+    #                
+    #            fi;
+    #            
+    #        fi;
+    #        
+    #        # nest statements
+    #        if tree.type = "STAT_SEQ_STAT" then
+    #            
+    #            statements := tree.statements;
+    #            
+    #            # assert that statements are flat
+    #            Assert( 0, statements.length > 0 );
+    #            Assert( 0, ForAll( statements, s -> not StartsWith( s.type, "STAT_SEQ_STAT" ) ) );
+    #            
+    #            first_six_statements := fail;
+    #            
+    #            if Last( path ) = "stats" and statements.length > 7 then
+    #                
+    #                first_six_statements := Sublist( statements, [ 1 .. 6 ] );
+    #                statements := Sublist( statements, [ 7 .. statements.length ] );
+    #                
+    #            fi;
+    #            
+    #            new_statements := rec(
+    #                type := "STAT_SEQ_STAT",
+    #                statements := statements,
+    #            );
+    #            
+    #            if first_six_statements <> fail then
+    #                
+    #                # new_statements.type will be handled by the recursion
+    #                return rec(
+    #                    type := "STAT_SEQ_STAT7",
+    #                    statements := ConcatenationForSyntaxTreeLists( first_six_statements, AsSyntaxTreeList( [ new_statements ] ) ),
+    #                );
+    #                
+    #            else
+    #                
+    #                if statements.length >= 2 and statements.length <= 7 then
+    #                    
+    #                    new_statements.type := Concatenation( "STAT_SEQ_STAT", String( statements.length ) );
+    #                    
+    #                fi;
+    #                
+    #                return new_statements;
+    #                
+    #            fi;
+    #            
+    #        fi;
+
+    #        # convert FVAR to LVAR and HVAR
+    #        if PositionSublist( tree.type, "FVAR" ) <> fail then
+    #            
+    #            func_pos := PositionProperty( func_stack, f -> f.id = tree.func_id );
+    #            
+    #            if func_pos = fail then
+    #                
+    #                # COVERAGE_IGNORE_BLOCK_START
+    #                Error( "An FVAR references a variable outside of the function stack. However, if you type 'return;', it will be replaced by a dummy variable." );
+    #                
+    #                tree.type := ReplacedString( tree.type, "FVAR", "GVAR" );
+    #                tree.gvar := Concatenation( "FVAR_outside_of_function_stack_", tree.name );
+    #                
+    #                return tree;
+    #                # COVERAGE_IGNORE_BLOCK_END
+    #                
+    #            fi;
+    #            
+    #            level := Length( func_stack ) - func_pos;
+    #            
+    #            # append position of function in stack for unique names
+    #            tree.name := Concatenation( tree.name, "_", String( func_pos ) );
+    #            
+    #            if not tree.name in func_stack[func_pos].nams then
+    #                
+    #                # COVERAGE_IGNORE_BLOCK_START
+    #                Error( "The FVAR name ", tree.name, " does not occur in the names of local variables of its function. ",
+    #                    "However, if you type 'return;', the name will be added for debugging purposes (this might lead to unexpected results for variadic functions)." );
+    #                
+    #                Add( func_stack[func_pos].nams, tree.name );
+    #                # COVERAGE_IGNORE_BLOCK_END
+    #                
+    #            fi;
+    #            
+    #            if level = 0 then
+    #                
+    #                tree.type := ReplacedString( tree.type, "FVAR", "LVAR" );
+    #                tree.lvar := Position( func_stack[func_pos].nams, tree.name );
+    #                
+    #            else
+    #                
+    #                tree.type := ReplacedString( tree.type, "FVAR", "HVAR" );
+    #                tree.hvar := 2 ^ 16 * level + Position( func_stack[func_pos].nams, tree.name );
+    #                
+    #            fi;
+    #            
+    #        fi;
+    #        
+    #        # remove STAT_SEQ_STAT from if branches with only a single statement
+    #        if tree.type = "BRANCH_IF" and tree.body.type = "STAT_SEQ_STAT" and tree.body.statements.length = 1 then
+    #            
+    #            tree.body := tree.body.statements.1;
+    #            
+    #        fi;
+    #        
+    #        if tree.type = "EXPR_CASE" then
+    #            
+    #            tree := rec(
+    #                type := "EXPR_FUNCCALL_0ARGS",
+    #                args := AsSyntaxTreeList( [ ] ),
+    #                funcref := rec(
+    #                    type := "EXPR_FUNC",
+    #                    id := -1, # will be ignored anyway
+    #                    nams := [ ],
+    #                    narg := 0,
+    #                    nloc := 0,
+    #                    variadic := false,
+    #                    stats := rec(
+    #                        type := "STAT_SEQ_STAT",
+    #                        statements := AsSyntaxTreeList( [
+    #                            rec(
+    #                                type := "STAT_IF_ELIF",
+    #                                branches := List( tree.branches, branch -> rec(
+    #                                    type := "BRANCH_IF",
+    #                                    condition := branch.condition,
+    #                                    body := rec(
+    #                                        type := "STAT_RETURN_OBJ",
+    #                                        obj := branch.value,
+    #                                    ),
+    #                                ) ),
+    #                            ),
+    #                        ] ),
+    #                    ),
+    #                ),
+    #            );
+    #            
+    #        fi;
+    #        
+    #    fi;
+    #    
+    #    return tree;
+    #    
+    #end;
+    
+    bindings_to_statements := function( func )
+      local statements, used_by_paths, pre_func, additional_arguments_func, name_of_immediate_child, binding_names, ordered_binding_names, name, value, branch;
+        statements := [ ];
+        
+        # Order bindings by the relation "is used by" and store the result in <ordered_binding_names>.
+        # <name_of_immediate_child> chooses a name in <children> which is only used by the bindings with names in <parents>, i.e. an "immediate" child of <parents>
+        # and is applied iteratively to the already ordered bindings and the not yet ordered bindings.
+        # We always have a starting point because "RETURN_VALUE" must not be used explicitly.
+        
+        used_by_paths := rec( );
+        
+        for name in func.nams do
+            
+            used_by_paths.(name) := [ ];
+            
+        od;
+        
+        pre_func := function ( tree, path )
+            
+            if tree.type = "EXPR_REF_FVAR" and tree.func_id = func.id then
+                
+                Assert( 0, tree.name in func.nams );
+                
+                Add( used_by_paths.(tree.name), path );
+                
+            fi;
+            
+            return tree;
+            
+        end;
+        
+        additional_arguments_func := function ( tree, key, path )
+            
+            return Concatenation( path, [ key ] );
+            
+        end;
+        
+        CapJitIterateOverTree( func.bindings, pre_func, ReturnTrue, additional_arguments_func, [ ] );
+        
+        Assert( 0, IsEmpty( used_by_paths.RETURN_VALUE ) );
+        
+        name_of_immediate_child := function ( parents, children )
+            
+            # take last child because this better reflects what the user would expect
+            # the sublist removes "BINDING_" from path[1]
+            return Last( Filtered( children, child -> ForAll( used_by_paths.(child), path -> path[1]{[ 9 .. Length( path[1] ) ]} in parents ) ) );
+            
+        end;
+        
+        # is modified below
+        binding_names := ShallowCopy( func.bindings.names );
+        
+        ordered_binding_names := [ ];
+        
+        while Length( binding_names ) > 0 do
+            
+            name := name_of_immediate_child( ordered_binding_names, binding_names );
+            
+            if name = fail then
+                
+                # COVERAGE_IGNORE_NEXT_LINE
+                Error( "The relation \"is used by\" between bindings does not give rise to a partial order, i.e. a DAG. This is not supported." );
+                
+            fi;
+            
+            RemoveSet( binding_names, name );
+            
+            Add( ordered_binding_names, name );
+            
+        od;
+        
+        # for each binding A not of type EXPR_CASE which is used in a binding B of EXPR_CASE:
+        # check if A is used solely in a single branch of B
+        # if yes: add A as a subbinding of this branch of B, i.e. the STAT_ASS_FVAR corresponding to A should be placed inside the branch
+        # and remove it from <ordered_binding_names> because it will be handled separately
+        ordered_binding_names := Filtered( ordered_binding_names, function ( name )
+          local value, paths, path1, used_by_name, used_by_value, branch_number, key, i;
+            
+            value := CapJitValueOfBinding( func.bindings, name );
+            
+            if value.type <> "EXPR_CASE" and not IsEmpty( used_by_paths.(name) ) then
+                
+                paths := used_by_paths.(name);
+                path1 := paths[1];
+                
+                Assert( 0, StartsWith( path1[1], "BINDING_" ) );
+                
+                # remove "BINDING_" from the start
+                used_by_name := path1[1]{[ 9 .. Length( path1[1] ) ]};
+                used_by_value := CapJitValueOfBinding( func.bindings, used_by_name );
+                
+                # if used_by_value.type = "EXPR_CASE", then each path is of the form [ BINDING_<binding_name>, "branches", <branch_number>, "condition"/"value" ]
+                # check if binding names and branch numbers coincide for all paths, and if the variable is only used in the value
+                if used_by_value.type = "EXPR_CASE" and ForAll( paths, path -> path[1] = path1[1] and path[3] = path1[3] and path[4] = "value" ) then
+                    
+                    branch_number := path1[3];
+                    
+                    if not IsBound( used_by_value.branches.(branch_number).subbinding_names ) then
+                        
+                        used_by_value.branches.(branch_number).subbinding_names := [ ];
+                        
+                    fi;
+                    
+                    # prepend name because we work from the back to the front
+                    Add( used_by_value.branches.(branch_number).subbinding_names, name, 1 );
+                    
+                    # for A and B as above: replace path to A by path to B
+                    for key in func.nams do
+                        
+                        for i in [ 1 .. Length( used_by_paths.(key) ) ] do
+                            
+                            if used_by_paths.(key)[i][1] = Concatenation( "BINDING_", name ) then
+                                
+                                # we are only interested in the first 4 keys anyway, see above
+                                used_by_paths.(key)[i] := path1{[ 1 .. 4 ]};
+                                
+                            fi;
+                            
+                        od;
+                        
+                    od;
+                    
+                    return false;
+                    
+                fi;
+                
+            fi;
+            
+            return true;
+            
+        end );
+        
+        for name in ordered_binding_names do
+            
+            # turning "RETURN_VALUE := ...;" into "return ...;" will be done below
+            
+            value := CapJitValueOfBinding( func.bindings, name );
+            
+            if value.type = "EXPR_CASE" then
+                
+                for branch in value.branches do
+                    
+                    if not IsBound( branch.subbinding_names ) then
+                        
+                        branch.subbinding_names := [ ];
+                        
+                    fi;
+                    
+                od;
+                
+                # prepend new statement
+                Add( statements, rec(
+                    type := "STAT_IF_ELIF",
+                    branches := List( value.branches, branch -> rec(
+                        type := "BRANCH_IF",
+                        condition := branch.condition,
+                        body := rec(
+                            type := "STAT_SEQ_STAT",
+                            statements := AsSyntaxTreeList(
+                                Concatenation(
+                                    List( branch.subbinding_names, subbinding_name ->
+                                        rec(
+                                            type := "STAT_ASS_FVAR",
+                                            func_id := func.id,
+                                            name := subbinding_name,
+                                            rhs := CapJitValueOfBinding( func.bindings, subbinding_name ),
+                                        )
+                                    ),
+                                    [ rec(
+                                        type := "STAT_ASS_FVAR",
+                                        func_id := func.id,
+                                        name := name,
+                                        rhs := branch.value,
+                                    ) ]
+                                )
+                            ),
+                        ),
+                    ) ),
+                ), 1 );
+                
+            else
+                
+                # prepend new statement
+                Add( statements, rec(
+                    type := "STAT_ASS_FVAR",
+                    func_id := func.id,
+                    name := name,
+                    rhs := value,
+                ), 1 );
+                
+            fi;
+            
+        od;
+        
+        return statements;
+        
+    end;
+    
+    result_func := function ( tree, result, keys, additional_arguments )
+      local header, statements, body, footer;
+        
+        if tree.type = "EXPR_INT" then
+            
+            return String( tree.value );
+            
+        elif tree.type = "EXPR_STRING" then
+            
+            return Concatenation( "\"", tree.value, "\"" );
+            
+        elif tree.type = "EXPR_SUM" then
+            
+            if IsString( result.left ) and IsString( result.right ) then
+                
+                return Concatenation( "(", result.left, " + ", result.right, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_DIFF" then
+            
+            if IsString( result.left ) and IsString( result.right ) then
+                
+                return Concatenation( "(", result.left, " - ", result.right, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_EQ" then
+            
+            if IsString( result.left ) and IsString( result.right ) then
+                
+                return Concatenation( "(", result.left, " = ", result.right, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_PROD" then
+            
+            if IsString( result.left ) and IsString( result.right ) then
+                
+                return Concatenation( "(", result.left, " * ", result.right, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_RANGE" then
+            
+            if IsString( result.first ) and IsString( result.last ) then
+                
+                return Concatenation( "(", result.first, ":", result.last, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_ELM_LIST" then
+            
+            if IsString( result.list ) and IsString( result.pos ) then
+                
+                return Concatenation( "(", result.list, "[", result.pos, "])" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_ELMS_LIST" then
+            
+            if IsString( result.list ) and IsString( result.poss ) then
+                
+                return Concatenation( "(", result.list, "[", result.poss, "])" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_REF_GVAR" then
+            
+            return tree.gvar;
+            
+        elif tree.type = "EXPR_REF_FVAR" then
+            
+            # TODO: only works if names are unique
+            return tree.name;
+            
+        elif tree.type = "SYNTAX_TREE_LIST" then
+            
+            return List( [ 1 .. tree.length ], i -> result.(i) );
+            
+        elif tree.type = "EXPR_REC" then
+            
+            if tree.keyvalue.length = 0 then
+                
+                return "Dict()";
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_ELM_REC_NAME" then
+            
+            if tree.record.type = "EXPR_REF_GVAR" and tree.record.gvar = "Julia" then
+                
+                return tree;
+                
+            elif tree.record.type = "EXPR_ELM_REC_NAME" and tree.record.record.type = "EXPR_REF_GVAR" and tree.record.record.gvar = "Julia" then
+                
+                return Concatenation( tree.record.name, ".", tree.name );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_ELM_REC_EXPR" then
+            
+            if tree.record.type = "EXPR_ELM_REC_NAME" and tree.record.record.type = "EXPR_REF_GVAR" and tree.record.record.gvar = "Julia" and tree.expression.type = "EXPR_STRING" then
+                
+                return Concatenation( tree.record.name, ".:(", tree.expression.value, ")" );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "EXPR_FUNCCALL" then
+            
+            if ForAll( result.args, x -> IsString( x ) ) then
+                
+                if tree.funcref.type = "EXPR_REF_GVAR" then
+                    
+                    if tree.funcref.gvar = "Dimension" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").object_datum" );
+                        
+                    elif tree.funcref.gvar = "UnderlyingMatrix" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").morphism_datum" );
+                        
+                    elif tree.funcref.gvar = "UnderlyingRing" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").attributes[\"category_attribute_1\"]" );
+                        
+                    elif tree.funcref.gvar = "Source" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").source" );
+                        
+                    elif tree.funcref.gvar = "Range" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").range" );
+                        
+                    elif tree.funcref.gvar = "ObjectifyObjectForCAPWithAttributes" then
+                        
+                        Assert( 0, Length( result.args ) = 4 );
+                        
+                        return Concatenation( "CapCategoryObject(", result.args[2], ", ", result.args[4], ")" );
+                        
+                    elif tree.funcref.gvar = "ObjectifyMorphismWithSourceAndRangeForCAPWithAttributes" then
+                        
+                        Assert( 0, Length( result.args ) = 6 );
+                        
+                        return Concatenation( "CapCategoryMorphism(", result.args[2], ", ", result.args[3], ", ", result.args[6], ", ", result.args[4], ")" );
+                        
+                    elif tree.funcref.gvar = "List" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "map(", result.args[2], ", ", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "Length" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "length(", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "Sum" then
+                        
+                        if Length( result.args ) = 1 then
+                            
+                            return Concatenation( "sum(", result.args[1], ")" );
+                            
+                        elif Length( result.args ) = 2 then
+                            
+                            return Concatenation( "sum(", result.args[2], ", ", result.args[1], ")" );
+                            
+                        elif Length( result.args ) = 3 then
+                            
+                            return Concatenation( "sum(", result.args[2], ", ", result.args[1], ", init = ", result.args[3], ")" );
+                            
+                        else
+                            
+                            Error( "this is not supported" );
+                            
+                        fi;
+                        
+                    elif tree.funcref.gvar = "CallFuncList" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( result.args[1], "(", result.args[2], "...)" );
+                        
+                    else
+                        
+                        Error( "this is not supported" );
+                        
+                    fi;
+                    
+                elif IsString( result.funcref ) and ForAll( result.args, x -> IsString( x ) ) then
+                    
+                    return Concatenation( result.funcref, "(", JoinStringsWithSeparator( result.args, ", " ), ")" );
+                    
+                else
+                    
+                    Error( "this is not supported" );
+                    
+                fi;
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        elif tree.type = "FVAR_BINDING_SEQ" then
+            
+            return result;
+            
+        elif tree.type = "EXPR_DECLARATIVE_FUNC" then
+            
+            if ForAll( tree.bindings.names, name -> IsString( result.bindings.(Concatenation( "BINDING_", name ) ) ) ) then
+                
+                header := Concatenation( "(function(", JoinStringsWithSeparator( tree.nams{[ 1 .. tree.narg ]}, ", " ), ")\n" );
+                
+                statements := bindings_to_statements( tree );
+                
+                body := Concatenation( List( statements, function( stat )
+                  local string;
+                    
+                    if stat.type = "STAT_ASS_FVAR" then
+                        
+                        string := result.bindings.( Concatenation( "BINDING_", stat.name ) );
+                        
+                        if IsString( string ) then
+                            
+                            return Concatenation( "    ", stat.name, " = ", string, ";\n" );
+                            
+                        else
+                            
+                            Error( "this is not supported" );
+                            
+                        fi;
+                        
+                    else
+                        
+                        Error( "this is not supported" );
+                        
+                    fi;
+                    
+                end ) );
+                
+                footer := "    return RETURN_VALUE;\nend)";
+                
+                return Concatenation( header, body, footer );
+                
+            else
+                
+                Error( "this is not supported" );
+                
+            fi;
+            
+        else
+            
+            Display( tree.type );
+            Error( "this type is not supported yet" );
+            
+        fi;
+        
+    end;
+    
+    additional_arguments_func := function ( tree, key, additional_arguments )
+      local path, func_stack;
+        
+        path := additional_arguments[1];
+        func_stack := additional_arguments[2];
+        
+        path := Concatenation( path, [ key ] );
+        
+        if IsRecord( tree ) and tree.type in [ "EXPR_FUNC", "EXPR_DECLARATIVE_FUNC" ] then
+            
+            Assert( 0, IsBound( tree.id ) );
+            
+            func_stack := Concatenation( func_stack, [ tree ] );
+            
+        fi;
+        
+        return [ path, func_stack ];
+        
+    end;
+    
+    code := CapJitIterateOverTree( tree, ReturnFirst, result_func, additional_arguments_func, [ [ ], [ ] ] );
+    
+    Display( code );
+    
+    return code;
+    
+end );

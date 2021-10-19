@@ -42,7 +42,8 @@ InstallGlobalFunction( CapJitDeduplicatedExpressions, function ( tree )
             # we do not need this information anymore
             Unbind( tree.CAP_JIT_DO_NOT_DEDUPLICATE );
             
-        elif StartsWith( tree.type, "EXPR_" ) and not tree.type in [ "EXPR_REF_FVAR", "EXPR_REF_GVAR", "EXPR_DECLARATIVE_FUNC", "EXPR_INT", "EXPR_STRING", "EXPR_TRUE", "EXPR_FALSE" ] then
+        # deduplicate expressions, but exclude "simple" expressions and "Julia.…" (so the Julia module is not separated from the operation)
+        elif StartsWith( tree.type, "EXPR_" ) and not tree.type in [ "EXPR_REF_FVAR", "EXPR_REF_GVAR", "EXPR_DECLARATIVE_FUNC", "EXPR_INT", "EXPR_STRING", "EXPR_TRUE", "EXPR_FALSE" ] and not (tree.type = "EXPR_ELM_REC_NAME" and tree.record.type = "EXPR_REF_GVAR" and tree.record.gvar = "Julia") then
             
             if not IsBound( expressions_by_level_and_type[level] ) then
                 
