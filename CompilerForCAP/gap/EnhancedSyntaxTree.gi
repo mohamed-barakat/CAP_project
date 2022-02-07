@@ -2080,11 +2080,33 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
     end;
     
     result_func := function ( tree, result, keys, additional_arguments )
-      local header, statements, body, footer;
+        local func_stack, header, statements, body, footer, pos, argument_names, name, binding, new_name;
         
-        if tree.type = "EXPR_INT" then
+        func_stack := additional_arguments[2];
+        
+        if tree.type = "EXPR_TRUE" then
             
-            return String( tree.value );
+            return "true";
+            
+        elif tree.type = "EXPR_FALSE" then
+            
+            return "false";
+            
+        elif tree.type = "EXPR_NOT" then
+            
+            return Concatenation( "(!", result.op, ")" );
+            
+        elif tree.type = "EXPR_OR" then
+            
+            return Concatenation( "(", result.left, " || ", result.right, ")" );
+            
+        elif tree.type = "EXPR_INT" then
+            
+            return Concatenation( "BigInt(", String( tree.value ), ")" );
+            
+        elif tree.type = "EXPR_LT" then
+            
+            return Concatenation( "(", result.left, " < ", result.right, ")" );
             
         elif tree.type = "EXPR_STRING" then
             
@@ -2118,7 +2140,7 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
             
             if IsString( result.left ) and IsString( result.right ) then
                 
-                return Concatenation( "(", result.left, " = ", result.right, ")" );
+                return Concatenation( "(", result.left, " == ", result.right, ")" );
                 
             else
                 
@@ -2150,29 +2172,13 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                 
             fi;
             
-        elif tree.type = "EXPR_ELM_LIST" then
+        elif tree.type = "EXPR_IN" then
             
-            if IsString( result.list ) and IsString( result.pos ) then
-                
-                return Concatenation( "(", result.list, "[", result.pos, "])" );
-                
-            else
-                
-                Error( "this is not supported" );
-                
-            fi;
+            return Concatenation( "(", result.left, " in ", result.right, ")" );
+
+        elif tree.type = "EXPR_LIST" then
             
-        elif tree.type = "EXPR_ELMS_LIST" then
-            
-            if IsString( result.list ) and IsString( result.poss ) then
-                
-                return Concatenation( "(", result.list, "[", result.poss, "])" );
-                
-            else
-                
-                Error( "this is not supported" );
-                
-            fi;
+            return Concatenation( "([", JoinStringsWithSeparator( result.list, ", " ), "])"  );
             
         elif tree.type = "EXPR_REF_GVAR" then
             
@@ -2180,8 +2186,9 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
             
         elif tree.type = "EXPR_REF_FVAR" then
             
-            # TODO: only works if names are unique
-            return tree.name;
+            pos := PositionProperty( func_stack, f -> f.id = tree.func_id );
+            
+            return Concatenation( tree.name, "_", String( pos ) );
             
         elif tree.type = "SYNTAX_TREE_LIST" then
             
@@ -2239,6 +2246,12 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                         
                         return Concatenation( "(", result.args[1], ").object_datum" );
                         
+                    elif tree.funcref.gvar = "AsList" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "(", result.args[1], ").morphism_datum" );
+                        
                     elif tree.funcref.gvar = "UnderlyingMatrix" then
                         
                         Assert( 0, Length( result.args ) = 1 );
@@ -2285,7 +2298,7 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                         
                         Assert( 0, Length( result.args ) = 1 );
                         
-                        return Concatenation( "length(", result.args[1], ")" );
+                        return Concatenation( "BigInt(length(", result.args[1], "))" );
                         
                     elif tree.funcref.gvar = "Sum" then
                         
@@ -2313,6 +2326,90 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                         
                         return Concatenation( result.args[1], "(", result.args[2], "...)" );
                         
+                    elif tree.funcref.gvar = "SSortedList" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+                        
+                        return Concatenation( "unique(sort(", result.args[1], "))" );
+                        
+                    elif tree.funcref.gvar = "+" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "(", result.args[1], " + ", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "-" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "(", result.args[1], " - ", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "*" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "(", result.args[1], " * ", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "^" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "(", result.args[1], "^", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "QUO_INT" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "div(", result.args[1], ", ", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "REM_INT" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "mod(", result.args[1], ", ", result.args[2], ")" );
+                        
+                    elif tree.funcref.gvar = "Position" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "findfirst(", result.args[2], ", ", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "Positions" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "findall(", result.args[2], ", ", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "[]" then
+                        
+                        return Concatenation( "(", result.args[1], "[", result.args[2], "])" );
+                        
+                    elif tree.funcref.gvar = "{}" then
+                        
+                        return Concatenation( "(", result.args[1], "[", result.args[2], "])" );
+                        
+                    elif tree.funcref.gvar = "Product" then
+                        
+                        return Concatenation( "prod(", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "ForAll" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "all(", result.args[2], ", ", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "Filtered" then
+                        
+                        Assert( 0, Length( result.args ) = 2 );
+                        
+                        return Concatenation( "filter(", result.args[2], ", ", result.args[1], ")" );
+                        
+                    elif tree.funcref.gvar = "Concatenation" then
+                        
+                        Assert( 0, Length( result.args ) = 1 );
+
+                        return Concatenation( "vcat(", result.args[1], ")" );
+                        
                     else
                         
                         Error( "this is not supported" );
@@ -2335,6 +2432,17 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                 
             fi;
             
+        elif tree.type = "CASE_BRANCH" then
+            
+            return result;
+            
+        elif tree.type = "EXPR_CASE" then
+            
+            return Concatenation(
+                           Concatenation( "(if ", result.branches[1].condition, "\n", result.branches[1].value, "\n" ),
+                           Concatenation( List( result.branches{[ 2 .. Length( result.branches ) ]}, b -> Concatenation( "elseif ", b.condition, "\n", b.value, "\n" ) ) ),
+                           "end)" );
+            
         elif tree.type = "FVAR_BINDING_SEQ" then
             
             return result;
@@ -2343,7 +2451,22 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
             
             if ForAll( tree.bindings.names, name -> IsString( result.bindings.(Concatenation( "BINDING_", name ) ) ) ) then
                 
-                header := Concatenation( "(function(", JoinStringsWithSeparator( tree.nams{[ 1 .. tree.narg ]}, ", " ), ")\n" );
+                # append position of function in stack to nams for unique names (the function is not yet on the stack at this point, so we have to add 1)
+                argument_names := List( tree.nams{[ 1 .. tree.narg ]}, name -> Concatenation( name, "_", String( Length( func_stack ) + 1 ) ) );
+                
+                for name in tree.bindings.names do
+                    if name = "RETURN_VALUE" then
+                        continue;
+                    fi;
+                    binding := tree.bindings.(Concatenation( "BINDING_", name ));
+                    new_name := Concatenation( name, "_", String( Length( func_stack ) + 1 ) );
+                    Unbind( tree.bindings.(Concatenation( "BINDING_", name )) );
+                    tree.bindings.(Concatenation( "BINDING_", new_name )) := binding;
+                od;
+                
+                tree.bindings.names := List( tree.bindings.names, name -> Concatenation( name, "_", String( Length( func_stack ) + 1 ) ) );
+                
+                header := Concatenation( "(function(", JoinStringsWithSeparator( argument_names, ", " ), ")\n" );
                 
                 statements := bindings_to_statements( tree );
                 
