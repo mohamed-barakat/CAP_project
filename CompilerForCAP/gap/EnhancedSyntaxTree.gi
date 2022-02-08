@@ -2295,7 +2295,7 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                         
                         Assert( 0, Length( result.args ) = 2 );
                         
-                        return Concatenation( "map(", result.args[2], ", ", result.args[1], ")" );
+                        return Concatenation( "pmap(", result.args[2], ", ", result.args[1], ")" );
                         
                     elif tree.funcref.gvar = "Length" then
                         
