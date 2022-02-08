@@ -1926,12 +1926,13 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
             
             # take last child because this better reflects what the user would expect
             # the sublist removes "BINDING_" from path[1]
-            return Last( Filtered( children, child -> ForAll( used_by_paths.(child), path -> path[1]{[ 9 .. Length( path[1] ) ]} in parents ) ) );
+            return First( children, child -> ForAll( used_by_paths.(child), path -> path[1]{[ 9 .. Length( path[1] ) ]} in parents ) );
             
         end;
         
         # is modified below
-        binding_names := ShallowCopy( func.bindings.names );
+        # do not take func.bindings.names directly because we want to preserve the order of func.nams (e.g. deduped_9 < deduped_10)
+        binding_names := Filtered( func.nams, x -> x in func.bindings.names );
         
         ordered_binding_names := [ ];
         
@@ -1946,7 +1947,7 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                 
             fi;
             
-            RemoveSet( binding_names, name );
+            Remove( binding_names, Position( binding_names, name ) );
             
             Add( ordered_binding_names, name );
             
@@ -2187,6 +2188,8 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
         elif tree.type = "EXPR_REF_FVAR" then
             
             pos := PositionProperty( func_stack, f -> f.id = tree.func_id );
+            
+            Assert( 0, pos <> fail );
             
             return Concatenation( tree.name, "_", String( pos ) );
             
@@ -2454,32 +2457,36 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                 # append position of function in stack to nams for unique names (the function is not yet on the stack at this point, so we have to add 1)
                 argument_names := List( tree.nams{[ 1 .. tree.narg ]}, name -> Concatenation( name, "_", String( Length( func_stack ) + 1 ) ) );
                 
-                for name in tree.bindings.names do
-                    if name = "RETURN_VALUE" then
-                        continue;
-                    fi;
-                    binding := tree.bindings.(Concatenation( "BINDING_", name ));
-                    new_name := Concatenation( name, "_", String( Length( func_stack ) + 1 ) );
-                    Unbind( tree.bindings.(Concatenation( "BINDING_", name )) );
-                    tree.bindings.(Concatenation( "BINDING_", new_name )) := binding;
-                od;
-                
-                tree.bindings.names := List( tree.bindings.names, name -> Concatenation( name, "_", String( Length( func_stack ) + 1 ) ) );
-                
                 header := Concatenation( "(function(", JoinStringsWithSeparator( argument_names, ", " ), ")\n" );
                 
                 statements := bindings_to_statements( tree );
                 
                 body := Concatenation( List( statements, function( stat )
-                  local string;
+                  local string, parts;
                     
                     if stat.type = "STAT_ASS_FVAR" then
+                        
+                        Assert( 0, stat.func_id = tree.id );
                         
                         string := result.bindings.( Concatenation( "BINDING_", stat.name ) );
                         
                         if IsString( string ) then
                             
-                            return Concatenation( "    ", stat.name, " = ", string, ";\n" );
+                            if stat.name = "RETURN_VALUE" then
+                                
+                                string := Concatenation( "    return ", string, ";\n" );
+                                
+                            else
+                                
+                                string := Concatenation( "    ", stat.name, "_", String( Length( func_stack ) + 1 ), " = ", string, ";\n" );
+                                
+                            fi;
+                            
+                            # indent
+                            # the last "\n" is lost
+                            parts := SplitString( string, "\n" );
+                            
+                            return Concatenation( JoinStringsWithSeparator( parts, "\n    " ), "\n" );
                             
                         else
                             
@@ -2495,7 +2502,7 @@ BindGlobal( "ENHANCED_SYNTAX_TREE_CODE_JULIA", function ( tree )
                     
                 end ) );
                 
-                footer := "    return RETURN_VALUE;\nend)";
+                footer := "end)";
                 
                 return Concatenation( header, body, footer );
                 
