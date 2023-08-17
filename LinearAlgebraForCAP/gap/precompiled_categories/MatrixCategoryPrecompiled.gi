@@ -3947,7 +3947,7 @@ function ( cat_1, morphisms_1 )
             return Dimension( Source( logic_new_func_x_2 ) );
         end );
     deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[ 1 .. 1 - 1 ]} ) + 1;
+    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
     deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
             local deduped_1_2;
             deduped_1_2 := deduped_9_1[i_2];
@@ -3973,7 +3973,7 @@ function ( cat_1, morphisms_1, P_1 )
             return Dimension( Source( logic_new_func_x_2 ) );
         end );
     deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[ 1 .. 1 - 1 ]} ) + 1;
+    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
     deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
             local deduped_1_2;
             deduped_1_2 := deduped_9_1[i_2];
@@ -4141,7 +4141,7 @@ function ( cat_1, morphisms_1 )
             return Dimension( Range( logic_new_func_x_2 ) );
         end );
     deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[ 1 .. 1 - 1 ]} ) + 1;
+    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
     deduped_6_1 := List( [ 1 .. deduped_12_1 ], function ( i_2 )
             local deduped_1_2;
             deduped_1_2 := deduped_9_1[i_2];
@@ -4167,7 +4167,7 @@ function ( cat_1, morphisms_1, P_1 )
             return Dimension( Range( logic_new_func_x_2 ) );
         end );
     deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[ 1 .. 1 - 1 ]} ) + 1;
+    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
     deduped_6_1 := List( [ 1 .. deduped_12_1 ], function ( i_2 )
             local deduped_1_2;
             deduped_1_2 := deduped_9_1[i_2];
