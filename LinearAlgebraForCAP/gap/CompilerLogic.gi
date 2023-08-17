@@ -100,6 +100,24 @@ CapJitAddLogicTemplate(
     )
 );
 
+#
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "ring", "matrix" ],
+        src_template := "KroneckerMat( HomalgIdentityMatrix( 1, ring ), matrix )",
+        dst_template := "matrix",
+    )
+);
+
+#
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "ring", "matrix" ],
+        src_template := "KroneckerMat( matrix, HomalgIdentityMatrix( 1, ring ) )",
+        dst_template := "matrix",
+    )
+);
+
 # Length( [ 1 .. n ] ) -> n
 CapJitAddLogicTemplate(
     rec(
