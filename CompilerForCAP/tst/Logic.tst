@@ -22,7 +22,7 @@ end
 
 #
 gap> func := function ( L1, L2 )
->   return List( Concatenation( L1, L2 ), x -> x ); end;;
+>   return List( Concatenation( L1, L2 ), x -> x^2 ); end;;
 
 #
 gap> tree := ENHANCED_SYNTAX_TREE( func );;
@@ -30,9 +30,9 @@ gap> tree := CapJitAppliedLogic( tree );;
 gap> Display( ENHANCED_SYNTAX_TREE_CODE( tree ) );
 function ( L1_1, L2_1 )
     return Concatenation( List( L1_1, function ( x_2 )
-              return x_2;
+              return x_2 ^ 2;
           end ), List( L2_1, function ( x_2 )
-              return x_2;
+              return x_2 ^ 2;
           end ) );
 end
 

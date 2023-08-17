@@ -136,3 +136,12 @@ CapJitAddLogicTemplate(
         dst_template := "[ 1 .. n ]"
     )
 );
+
+# List( list, i -> i ) -> list
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "list" ],
+        src_template := "List( list, i -> i )",
+        dst_template := "list"
+    )
+);
