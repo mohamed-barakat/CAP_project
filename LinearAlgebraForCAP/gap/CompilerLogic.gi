@@ -226,3 +226,21 @@ CapJitAddLogicTemplate(
         dst_template := "list"
     )
 );
+
+# list{[ ]} -> [ ]
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "list" ],
+        src_template := "list{[ ]}",
+        dst_template := "[ ]"
+    )
+);
+
+# Sum( [ ] ) -> 0
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [  ],
+        src_template := "Sum( [ ] )",
+        dst_template := "0"
+    )
+);

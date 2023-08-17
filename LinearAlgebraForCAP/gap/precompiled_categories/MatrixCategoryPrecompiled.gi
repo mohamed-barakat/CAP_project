@@ -3939,21 +3939,20 @@ end
         
 ########
 function ( cat_1, morphisms_1 )
-    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1, deduped_12_1;
-    deduped_12_1 := List( morphisms_1, UnderlyingMatrix );
-    deduped_11_1 := Length( morphisms_1 );
-    deduped_10_1 := UnderlyingRing( cat_1 );
-    deduped_9_1 := List( morphisms_1, function ( logic_new_func_x_2 )
+    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1;
+    deduped_11_1 := List( morphisms_1, UnderlyingMatrix );
+    deduped_10_1 := Length( morphisms_1 );
+    deduped_9_1 := UnderlyingRing( cat_1 );
+    deduped_8_1 := List( morphisms_1, function ( logic_new_func_x_2 )
             return Dimension( Source( logic_new_func_x_2 ) );
         end );
-    deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
-    deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
+    deduped_7_1 := Sum( deduped_8_1 );
+    deduped_6_1 := List( [ 1 .. deduped_10_1 ], function ( i_2 )
             local deduped_1_2;
-            deduped_1_2 := deduped_9_1[i_2];
-            return UnionOfRows( HomalgZeroMatrix( Sum( deduped_9_1{[ 1 .. (i_2 - 1) ]} ), deduped_1_2, deduped_10_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_10_1 ), HomalgZeroMatrix( Sum( deduped_9_1{[ (i_2 + 1) .. deduped_11_1 ]} ), deduped_1_2, deduped_10_1 ) ) * deduped_12_1[i_2];
+            deduped_1_2 := deduped_8_1[i_2];
+            return UnionOfRows( HomalgZeroMatrix( Sum( deduped_8_1{[ 1 .. (i_2 - 1) ]} ), deduped_1_2, deduped_9_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_9_1 ), HomalgZeroMatrix( Sum( deduped_8_1{[ (i_2 + 1) .. deduped_10_1 ]} ), deduped_1_2, deduped_9_1 ) ) * deduped_11_1[i_2];
         end );
-    deduped_5_1 := CertainColumns( SyzygiesOfRows( (UnionOfColumns( deduped_10_1, deduped_8_1, deduped_6_1{[ 1 .. deduped_11_1 - 1 ]} ) - UnionOfColumns( deduped_10_1, deduped_8_1, deduped_6_1{[ 2 .. deduped_11_1 ]} )) ), [ deduped_7_1 .. (deduped_7_1 - 1 + deduped_9_1[1]) ] ) * deduped_12_1[1];
+    deduped_5_1 := CertainColumns( SyzygiesOfRows( (UnionOfColumns( deduped_9_1, deduped_7_1, deduped_6_1{[ 1 .. deduped_10_1 - 1 ]} ) - UnionOfColumns( deduped_9_1, deduped_7_1, deduped_6_1{[ 2 .. deduped_10_1 ]} )) ), [ 1 .. deduped_8_1[1] ] ) * deduped_11_1[1];
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( deduped_5_1 ) ), CAP_JIT_INCOMPLETE_LOGIC( Range( CAP_JIT_INCOMPLETE_LOGIC( morphisms_1[1] ) ) ), UnderlyingMatrix, deduped_5_1 );
 end
 ########
@@ -3965,21 +3964,20 @@ end
         
 ########
 function ( cat_1, morphisms_1, P_1 )
-    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1, deduped_12_1;
-    deduped_12_1 := List( morphisms_1, UnderlyingMatrix );
-    deduped_11_1 := Length( morphisms_1 );
-    deduped_10_1 := UnderlyingRing( cat_1 );
-    deduped_9_1 := List( morphisms_1, function ( logic_new_func_x_2 )
+    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1;
+    deduped_11_1 := List( morphisms_1, UnderlyingMatrix );
+    deduped_10_1 := Length( morphisms_1 );
+    deduped_9_1 := UnderlyingRing( cat_1 );
+    deduped_8_1 := List( morphisms_1, function ( logic_new_func_x_2 )
             return Dimension( Source( logic_new_func_x_2 ) );
         end );
-    deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
-    deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
+    deduped_7_1 := Sum( deduped_8_1 );
+    deduped_6_1 := List( [ 1 .. deduped_10_1 ], function ( i_2 )
             local deduped_1_2;
-            deduped_1_2 := deduped_9_1[i_2];
-            return UnionOfRows( HomalgZeroMatrix( Sum( deduped_9_1{[ 1 .. (i_2 - 1) ]} ), deduped_1_2, deduped_10_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_10_1 ), HomalgZeroMatrix( Sum( deduped_9_1{[ (i_2 + 1) .. deduped_11_1 ]} ), deduped_1_2, deduped_10_1 ) ) * deduped_12_1[i_2];
+            deduped_1_2 := deduped_8_1[i_2];
+            return UnionOfRows( HomalgZeroMatrix( Sum( deduped_8_1{[ 1 .. (i_2 - 1) ]} ), deduped_1_2, deduped_9_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_9_1 ), HomalgZeroMatrix( Sum( deduped_8_1{[ (i_2 + 1) .. deduped_10_1 ]} ), deduped_1_2, deduped_9_1 ) ) * deduped_11_1[i_2];
         end );
-    deduped_5_1 := CertainColumns( SyzygiesOfRows( (UnionOfColumns( deduped_10_1, deduped_8_1, deduped_6_1{[ 1 .. deduped_11_1 - 1 ]} ) - UnionOfColumns( deduped_10_1, deduped_8_1, deduped_6_1{[ 2 .. deduped_11_1 ]} )) ), [ deduped_7_1 .. (deduped_7_1 - 1 + deduped_9_1[1]) ] ) * deduped_12_1[1];
+    deduped_5_1 := CertainColumns( SyzygiesOfRows( (UnionOfColumns( deduped_9_1, deduped_7_1, deduped_6_1{[ 1 .. deduped_10_1 - 1 ]} ) - UnionOfColumns( deduped_9_1, deduped_7_1, deduped_6_1{[ 2 .. deduped_10_1 ]} )) ), [ 1 .. deduped_8_1[1] ] ) * deduped_11_1[1];
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( deduped_5_1 ) ), CAP_JIT_INCOMPLETE_LOGIC( Range( CAP_JIT_INCOMPLETE_LOGIC( morphisms_1[1] ) ) ), UnderlyingMatrix, deduped_5_1 );
 end
 ########
@@ -4133,21 +4131,20 @@ end
         
 ########
 function ( cat_1, morphisms_1 )
-    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1, deduped_12_1;
-    deduped_12_1 := Length( morphisms_1 );
-    deduped_11_1 := UnderlyingRing( cat_1 );
-    deduped_10_1 := List( morphisms_1, UnderlyingMatrix );
-    deduped_9_1 := List( morphisms_1, function ( logic_new_func_x_2 )
+    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1;
+    deduped_11_1 := Length( morphisms_1 );
+    deduped_10_1 := UnderlyingRing( cat_1 );
+    deduped_9_1 := List( morphisms_1, UnderlyingMatrix );
+    deduped_8_1 := List( morphisms_1, function ( logic_new_func_x_2 )
             return Dimension( Range( logic_new_func_x_2 ) );
         end );
-    deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
-    deduped_6_1 := List( [ 1 .. deduped_12_1 ], function ( i_2 )
+    deduped_7_1 := Sum( deduped_8_1 );
+    deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
             local deduped_1_2;
-            deduped_1_2 := deduped_9_1[i_2];
-            return deduped_10_1[i_2] * UnionOfColumns( HomalgZeroMatrix( deduped_1_2, Sum( deduped_9_1{[ 1 .. (i_2 - 1) ]} ), deduped_11_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_11_1 ), HomalgZeroMatrix( deduped_1_2, Sum( deduped_9_1{[ (i_2 + 1) .. deduped_12_1 ]} ), deduped_11_1 ) );
+            deduped_1_2 := deduped_8_1[i_2];
+            return deduped_9_1[i_2] * UnionOfColumns( HomalgZeroMatrix( deduped_1_2, Sum( deduped_8_1{[ 1 .. (i_2 - 1) ]} ), deduped_10_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_10_1 ), HomalgZeroMatrix( deduped_1_2, Sum( deduped_8_1{[ (i_2 + 1) .. deduped_11_1 ]} ), deduped_10_1 ) );
         end );
-    deduped_5_1 := deduped_10_1[1] * CertainRows( SyzygiesOfColumns( (UnionOfRows( deduped_11_1, deduped_8_1, deduped_6_1{[ 1 .. deduped_12_1 - 1 ]} ) - UnionOfRows( deduped_11_1, deduped_8_1, deduped_6_1{[ 2 .. deduped_12_1 ]} )) ), [ deduped_7_1 .. (deduped_7_1 - 1 + deduped_9_1[1]) ] );
+    deduped_5_1 := deduped_9_1[1] * CertainRows( SyzygiesOfColumns( (UnionOfRows( deduped_10_1, deduped_7_1, deduped_6_1{[ 1 .. deduped_11_1 - 1 ]} ) - UnionOfRows( deduped_10_1, deduped_7_1, deduped_6_1{[ 2 .. deduped_11_1 ]} )) ), [ 1 .. deduped_8_1[1] ] );
     return CreateCapCategoryMorphismWithAttributes( cat_1, CAP_JIT_INCOMPLETE_LOGIC( Source( CAP_JIT_INCOMPLETE_LOGIC( morphisms_1[1] ) ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( deduped_5_1 ) ), UnderlyingMatrix, deduped_5_1 );
 end
 ########
@@ -4159,21 +4156,20 @@ end
         
 ########
 function ( cat_1, morphisms_1, P_1 )
-    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1, deduped_12_1;
-    deduped_12_1 := Length( morphisms_1 );
-    deduped_11_1 := UnderlyingRing( cat_1 );
-    deduped_10_1 := List( morphisms_1, UnderlyingMatrix );
-    deduped_9_1 := List( morphisms_1, function ( logic_new_func_x_2 )
+    local deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1, deduped_10_1, deduped_11_1;
+    deduped_11_1 := Length( morphisms_1 );
+    deduped_10_1 := UnderlyingRing( cat_1 );
+    deduped_9_1 := List( morphisms_1, UnderlyingMatrix );
+    deduped_8_1 := List( morphisms_1, function ( logic_new_func_x_2 )
             return Dimension( Range( logic_new_func_x_2 ) );
         end );
-    deduped_8_1 := Sum( deduped_9_1 );
-    deduped_7_1 := Sum( deduped_9_1{[  ]} ) + 1;
-    deduped_6_1 := List( [ 1 .. deduped_12_1 ], function ( i_2 )
+    deduped_7_1 := Sum( deduped_8_1 );
+    deduped_6_1 := List( [ 1 .. deduped_11_1 ], function ( i_2 )
             local deduped_1_2;
-            deduped_1_2 := deduped_9_1[i_2];
-            return deduped_10_1[i_2] * UnionOfColumns( HomalgZeroMatrix( deduped_1_2, Sum( deduped_9_1{[ 1 .. (i_2 - 1) ]} ), deduped_11_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_11_1 ), HomalgZeroMatrix( deduped_1_2, Sum( deduped_9_1{[ (i_2 + 1) .. deduped_12_1 ]} ), deduped_11_1 ) );
+            deduped_1_2 := deduped_8_1[i_2];
+            return deduped_9_1[i_2] * UnionOfColumns( HomalgZeroMatrix( deduped_1_2, Sum( deduped_8_1{[ 1 .. (i_2 - 1) ]} ), deduped_10_1 ), HomalgIdentityMatrix( deduped_1_2, deduped_10_1 ), HomalgZeroMatrix( deduped_1_2, Sum( deduped_8_1{[ (i_2 + 1) .. deduped_11_1 ]} ), deduped_10_1 ) );
         end );
-    deduped_5_1 := deduped_10_1[1] * CertainRows( SyzygiesOfColumns( (UnionOfRows( deduped_11_1, deduped_8_1, deduped_6_1{[ 1 .. deduped_12_1 - 1 ]} ) - UnionOfRows( deduped_11_1, deduped_8_1, deduped_6_1{[ 2 .. deduped_12_1 ]} )) ), [ deduped_7_1 .. (deduped_7_1 - 1 + deduped_9_1[1]) ] );
+    deduped_5_1 := deduped_9_1[1] * CertainRows( SyzygiesOfColumns( (UnionOfRows( deduped_10_1, deduped_7_1, deduped_6_1{[ 1 .. deduped_11_1 - 1 ]} ) - UnionOfRows( deduped_10_1, deduped_7_1, deduped_6_1{[ 2 .. deduped_11_1 ]} )) ), [ 1 .. deduped_8_1[1] ] );
     return CreateCapCategoryMorphismWithAttributes( cat_1, CAP_JIT_INCOMPLETE_LOGIC( Source( CAP_JIT_INCOMPLETE_LOGIC( morphisms_1[1] ) ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( deduped_5_1 ) ), UnderlyingMatrix, deduped_5_1 );
 end
 ########
