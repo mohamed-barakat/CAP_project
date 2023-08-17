@@ -64,6 +64,16 @@ CapJitAddLogicTemplate(
     )
 );
 
+# 0 * n -> 0
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "n" ],
+        variable_filters := [ "IsInt" ],
+        src_template := "0 * n",
+        dst_template := "0"
+    )
+);
+
 # 1 * n -> n
 CapJitAddLogicTemplate(
     rec(
