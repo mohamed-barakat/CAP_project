@@ -2776,7 +2776,7 @@ function ( cat_1, a_1 )
     deduped_4_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
     deduped_3_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
     deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 ) * (deduped_2_1 * deduped_2_1 * KroneckerMat( ConvertMatrixToColumn( deduped_3_1 ), deduped_4_1 ));
+    morphism_attr_1_1 := KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 ) * (deduped_2_1 * deduped_2_1 * deduped_2_1);
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2793,7 +2793,7 @@ function ( cat_1, a_1, s_1 )
     deduped_4_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
     deduped_3_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
     deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 ) * (deduped_2_1 * deduped_2_1 * KroneckerMat( ConvertMatrixToColumn( deduped_3_1 ), deduped_4_1 ));
+    morphism_attr_1_1 := KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 ) * (deduped_2_1 * deduped_2_1 * deduped_2_1);
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2829,12 +2829,10 @@ end
         
 ########
 function ( cat_1, a_1 )
-    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
-    deduped_5_1 := UnderlyingRing( cat_1 );
-    deduped_4_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
-    deduped_3_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
-    deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * KroneckerMat( deduped_3_1, ConvertMatrixToColumn( deduped_4_1 ) );
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1;
+    deduped_3_1 := UnderlyingRing( cat_1 );
+    deduped_2_1 := KroneckerMat( HomalgIdentityMatrix( Dimension( a_1 ), deduped_3_1 ), HomalgIdentityMatrix( 1, deduped_3_1 ) );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1;
     return CreateCapCategoryMorphismWithAttributes( cat_1, a_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2846,12 +2844,10 @@ end
         
 ########
 function ( cat_1, a_1, s_1 )
-    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
-    deduped_5_1 := UnderlyingRing( cat_1 );
-    deduped_4_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
-    deduped_3_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
-    deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * KroneckerMat( deduped_3_1, ConvertMatrixToColumn( deduped_4_1 ) );
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1;
+    deduped_3_1 := UnderlyingRing( cat_1 );
+    deduped_2_1 := KroneckerMat( HomalgIdentityMatrix( Dimension( a_1 ), deduped_3_1 ), HomalgIdentityMatrix( 1, deduped_3_1 ) );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1;
     return CreateCapCategoryMorphismWithAttributes( cat_1, s_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2921,12 +2917,10 @@ end
         
 ########
 function ( cat_1, a_1 )
-    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
-    deduped_5_1 := UnderlyingRing( cat_1 );
-    deduped_4_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
-    deduped_3_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
-    deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( deduped_3_1, ConvertMatrixToRow( deduped_4_1 ) ) * deduped_2_1 * deduped_2_1;
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1;
+    deduped_3_1 := UnderlyingRing( cat_1 );
+    deduped_2_1 := KroneckerMat( HomalgIdentityMatrix( Dimension( a_1 ), deduped_3_1 ), HomalgIdentityMatrix( 1, deduped_3_1 ) );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1;
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), a_1, UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2938,12 +2932,10 @@ end
         
 ########
 function ( cat_1, a_1, r_1 )
-    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
-    deduped_5_1 := UnderlyingRing( cat_1 );
-    deduped_4_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
-    deduped_3_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
-    deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( deduped_3_1, ConvertMatrixToRow( deduped_4_1 ) ) * deduped_2_1 * deduped_2_1;
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1;
+    deduped_3_1 := UnderlyingRing( cat_1 );
+    deduped_2_1 := KroneckerMat( HomalgIdentityMatrix( Dimension( a_1 ), deduped_3_1 ), HomalgIdentityMatrix( 1, deduped_3_1 ) );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1;
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), r_1, UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2960,7 +2952,7 @@ function ( cat_1, a_1 )
     deduped_4_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
     deduped_3_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
     deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( ConvertMatrixToRow( deduped_3_1 ), deduped_4_1 ) * deduped_2_1 * deduped_2_1 * KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1 * KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 );
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
@@ -2977,7 +2969,7 @@ function ( cat_1, a_1, r_1 )
     deduped_4_1 := HomalgIdentityMatrix( Dimension( a_1 ), deduped_5_1 );
     deduped_3_1 := HomalgIdentityMatrix( 1, deduped_5_1 );
     deduped_2_1 := KroneckerMat( deduped_3_1, deduped_4_1 );
-    morphism_attr_1_1 := KroneckerMat( ConvertMatrixToRow( deduped_3_1 ), deduped_4_1 ) * deduped_2_1 * deduped_2_1 * KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 );
+    morphism_attr_1_1 := deduped_2_1 * deduped_2_1 * deduped_2_1 * KroneckerMat( TransposedMatrix( deduped_3_1 ), deduped_4_1 );
     return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, Dimension, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
