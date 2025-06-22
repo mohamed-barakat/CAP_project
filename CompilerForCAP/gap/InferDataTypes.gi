@@ -80,6 +80,10 @@ InstallGlobalFunction( "CAP_JIT_INTERNAL_GET_DATA_TYPE_OF_VALUE", function ( val
         
         return CapJitDataTypeOfRing( value );
         
+    elif IsGroup( value ) then
+        
+        return CapJitDataTypeOfGroup( value );
+        
     elif IsFunction( value ) then
         
         # signature has to be set from somewhere else
