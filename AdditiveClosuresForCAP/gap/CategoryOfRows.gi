@@ -982,27 +982,12 @@ InstallGlobalFunction( INSTALL_FUNCTIONS_FOR_CATEGORY_OF_ROWS,
     if HasIsCommutative( ring ) and IsCommutative( ring ) then
         
         ##
-        AddTensorProductOnObjects( category,
-          function( cat, a, b )
-            
-            return CategoryOfRowsObject( cat, RankOfObject( a ) * RankOfObject( b ) );
-            
-        end );
-        
-        ##
         AddTensorProductOnMorphismsWithGivenTensorProducts( category,
           function( cat, s, alpha, beta, r )
             
             return CategoryOfRowsMorphism( cat, s,
               KroneckerMat( UnderlyingMatrix( alpha ), UnderlyingMatrix( beta ) ),
             r );
-            
-        end );
-        
-        AddTensorUnit( category,
-          function( cat )
-            
-            return CategoryOfRowsObject( cat, 1 );
             
         end );
         

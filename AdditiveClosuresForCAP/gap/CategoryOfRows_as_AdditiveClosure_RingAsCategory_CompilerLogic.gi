@@ -468,3 +468,12 @@ CapJitAddLogicTemplate(
         dst_template := "CertainColumns( matrix, [ from1 + from2 .. from1 + to2 ] )",
     )
 );
+
+CapJitAddLogicTemplate(
+    rec(
+        variable_names := [ "length" ],
+        variable_filters := [ "IsInt" ],
+        src_template := "Length( [ 0 .. length - 1 ] )",
+        dst_template := "length",
+    )
+);
