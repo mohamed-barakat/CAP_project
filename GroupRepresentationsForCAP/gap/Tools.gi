@@ -46,6 +46,38 @@ InstallMethod( MultiplicityTripleArray,
     
 end );
 
+InstallGlobalFunction( AssociatorsOnIrreduciblesFromDatabase,
+  function( group )
+    local group_name, associator_filename, stream, command, associator_data;
+    
+    group_name := StructureDescription( group );
+    
+    group_name := Concatenation( group_name, "Ass.g" );
+    
+    # TODO: extract the path from Sebastians database keys.
+    associator_filename :=
+      Concatenation( PackageInfo( "GroupRepresentationsForCAP" )[1].InstallationPath,
+                     "/gap/AssociatorsDatabase/",
+                     group_name );
+    
+    if IsExistingFile( associator_filename ) then
+        
+        stream := InputTextFile( associator_filename );
+        
+        command := ReadAll( stream );
+        
+        associator_data := EvalString( command );
+        
+        return associator_data;
+        
+    else
+        
+        return fail;
+        
+    fi;
+    
+end );
+
 ##
 InstallGlobalFunction( LaTeXStringOfSemisimpleCategoryObjectList,
   function ( object_list )

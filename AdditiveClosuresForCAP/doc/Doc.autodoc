@@ -48,6 +48,16 @@
 
 @Chapter Basic operations
 
+@Chapter Direct sum of an additive category
+@InsertChunk DirectSumOfAdditiveCategoryIntroduction
+
+@Section Attributes
+@Section Constructors
+@InsertChunk DirectSumOfAdditiveCategory_constructors
+@Section Operations
+@Section GAP Categories
+@Section Examples and Tests
+
 @Chapter Examples and Tests
 
 @Chapter Add Functions

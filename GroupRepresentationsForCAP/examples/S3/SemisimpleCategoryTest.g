@@ -44,6 +44,7 @@ tp_mor := TensorProductOnMorphisms( mor, mor );
 
 Display( tp_mor );
 
-#AssociatorLeftToRight( b, b, b );
+AssociatorLeftToRight( a, a, b );
+AssociatorLeftToRight( b, b, b );
 
 L := [ ob1, ob2, ob3 ];

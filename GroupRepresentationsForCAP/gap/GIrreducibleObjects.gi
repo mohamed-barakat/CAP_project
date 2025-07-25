@@ -213,6 +213,8 @@ InstallMethod( AssociatorFromData,
         
     od;
     
+    # Error( "\033[31mDEBUGPRINT[42]\033[0m" );
+    
     return morphism_list;
     
 end );

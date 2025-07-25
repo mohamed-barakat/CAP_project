@@ -106,6 +106,10 @@ DeclareAttribute( "UnderlyingFieldForHomalgForSemisimpleCategory",
                   IsSemisimpleCategory );
 
 
+##
+DeclareAttribute( "AssociatorData",
+                  IsSemisimpleCategory );
+
 #! @Description
 #! The argument is a semisimple category $C = \bigoplus_{i \in I} k\mathrm{-vec}$.
 #! The output is its object filter which could be specified in the constructor of $C$.

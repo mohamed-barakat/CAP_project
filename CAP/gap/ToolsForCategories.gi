@@ -1633,6 +1633,23 @@ InstallGlobalFunction( TransposedMatWithGivenDimensions, function ( nr_rows, nr_
 end );
 
 ##
+InstallGlobalFunction( BooleanToInteger, function ( boolean )
+    
+    Assert( 0, IsBool( boolean ) );
+    
+    if boolean = true then
+        
+        return 1;
+        
+    else
+        
+        return 0;
+        
+    fi;
+    
+end );
+
+##
 InstallGlobalFunction( HandlePrecompiledTowers, FunctionWithNamedArguments(
   [
     [ "no_precompiled_code", false ],

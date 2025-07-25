@@ -122,6 +122,10 @@ DeclareOperation( "RepresentationCategoryZGradedMorphism", [ IsSemisimpleCategor
 ####################################
 
 ##
+DeclareAttribute( "IsCompleteData",
+                  IsRepresentationCategory );
+
+##
 DeclareAttribute( "DegreeDecomposition",
                   IsRepresentationCategoryZGradedObject );
 

@@ -1519,3 +1519,6 @@ CapJitAddTypeSignature( "Iterated", [ IsList, IsFunction, IsObject, IsObject ], 
     return rec( args := args, output_type := args.2.data_type.signature[2] );
     
 end );
+
+CapJitAddTypeSignature( "BooleanToInteger", [ IsBool ], IsInt );
+

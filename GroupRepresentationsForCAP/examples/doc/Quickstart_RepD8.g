@@ -23,32 +23,27 @@ Display( AssociatorLeftToRight( v, v, v ) );
 #! 1/2,1/2, 1/2, -1/2,
 #! 1/2,1/2, -1/2,1/2  
 #! 
-#! A morphism in Category of matrices over Q
 #! ------------------------
 Display( Braiding( v, v ) );
 #! Component: (x_1)
 #! 
 #! 1
 #! 
-#! A morphism in Category of matrices over Q
 #! ------------------------
 #! Component: (x_2)
 #! 
 #! 1
 #! 
-#! A morphism in Category of matrices over Q
 #! ------------------------
 #! Component: (x_3)
 #! 
 #! 1
 #! 
-#! A morphism in Category of matrices over Q
 #! ------------------------
 #! Component: (x_4)
 #! 
 #! -1
 #! 
-#! A morphism in Category of matrices over Q
 #! ------------------------
 alpha := IdentityMorphism( TensorProductOnObjects( v, v ) ) + Braiding( v, v );
 #! <A morphism in The representation category of Group( [ f1, f2, f3 ] )>

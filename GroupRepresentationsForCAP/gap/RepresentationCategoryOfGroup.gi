@@ -130,7 +130,9 @@ InstallMethod( RepresentationCategory,
         
     else
         
-        field := HomalgCyclotomicFieldInMAGMA( conductor, "e" );
+        # I don't have Magma. :(
+        # field := HomalgCyclotomicFieldInMAGMA( conductor, "e" );
+        field := HomalgFieldOfRationalsInDefaultCAS();
         
     fi;
     
@@ -145,6 +147,8 @@ InstallMethod( RepresentationCategory,
     SetUnderlyingGroupForRepresentationCategory( category, group );
     
     SetIsSkeletalCategory( category, true );
+    
+    SetIsCompleteData( category, is_complete_data );
     
     DeactivateCachingOfCategory( category );
     
@@ -326,7 +330,9 @@ InstallMethod( RepresentationCategoryZGraded,
         
     else
         
-        field := HomalgCyclotomicFieldInMAGMA( conductor, "e" );
+        # I don't have Magma. :(
+        # field := HomalgCyclotomicFieldInMAGMA( conductor, "e" );
+        field := HomalgFieldOfRationalsInDefaultCAS();
         
     fi;
     
@@ -341,6 +347,8 @@ InstallMethod( RepresentationCategoryZGraded,
     SetUnderlyingGroupForRepresentationCategory( category, group );
     
     SetIsSkeletalCategory( category, true );
+    
+    SetIsCompleteData( category, is_complete_data );
     
     ## side effect: this computes the multiplicity array of group which can thus be accessed without the getter
     MultiplicityArray( group );

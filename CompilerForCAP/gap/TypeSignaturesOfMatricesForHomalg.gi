@@ -24,6 +24,34 @@ end );
 
 CapJitAddTypeSignature( "ZeroImmutable", [ IsHomalgRing ], input_types -> CapJitDataTypeOfElementOfRing( input_types[1].ring ) );
 CapJitAddTypeSignature( "OneImmutable", [ IsHomalgRing ], input_types -> CapJitDataTypeOfElementOfRing( input_types[1].ring ) );
+CapJitAddTypeSignature( "MinusOne", [ IsHomalgRing ], input_types -> CapJitDataTypeOfElementOfRing( input_types[1].ring ) );
+CapJitAddTypeSignature( "IsZero", [ IsHomalgRing ], input_types -> CapJitDataTypeOfElementOfRing( input_types[1].ring ) );
+
+CapJitAddTypeSignature( "HomalgMatrix", [ IsStringRep, IsInt, IsInt, IsHomalgRing ], function ( input_types )
+  local ring;
+    
+    ring := input_types[4].ring;
+    
+    return rec(
+        filter := IsHomalgMatrix,
+        ring := ring,
+    );
+    
+end );
+
+CapJitAddTypeSignature( "HomalgDiagonalMatrix", [ IsList, IsHomalgRing ], function ( input_types )
+  local ring;
+    
+    ring := input_types[2].ring;
+    
+    Assert( 0, input_types[1].element_type = CapJitDataTypeOfElementOfRing( ring ) or input_types[1].element_type.filter = IsInt ); # for example, integers appear in SGREPS_BraidingOnIrreducibles in GroupRepresentationsForCAP/gap/SkeletalCategoryOfGroupRepresentations_BraidingMorphisms.gi
+    
+    return rec(
+        filter := IsHomalgMatrix,
+        ring := ring,
+    );
+    
+end );
 
 CapJitAddTypeSignature( "HomalgMatrixListList", [ IsList, IsInt, IsInt, IsHomalgRing ], function ( input_types )
   local ring;
@@ -69,6 +97,7 @@ CapJitAddTypeSignature( "HomalgColumnVector", [ IsList, IsInt, IsHomalgRing ], f
 end );
 
 CapJitAddTypeSignature( "HomalgIdentityMatrix", [ IsInt, IsHomalgRing ], input_types -> rec( filter := IsHomalgMatrix, ring := input_types[2].ring ) );
+CapJitAddTypeSignature( "HomalgIdentityMatrix", [ IsInt, IsFieldForHomalg ], input_types -> rec( filter := IsHomalgMatrix, ring := input_types[2].ring ) );
 CapJitAddTypeSignature( "HomalgZeroMatrix", [ IsInt, IsInt, IsHomalgRing ], input_types -> rec( filter := IsHomalgMatrix, ring := input_types[3].ring ) );
 CapJitAddTypeSignature( "RandomMatrix", [ IsInt, IsInt, IsHomalgRing ], input_types -> rec( filter := IsHomalgMatrix, ring := input_types[3].ring ) );
 CapJitAddTypeSignature( "IsZero", [ IsHomalgMatrix ], IsBool );

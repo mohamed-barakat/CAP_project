@@ -323,7 +323,7 @@ InstallMethod( Display,
             
             Print( "\n" );
             
-            Display( elem[1] );
+            Display( UnderlyingMatrix( elem[1] ) );
             
             Print( "\n------------------------\n" );
             

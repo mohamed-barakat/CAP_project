@@ -75,6 +75,7 @@ Dependencies := rec(
                            [ "ToolsForHomalg", ">= 2020.09.01" ],
                            [ "CAP", ">= 2023.02-09" ],
                            [ "MonoidalCategories", ">= 2025.08-01" ],
+                           [ "LinearClosuresForCAP", ">= 2025.07-02" ],
                            [ "LinearAlgebraForCAP", ">=2024.02-02" ],
                            [ "RingsForHomalg", ">=2016.08.12" ],
                            [ "repsn", ">=3.0.2" ] ],

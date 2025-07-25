@@ -23,6 +23,8 @@ AutoDoc( rec(
                 \usepackage{tikz}
                 \usetikzlibrary{arrows}
                 \usetikzlibrary{calc}
+                \DeclareUnicodeCharacter{2A01}{\ensuremath{\bigoplus}}
+                \usepackage{mathtools}
             """,
         ),
     ),

@@ -428,6 +428,12 @@ InstallGlobalFunction( BigInt, IdFunc );
 # =#
 
 #! @Description
+#!   Converts the boolean <A>true</A> to the integer 1 and the boolean <A>false</A> to the integer 0.
+#! @Arguments boolean
+#! @Returns an integer
+DeclareGlobalFunction( "BooleanToInteger" );
+
+#! @Description
 #!   Shorthand for `ObjectifyWithAttributes( rec( ), type, [attribute1, value1, ...] )`.
 #! @Arguments type, [attribute1, value1, ...]
 DeclareGlobalFunction( "CreateGapObjectWithAttributes" );

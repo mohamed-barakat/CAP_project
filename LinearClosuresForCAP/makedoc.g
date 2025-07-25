@@ -20,6 +20,8 @@ AutoDoc( rec(
     gapdoc := rec(
         LaTeXOptions := rec(
             LateExtraPreamble := """
+                \usepackage{mathtools}
+                \DeclareUnicodeCharacter{2295}{\ensuremath{\oplus}}
             """,
         ),
     ),
