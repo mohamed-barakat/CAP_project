@@ -152,6 +152,25 @@ InstallGlobalFunction( FiniteSkeletalDiscreteCategory,
         
     end );
     
+    ##
+    AddSetOfGeneratingMorphismsOfCategory( D,
+      function( D )
+        
+        return CapJitTypedExpression( [ ], cat -> CapJitDataTypeOfListOf( CapJitDataTypeOfMorphismOfCategory( D ) ) );
+        
+    end );
+    
+    SetRangeCategoryOfHomomorphismStructure( D, SkeletalFinSets );
+    SetIsEquippedWithHomomorphismStructure( D, true );
+    
+    ##
+    AddMorphismsOfExternalHom( D,
+      function( D, source, range )
+        
+        return [ IdentityMorphism( D, source ) ]{[ 1 .. -1 + Position( [ false, true ], IsEqualForObjects( D, source, range ) ) ]};
+        
+    end );
+    
     if CAP_NAMED_ARGUMENTS.FinalizeCategory then
         
         Finalize( D );
