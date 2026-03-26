@@ -447,6 +447,79 @@ AddDerivationToCAP( RightUnitor,
     
 end : is_with_given_derivation := true );
 
+## TensorProductOnMorphismAndObject
+InstallMethod( AddTensorProductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "TensorProductOnMorphismAndObject", category, func, -1 );
+    
+end );
+
+InstallMethod( AddTensorProductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "TensorProductOnMorphismAndObject", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## TensorProductOnMorphismAndObjectWithGivenTensorProducts
+InstallMethod( AddTensorProductOnMorphismAndObjectWithGivenTensorProducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "TensorProductOnMorphismAndObjectWithGivenTensorProducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddTensorProductOnMorphismAndObjectWithGivenTensorProducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "TensorProductOnMorphismAndObjectWithGivenTensorProducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( TensorProductOnMorphismAndObjectWithGivenTensorProducts,
+                    "TensorProductOnMorphismAndObjectWithGivenTensorProducts by calling TensorProductOnMorphismAndObject with the WithGiven argument(s) dropped",
+                    [
+                        [ TensorProductOnMorphismAndObject, 1 ],
+                    ],
+  function( cat, s, alpha, b, r )
+    
+    return TensorProductOnMorphismAndObject( cat, alpha, b );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( TensorProductOnMorphismAndObject,
+                    "TensorProductOnMorphismAndObject by calling TensorProductOnMorphismAndObjectWithGivenTensorProducts with the WithGiven object(s)",
+                    [
+                        [ TensorProductOnMorphismAndObjectWithGivenTensorProducts, 1 ],
+                        [ TensorProductOnObjects, 2 ],
+                    ],
+  function( cat, alpha, b )
+    
+    return TensorProductOnMorphismAndObjectWithGivenTensorProducts( cat, TensorProductOnObjects( cat, Source( alpha ), b ), alpha, b, TensorProductOnObjects( cat, Range( alpha ), b ) );
+    
+end : is_with_given_derivation := true );
+
 ## TensorProductOnMorphisms
 InstallMethod( AddTensorProductOnMorphisms,
                [ IsCapCategory, IsFunction ],
@@ -517,5 +590,78 @@ AddDerivationToCAP( TensorProductOnMorphisms,
   function( cat, alpha, beta )
     
     return TensorProductOnMorphismsWithGivenTensorProducts( cat, TensorProductOnObjects( cat, Source( alpha ), Source( beta ) ), alpha, beta, TensorProductOnObjects( cat, Range( alpha ), Range( beta ) ) );
+    
+end : is_with_given_derivation := true );
+
+## TensorProductOnObjectAndMorphism
+InstallMethod( AddTensorProductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "TensorProductOnObjectAndMorphism", category, func, -1 );
+    
+end );
+
+InstallMethod( AddTensorProductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "TensorProductOnObjectAndMorphism", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## TensorProductOnObjectAndMorphismWithGivenTensorProducts
+InstallMethod( AddTensorProductOnObjectAndMorphismWithGivenTensorProducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "TensorProductOnObjectAndMorphismWithGivenTensorProducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddTensorProductOnObjectAndMorphismWithGivenTensorProducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "TensorProductOnObjectAndMorphismWithGivenTensorProducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( TensorProductOnObjectAndMorphismWithGivenTensorProducts,
+                    "TensorProductOnObjectAndMorphismWithGivenTensorProducts by calling TensorProductOnObjectAndMorphism with the WithGiven argument(s) dropped",
+                    [
+                        [ TensorProductOnObjectAndMorphism, 1 ],
+                    ],
+  function( cat, s, a, beta, r )
+    
+    return TensorProductOnObjectAndMorphism( cat, a, beta );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( TensorProductOnObjectAndMorphism,
+                    "TensorProductOnObjectAndMorphism by calling TensorProductOnObjectAndMorphismWithGivenTensorProducts with the WithGiven object(s)",
+                    [
+                        [ TensorProductOnObjectAndMorphismWithGivenTensorProducts, 1 ],
+                        [ TensorProductOnObjects, 2 ],
+                    ],
+  function( cat, a, beta )
+    
+    return TensorProductOnObjectAndMorphismWithGivenTensorProducts( cat, TensorProductOnObjects( cat, a, Source( beta ) ), a, beta, TensorProductOnObjects( cat, a, Range( beta ) ) );
     
 end : is_with_given_derivation := true );
