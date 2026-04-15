@@ -16,7 +16,7 @@ DeclareCategory( "IsGroupAsCategoryObject",
                  IsCapCategoryObject );
 
 DeclareCategory( "IsGroupAsCategoryMorphism",
-                 IsCapCategoryMorphism );
+                 FilterIntersection( IsCapCategoryMorphism, IsAutomorphism ) );
 
 DeclareCategory( "IsGroupAsCategory",
                  IsCapCategory );

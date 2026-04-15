@@ -368,7 +368,7 @@ end );
 ##
 ####################################
 
-InstallMethod( \*,
+InstallOtherMethod( \*,
         [ IsGroupAsCategoryMorphism, IsGroupAsCategoryMorphism ],
         
         PreCompose );
