@@ -29,8 +29,8 @@ InstallMethod( GroupAsCategory,
       CreateCapCategoryWithDataTypes(
               Concatenation( "GroupAsCategory( ", group_name," )" ),
               IsGroupAsCategory,
-              IsGroupAsCategoryObject,
-              IsGroupAsCategoryMorphism,
+              IsObjectInGroupAsCategory,
+              IsMorphismInGroupAsCategory,
               IsCapCategoryTwoCell,
               IsBool,
               CapJitDataTypeOfElementOfGroup( group ),
@@ -103,7 +103,7 @@ end );
 
 ##
 InstallMethod( ViewString,
-        [ IsGroupAsCategoryMorphism ],
+        [ IsMorphismInGroupAsCategory ],
     
   function( alpha )
     
@@ -113,7 +113,7 @@ end );
 
 ##
 InstallMethod( ViewString,
-        [ IsGroupAsCategoryObject ],
+        [ IsObjectInGroupAsCategory ],
         
   function( obj )
     
@@ -139,7 +139,7 @@ end );
 
 ##
 InstallMethod( PositionWithinElements,
-        [ IsGroupAsCategoryMorphism ],
+        [ IsMorphismInGroupAsCategory ],
         
   function( alpha )
     
@@ -369,12 +369,12 @@ end );
 ####################################
 
 InstallOtherMethod( \*,
-        [ IsGroupAsCategoryMorphism, IsGroupAsCategoryMorphism ],
+        [ IsMorphismInGroupAsCategory, IsMorphismInGroupAsCategory ],
         
         PreCompose );
 
 InstallMethod( \=,
-        [ IsGroupAsCategoryMorphism, IsGroupAsCategoryMorphism ],
+        [ IsMorphismInGroupAsCategory, IsMorphismInGroupAsCategory ],
         
         IsCongruentForMorphisms );
 
@@ -415,7 +415,7 @@ end );
 
 ##
 InstallMethod( Down,
-        [ IsGroupAsCategoryObject ],
+        [ IsObjectInGroupAsCategory ],
         
   function( obj )
     
@@ -425,7 +425,7 @@ end );
 
 ##
 InstallMethod( DownOnlyMorphismData,
-        [ IsGroupAsCategoryMorphism ],
+        [ IsMorphismInGroupAsCategory ],
         
   function( mor )
     

@@ -12,10 +12,10 @@
 ####################################
 
 ##
-DeclareCategory( "IsGroupAsCategoryObject",
+DeclareCategory( "IsObjectInGroupAsCategory",
                  IsCapCategoryObject );
 
-DeclareCategory( "IsGroupAsCategoryMorphism",
+DeclareCategory( "IsMorphismInGroupAsCategory",
                  FilterIntersection( IsCapCategoryMorphism, IsAutomorphism ) );
 
 DeclareCategory( "IsGroupAsCategory",
@@ -51,10 +51,10 @@ DeclareAttribute( "ElementsOfUnderlyingGroup",
                   IsGroupAsCategory );
 
 DeclareAttribute( "UnderlyingGroupElement",
-                  IsGroupAsCategoryMorphism );
+                  IsMorphismInGroupAsCategory );
 
 DeclareAttribute( "PositionWithinElements",
-                  IsGroupAsCategoryMorphism );
+                  IsMorphismInGroupAsCategory );
 
 ####################################
 ##
@@ -64,7 +64,7 @@ DeclareAttribute( "PositionWithinElements",
 
 ##
 DeclareOperation( "*",
-                  [ IsGroupAsCategoryMorphism, IsGroupAsCategoryMorphism ] );
+                  [ IsMorphismInGroupAsCategory, IsMorphismInGroupAsCategory ] );
 
 ##
 DeclareOperation( "/",
