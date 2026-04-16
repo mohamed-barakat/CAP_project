@@ -28,85 +28,45 @@ else
   echo -e "\033[0;32mUsing CODECOV_TOKEN from environment variable.\033[0m"
 fi
 
+# build extra args for commit/branch/PR override (used by workflow_run context)
+EXTRA_ARGS=""
+if [ -n "$CODECOV_COMMIT_SHA" ]; then
+  EXTRA_ARGS="$EXTRA_ARGS -C $CODECOV_COMMIT_SHA"
+fi
+if [ -n "$CODECOV_BRANCH" ]; then
+  EXTRA_ARGS="$EXTRA_ARGS -B $CODECOV_BRANCH"
+fi
+if [ -n "$CODECOV_PR" ]; then
+  EXTRA_ARGS="$EXTRA_ARGS -P $CODECOV_PR"
+fi
+
 # execute
 chmod +x codecov
-while ! ./codecov -Z -v -s ../ -F CAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
+
+for pkg in \
+  CAP \
+  ActionsForCAP \
+  AdditiveClosuresForCAP \
+  AttributeCategoryForCAP \
+  CartesianCategories \
+  CompilerForCAP \
+  ComplexesAndFilteredObjectsForCAP \
+  FreydCategoriesForCAP \
+  GeneralizedMorphismsForCAP \
+  GradedModulePresentationsForCAP \
+  GroupRepresentationsForCAP \
+  GroupsAsCategoriesForCAP \
+  HomologicalAlgebraForCAP \
+  InternalExteriorAlgebraForCAP \
+  LinearAlgebraForCAP \
+  LinearClosuresForCAP \
+  ModulePresentationsForCAP \
+  ModulesOverLocalRingsForCAP \
+  MonoidalCategories \
+  ToricSheaves \
+; do
+  while ! ./codecov -Z -v -s ../ -F "$pkg" -t $CODECOV_TOKEN $EXTRA_ARGS; do
+    echo "Codecov upload for $pkg failed, retrying in 60s"
     sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F ActionsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F AdditiveClosuresForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F AttributeCategoryForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F CartesianCategories -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F CompilerForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F ComplexesAndFilteredObjectsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F FreydCategoriesForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F GeneralizedMorphismsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F GradedModulePresentationsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F GroupRepresentationsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F GroupsAsCategoriesForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F HomologicalAlgebraForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F InternalExteriorAlgebraForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F LinearAlgebraForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F LinearClosuresForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F ModulePresentationsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F ModulesOverLocalRingsForCAP -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F MonoidalCategories -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
-done
-while ! ./codecov -Z -v -s ../ -F ToricSheaves -t $CODECOV_TOKEN; do
-    echo "Codecov upload failed, retrying in 60s"
-    sleep 60
+  done
 done
