@@ -85,26 +85,12 @@ jobs:
       matrix:
         image: ["ghcr.io/homalg-project/gap-docker:latest", "ghcr.io/homalg-project/gap-docker-master:latest"]
         config:
-          - { packages: [CAP] }
-          - { packages: [ActionsForCAP] }
-          - { packages: [AdditiveClosuresForCAP] }
-          - { packages: [AttributeCategoryForCAP] }
-          - { packages: [CartesianCategories] }
+          - { packages: [CAP, ActionsForCAP, AttributeCategoryForCAP, GroupRepresentationsForCAP, GroupsAsCategoriesForCAP] }
+          - { packages: [CartesianCategories, MonoidalCategories] }
+          - { packages: [ComplexesAndFilteredObjectsForCAP, InternalExteriorAlgebraForCAP, HomologicalAlgebraForCAP, GeneralizedMorphismsForCAP, ToricSheaves] }
           - { packages: [CompilerForCAP] }
-          - { packages: [ComplexesAndFilteredObjectsForCAP] }
-          - { packages: [FreydCategoriesForCAP] }
-          - { packages: [GeneralizedMorphismsForCAP] }
-          - { packages: [GradedModulePresentationsForCAP] }
-          - { packages: [GroupRepresentationsForCAP] }
-          - { packages: [GroupsAsCategoriesForCAP] }
-          - { packages: [HomologicalAlgebraForCAP] }
-          - { packages: [InternalExteriorAlgebraForCAP] }
-          - { packages: [LinearAlgebraForCAP] }
-          - { packages: [LinearClosuresForCAP] }
-          - { packages: [ModulePresentationsForCAP] }
-          - { packages: [ModulesOverLocalRingsForCAP] }
-          - { packages: [MonoidalCategories] }
-          - { packages: [ToricSheaves] }
+          - { packages: [LinearAlgebraForCAP, LinearClosuresForCAP, AdditiveClosuresForCAP, FreydCategoriesForCAP] }
+          - { packages: [ModulesOverLocalRingsForCAP, ModulePresentationsForCAP, GradedModulePresentationsForCAP] }
       fail-fast: false
     name: ${{ matrix.config.targets && format('{0}_{1}', matrix.config.package, join(matrix.config.targets, '_')) || matrix.config.package || join(matrix.config.packages, '_') }} (${{ matrix.image == 'ghcr.io/homalg-project/gap-docker:latest' && 'stable' || 'master' }})
     runs-on: ubuntu-latest
