@@ -2812,6 +2812,98 @@ AddDerivationToCAP( BasisOfSolutionsOfHomogeneousDoubleLinearSystemInLinearCateg
   CategoryGetters := rec( range_cat := RangeCategoryOfHomomorphismStructure ),
   CategoryFilter := cat -> HasIsLinearCategoryOverCommutativeRing( cat ) and IsLinearCategoryOverCommutativeRing( cat ) and HasRangeCategoryOfHomomorphismStructure( cat ) );
 
+##
+AddDerivationToCAP( CoequalizerOfIdentityAndAutomorphisms,
+                    "CoequalizerOfIdentityAndAutomorphisms from ProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+                    [ [ ProjectionOntoCoequalizerOfIdentityAndAutomorphisms, 1 ] ],
+                    
+  function( cat, A, diagram )
+    
+    return Range( ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, A, diagram ) );
+    
+end );
+
+##
+AddDerivationToCAP( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+                    "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms using ColiftAlongEpimorphism and ProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+                    [ [ ColiftAlongEpimorphism, 1 ],
+                      [ ProjectionOntoCoequalizerOfIdentityAndAutomorphisms, 1 ] ],
+                    
+  function( cat, A, diagram, T, tau )
+    
+    return ColiftAlongEpimorphism( cat,
+                   ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, A, diagram ),
+                   tau );
+    
+end );
+
+##
+AddDerivationToCAP( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+                    "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer using ColiftAlongEpimorphism and ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                    [ [ ColiftAlongEpimorphism, 1 ],
+                      [ ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer, 1 ] ],
+                    
+  function( cat, A, diagram, T, tau, C )
+    
+    return ColiftAlongEpimorphism( cat,
+                   ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat, A, diagram, C ),
+                   tau );
+    
+end );
+
+##
+AddDerivationToCAP( CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers,
+                    "CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers using the universality of the coequalizer",
+                    [ [ UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer, 1 ],
+                      [ PreCompose, 1 ],
+                      [ ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer, 1 ] ],
+                    
+  function( cat, P, automorphisms, mu, automorphismsp, Pp )
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat,
+                   Source( mu ),
+                   automorphisms,
+                   Pp,
+                   PreCompose( cat,
+                           mu,
+                           ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat,
+                                   Range( mu ),
+                                   automorphismsp,
+                                   Pp ) ),
+                   P );
+    
+end );
+
+##
+AddDerivationToCAP( IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer,
+                    "IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer from ProjectionOntoCoequalizerOfIdentityAndAutomorphisms and ProjectionOntoCoequalizer and ColiftAlongEpimorphism",
+                    [ [ ProjectionOntoCoequalizerOfIdentityAndAutomorphisms, 1 ],
+                      [ ProjectionOntoCoequalizer, 1 ],
+                      [ ColiftAlongEpimorphism, 1 ] ],
+                    
+  function( cat, A, diagram )
+    
+    return ColiftAlongEpimorphism( cat,
+                   ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, A, diagram ),
+                   ProjectionOntoCoequalizer( cat, A, diagram ) );
+    
+end );
+
+##
+AddDerivationToCAP( IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms,
+                    "IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms from ProjectionOntoCoequalizerOfIdentityAndAutomorphisms and ProjectionOntoCoequalizer and ColiftAlongEpimorphism",
+                    [ [ ProjectionOntoCoequalizerOfIdentityAndAutomorphisms, 1 ],
+                      [ ProjectionOntoCoequalizer, 1 ],
+                      [ ColiftAlongEpimorphism, 1 ] ],
+                    
+  function( cat, A, diagram )
+    
+    return ColiftAlongEpimorphism( cat,
+                   ProjectionOntoCoequalizer( cat, A, diagram ),
+                   ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, A, diagram ) );
+    
+end );
+
 ## Final methods for Equalizer
 
 ##
@@ -3666,3 +3758,84 @@ AddFinalDerivationBundle( "ZeroObject as the empty direct product",
     
   end
 ] : CategoryFilter := cat -> IsBound( cat!.supports_empty_limits ) and cat!.supports_empty_limits = true );
+
+## Final methods for CoequalizerOfIdentityAndAutomorphisms
+
+##
+AddFinalDerivationBundle( "CoequalizerOfIdentityAndAutomorphisms from Coequalizer",
+                    [ [ IdentityMorphism, 2 ],
+                      [ Coequalizer, 1 ],
+                      [ ProjectionOntoCoequalizerWithGivenCoequalizer, 1 ],
+                      [ UniversalMorphismFromCoequalizerWithGivenCoequalizer, 1 ] ],
+                    [ CoequalizerOfIdentityAndAutomorphisms,
+                      ProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+                      ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+                      UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+                      UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+                      IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer,
+                      IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms ],
+[
+  CoequalizerOfIdentityAndAutomorphisms,
+  [ [ IdentityMorphism, 1 ],
+    [ Coequalizer, 1 ] ],
+  function( cat, A, automorphisms )
+    local D;
+    
+    D := Concatenation( [ IdentityMorphism( cat, A ) ], automorphisms );
+    
+    return Coequalizer( cat, A, D );
+    
+  end
+],
+[
+  ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+  [ [ IdentityMorphism, 1 ],
+    [ ProjectionOntoCoequalizerWithGivenCoequalizer, 1 ] ],
+  function( cat, A, automorphisms, coequalizer )
+    local D;
+    
+    D := Concatenation( [ IdentityMorphism( cat, A ) ], automorphisms );
+    
+    return ProjectionOntoCoequalizerWithGivenCoequalizer( cat, A, D, coequalizer );
+    
+  end
+],
+[
+  UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+  [ [ IdentityMorphism, 1 ],
+    [ UniversalMorphismFromCoequalizerWithGivenCoequalizer, 1 ] ],
+  function( cat, A, automorphisms, T, tau, coequalizer )
+    local D;
+    
+    D := Concatenation( [ IdentityMorphism( cat, A ) ], automorphisms );
+    
+    return UniversalMorphismFromCoequalizerWithGivenCoequalizer( cat, A, D, T, tau, coequalizer );
+    
+  end
+],
+[
+  IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer,
+  [ [ IdentityMorphism, 2 ],
+    [ Coequalizer, 1 ] ],
+  function( cat, A, automorphisms )
+    local D;
+    
+    D := Concatenation( [ IdentityMorphism( cat, A ) ], automorphisms );
+    
+    return IdentityMorphism( cat, Coequalizer( cat, A, D ) );
+    
+  end
+],
+[
+  IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms,
+  [ [ IdentityMorphism, 2 ],
+    [ Coequalizer, 1 ] ],
+  function( cat, A, automorphisms )
+    local D;
+    
+    D := Concatenation( [ IdentityMorphism( cat, A ) ], automorphisms );
+    
+    return IdentityMorphism( cat, Coequalizer( cat, A, D ) );
+    
+  end
+] );

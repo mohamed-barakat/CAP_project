@@ -18,7 +18,7 @@ Display( Sgrmod );
 #! A CAP category with name
 #! The category of graded left f.p. modules over Q[x,y] (with weights [ 1, 1 ]):
 #! 
-#! 38 primitive operations were used to derive 233 operations for this category
+#! 38 primitive operations were used to derive 242 operations for this category
 #! which algorithmically
 #! * IsAbelianCategoryWithEnoughProjectives
 #! * IsAdditiveMonoidalCategory
@@ -80,7 +80,7 @@ Display( CohP1 );
 #! The Serre quotient category of The category of graded left f.p. modules
 #! over Q[x,y] (with weights [ 1, 1 ]) by test function with name: is_artinian:
 #! 
-#! 21 primitive operations were used to derive 188 operations for this category
+#! 21 primitive operations were used to derive 197 operations for this category
 #! which algorithmically
 #! * IsAbelianCategory
 Sh := CanonicalProjection( CohP1 );

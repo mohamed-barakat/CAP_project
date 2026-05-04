@@ -1672,6 +1672,187 @@ DeclareOperation( "IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsF
 
 #! @Chapter Universal Objects
 
+#! @Chapter Universal Objects
+
+####################################
+##
+#! @Section CoequalizerOfIdentityAndAutomorphisms
+##
+####################################
+
+#! For an integer $n \geq 0$ and a given list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$,
+#! a coequalizer of the identity morphism on $A$ and $D$ consists of three parts:
+#! * an object $C$,
+#! * a morphism $\pi: A \rightarrow C $ such that
+#!  $\pi \circ \alpha_i \sim_{A,C} \pi \circ \alpha_j$ for all pairs $i,j$,
+#! * a dependent function $u$ mapping the morphism
+#!  $\tau: A \rightarrow T $ such that
+#!  $\tau \circ \alpha_i \sim_{A,T} \tau \circ \alpha_j$
+#!  to a morphism $u( \tau ): C \rightarrow T$ such that
+#!  $u( \tau ) \circ \pi \sim_{A, T} \tau$.
+#! The triple $( C, \pi, u )$ is called a <Emph>coequalizer</Emph> of $D$ if the morphisms $u( \tau )$ are uniquely determined up to
+#! congruence of morphisms.
+#! We denote the object $C$ of such a triple by $\mathrm{CoequalizerOfIdentityAndAutomorphisms}(D)$.
+#! We say that the morphism $u( \tau )$ is induced by the
+#! <Emph>universal property of the coequalizer</Emph>.
+#! $\\ $
+#! $\mathrm{CoequalizerOfIdentityAndAutomorphisms}$ is a functorial operation. This means:
+#! For a second diagram $D' = (\alpha_i': A' \rightarrow A')_{i = 1 \dots n}$ and a natural morphism
+#! between coequalizer diagrams (i.e., a collection of morphisms
+#! $\mu: A \rightarrow A'$ and $\alpha: A \rightarrow A'$
+#! such that $\alpha_i' \circ \alpha \sim_{A, A'} \mu \circ \alpha_i$ for $i = 1, \dots n$)
+#! we obtain a morphism $\mathrm{CoequalizerOfIdentityAndAutomorphisms}( D ) \rightarrow \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D' )$.
+#!
+#! Given a category $\mathbf{C}$ and a functor $F: G \to \mathbf{C}$ from a group $G$ (viewed as a groupoid on one object).
+#! The operation $\mathrm{CoequalizerOfIdentityAndAutomorphisms}$ is needed in $\mathbf{C}$ to lift $F$ to a functor
+#! $\widetilde{F}: \mathrm{T}(G) \to \mathbf{C}$, where $\mathrm{T}(G)$ is the coequalizer completion of $G$,
+#! namely the category of transitive (left) $G$-sets.
+
+#! @BeginLatexOnly
+#! \begin{center}
+#! \begin{tikzpicture}
+#! \def\w{2}
+#! \node (B) at (0,0) {$A$};
+#! \node (A) at (\w,0) {$A$};
+#! \node (C) at (2*\w,0) {$C$};
+#! \node (T) at (2*\w,\w) {$T$};
+#! \draw[-latex] (B) to [out = 20, in = 180-20] node[pos=0.45, above] {$\alpha_1$} (A);
+#! \draw[-latex] (B) to [out = -20, in = -180+20] node[pos=0.45, below] {$\alpha_2$} (A);
+#! \draw[-latex] (A) to node[pos=0.45, above] {$\pi$} (C);
+#! \draw[-latex] (A) to node[pos=0.45, above left] {$\tau$} (T);
+#! \draw[dashed, -latex] (C) to node[pos=0.45, right] {$\exists ! u( \tau )$} (T);
+#! \draw[-latex, dotted] (B) to [out = 90, in = 180] node[pos=0.45, above left] {$\tau \circ \alpha_1 \sim_{A,T} \tau \circ \alpha_2$} (T);
+#! \draw[-latex, dotted] (B) to [out = -45, in = -135] node[pos=0.45, below] {$\pi \circ \alpha_1 \sim_{A,C} \pi \circ \alpha_2$} (C);
+#! \end{tikzpicture}
+#! \end{center}
+#! @EndLatexOnly
+
+## Main Operations and Attributes
+
+
+#! @Description
+#! This is a convenience method.
+#! There are three different ways to use this method:
+#! * The arguments are an object $A$ and a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! * The argument is a nonempty list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! * The arguments are morphisms $\alpha_1: A \rightarrow A, \dots, \alpha_n: A \rightarrow A$ with $n \geq 1$.
+#! The output is the coequalizer $\mathrm{CoequalizerOfIdentityAndAutomorphisms}(D)$.
+#! @Returns an object
+DeclareGlobalFunction( "CoequalizerOfIdentityAndAutomorphisms" );
+
+#! @Description
+#! The arguments are an object $A$ and a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
+#! The output is the coequalizer $\mathrm{CoequalizerOfIdentityAndAutomorphisms}(D)$.
+#! @Returns an object
+#! @Arguments A, D
+DeclareOperation( "CoequalizerOfIdentityAndAutomorphismsOp",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object $A$ and a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
+#! The output is the projection
+#! $\pi: A \rightarrow \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D )$.
+#! @Returns a morphism in $\mathrm{Hom}( A, \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D ) )$.
+#! @Arguments A, D
+DeclareOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object $A$, a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$,
+#! and an object $C = \mathrm{CoequalizerOfIdentityAndAutomorphisms}(D)$.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
+#! The output is the projection
+#! $\pi: A \rightarrow C$.
+#! @Returns a morphism in $\mathrm{Hom}( A, C )$.
+#! @Arguments A, D, C
+DeclareOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $A$, a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$, a test object $T$,
+#! and a morphism $\tau: A \rightarrow T $ such that
+#! $\tau \circ \alpha_i \sim_{A,T} \tau \circ \alpha_j$ for all pairs $i,j$.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
+#! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
+#! The output is the morphism
+#! $u( \tau ): \mathrm{CoequalizerOfIdentityAndAutomorphisms}(D) \rightarrow T$
+#! given by the universal property of the coequalizer.
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{CoequalizerOfIdentityAndAutomorphisms}(D), T )$
+#! @Arguments A, D, T, tau
+DeclareOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an object $A$, a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$, a test object $T$,
+#! a morphism $\tau: A \rightarrow T $ such that
+#! $\tau \circ \alpha_i \sim_{A,T} \tau \circ \alpha_j$,
+#! and an object $C = \mathrm{CoequalizerOfIdentityAndAutomorphisms}(D)$.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
+#! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
+#! The output is the morphism
+#! $u( \tau ): C \rightarrow T$
+#! given by the universal property of the coequalizer.
+#! @Returns a morphism in $\mathrm{Hom}( C, T )$
+#! @Arguments A, D, T, tau, C
+DeclareOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                  [ IsCapCategoryObject, IsList, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are a list of automorphisms
+#! $L_s = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$,
+#! a morphism
+#! $\mu: A \rightarrow A'$,
+#! and a list of automorphisms
+#! $L_r = ( \alpha_i': A' \rightarrow A' )_{i = 1 \dots n}$
+#! such that there exists a morphism $\alpha: A \rightarrow A'$
+#! such that $\alpha_i' \circ \alpha \sim_{A, A'} \mu \circ \alpha_i$ for $i = 1, \dots n$.
+#! The output is the morphism
+#! $\mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i )_{i=1}^n ) \rightarrow \mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i' )_{i=1}^n )$
+#! given by the functorality of the coequalizer.
+#! @Returns a morphism in $\mathrm{Hom}(\mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i )_{i=1 \dots n} ), \mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i' )_{i=1 \dots n} ))$
+#! @Arguments Ls, mu, Lr
+DeclareOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorial",
+                  [ IsList, IsCapCategoryMorphism, IsList ] );
+
+#! @Description
+#! The arguments are an object $s = \mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i )_{i=1}^n )$,
+#! a list of automorphisms
+#! $L_s = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$,
+#! a morphism
+#! $\mu: A \rightarrow A'$,
+#! and a list of automorphisms
+#! $L_r = ( \alpha_i': A' \rightarrow A' )_{i = 1 \dots n}$
+#! such that there exists a morphism $\alpha: A \rightarrow A'$
+#! such that $\alpha_i' \circ \alpha \sim_{A, A'} \mu \circ \alpha_i$ for $i = 1, \dots n$,
+#! and an object $r = \mathrm{CoequalizerOfIdentityAndAutomorphisms}( ( \alpha_i' )_{i=1}^n )$.
+#! The output is the morphism
+#! $s \rightarrow r$
+#! given by the functorality of the coequalizer.
+#! @Returns a morphism in $\mathrm{Hom}(s, r)$
+#! @Arguments s, Ls, mu, Lr, r
+DeclareOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers",
+                  [ IsCapCategoryObject, IsList, IsCapCategoryMorphism, IsList, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $A$ and a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! The output is the isomorphism
+#! $\mathrm{CoequalizerOfIdentityAndAutomorphisms}( D ) \rightarrow \mathrm{Coequalizer}( D )$.
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D ), \mathrm{Coequalizer}( D ) )$.
+#! @Arguments A, D
+DeclareOperation( "IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer",
+                  [ IsCapCategoryObject, IsList ] );
+
+#! @Description
+#! The arguments are an object $A$ and a list of automorphisms $D = ( \alpha_i: A \rightarrow A )_{i = 1 \dots n}$.
+#! The output is the isomorphism
+#! $\mathrm{Coequalizer}( D ) \rightarrow \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D )$.
+#! @Returns a morphism in $\mathrm{Hom}( \mathrm{Coequalizer}( D ), \mathrm{CoequalizerOfIdentityAndAutomorphisms}( D ) )$.
+#! @Arguments A, D
+DeclareOperation( "IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategoryObject, IsList ] );
+
 ####################################
 ##
 #! @Section Fiber Product (= Pullback)

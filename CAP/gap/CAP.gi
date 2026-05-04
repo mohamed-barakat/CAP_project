@@ -35,6 +35,10 @@ InstallTrueMethod( IsCategoryWithInitialObject, IsCategoryWithZeroObject );
 
 InstallTrueMethod( IsCategoryWithTerminalObject, IsCategoryWithZeroObject );
 
+InstallTrueMethod( IsCategoryWithEqualizersOfIdentityAndAutomorphisms, IsCategoryWithEqualizers );
+
+InstallTrueMethod( IsCategoryWithCoequalizersOfIdentityAndAutomorphisms, IsCategoryWithCoequalizers );
+
 InstallTrueMethod( IsCategoryWithZeroObject, IsAdditiveCategory );
 
 InstallTrueMethod( IsEnrichedOverCommutativeRegularSemigroup, IsAbCategory );

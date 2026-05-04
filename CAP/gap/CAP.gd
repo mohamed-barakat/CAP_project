@@ -255,6 +255,20 @@ DeclareProperty( "IsCategoryWithCoequalizers", IsCapCategory );
 AddCategoricalProperty( [ "IsCategoryWithCoequalizers", "IsCategoryWithEqualizers" ] );
 
 #! @Description
+#!  The property of the category <A>C</A> having all coequalizers of an identity and automorphisms.
+#! @Arguments C
+DeclareProperty( "IsCategoryWithCoequalizersOfIdentityAndAutomorphisms", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithCoequalizersOfIdentityAndAutomorphisms", "IsCategoryWithEqualizersOfIdentityAndAutomorphisms" ] );
+
+#! @Description
+#!  The property of the category <A>C</A> having all equalizers of an identity and automorphisms.
+#! @Arguments C
+DeclareProperty( "IsCategoryWithEqualizersOfIdentityAndAutomorphisms", IsCapCategory );
+
+AddCategoricalProperty( [ "IsCategoryWithEqualizersOfIdentityAndAutomorphisms", "IsCategoryWithCoequalizersOfIdentityAndAutomorphisms" ] );
+
+#! @Description
 #!  The property of the category <A>C</A> being enriched over a commutative regular semigroup.
 #! @Arguments C
 DeclareProperty( "IsEnrichedOverCommutativeRegularSemigroup", IsCapCategory );
