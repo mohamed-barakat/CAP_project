@@ -1260,7 +1260,7 @@ DeclareOperation( "ComponentOfMorphismIntoDirectProduct",
 ##
 ####################################
 
-#! For an integer $n \geq 1$ and a given list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$,
+#! For an integer $n \geq 0$ and a given list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$,
 #! an equalizer of $D$ consists of three parts:
 #! * an object $E$,
 #! * a morphism $\iota: E \rightarrow A $ such that
@@ -1309,15 +1309,15 @@ DeclareOperation( "ComponentOfMorphismIntoDirectProduct",
 #! This is a convenience method.
 #! There are three different ways to use this method:
 #! * The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
-#! * The argument is a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
-#! * The arguments are morphisms $\beta_1: A \rightarrow B, \dots, \beta_n: A \rightarrow B$.
+#! * The argument is a nonempty list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
+#! * The arguments are morphisms $\beta_1: A \rightarrow B, \dots, \beta_n: A \rightarrow B$ with $n \geq 1$.
 #! The output is the equalizer $\mathrm{Equalizer}(D)$.
 #! @Returns an object
 DeclareGlobalFunction( "Equalizer" );
 
 #! @Description
 #! The arguments are an object $A$ and list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the equalizer $\mathrm{Equalizer}(D)$.
 #! @Returns an object
 #! @Arguments A, D
@@ -1326,7 +1326,7 @@ DeclareOperation( "EqualizerOp",
 
 #! @Description
 #! The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the equalizer embedding
 #! $\iota: \mathrm{Equalizer}(D) \rightarrow A$.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{Equalizer}(D), A )$
@@ -1337,7 +1337,7 @@ DeclareOperation( "EmbeddingOfEqualizer",
 #! @Description
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$,
 #! and an object $E = \mathrm{Equalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the equalizer embedding
 #! $\iota: E \rightarrow A$.
 #! @Returns a morphism in $\mathrm{Hom}( E, A )$
@@ -1347,7 +1347,7 @@ DeclareOperation( "EmbeddingOfEqualizerWithGivenEqualizer",
 
 #! @Description
 #! The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the composition $\mu: \mathrm{Equalizer}(D) \rightarrow B$
 #! of the embedding $\iota: \mathrm{Equalizer}(D) \rightarrow A$ and $\beta_1$.
 #! @Returns a morphism in $\mathrm{Hom}( \mathrm{Equalizer}(D), B )$
@@ -1358,7 +1358,7 @@ DeclareOperation( "MorphismFromEqualizerToSink",
 #! @Description
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$
 #! and an object $E = \mathrm{Equalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the composition $\mu: E \rightarrow B$
 #! of the embedding $\iota: E \rightarrow A$ and $\beta_1$.
 #! @Returns a morphism in $\mathrm{Hom}( E, B )$
@@ -1370,7 +1370,7 @@ DeclareOperation( "MorphismFromEqualizerToSinkWithGivenEqualizer",
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: A \rightarrow B )_{i = 1 \dots n}$, a test object $T$,
 #! and a morphism $ \tau: T \rightarrow A $
 #! such that $\beta_i \circ \tau  \sim_{T, B} \beta_j \circ \tau$ for all pairs $i,j$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
 #! The output is the morphism
 #! $u( \tau ): T \rightarrow \mathrm{Equalizer}(D)$
@@ -1385,7 +1385,7 @@ DeclareOperation( "UniversalMorphismIntoEqualizer",
 #! a morphism $\tau: T \rightarrow A )$
 #! such that $\beta_i \circ \tau  \sim_{T, B} \beta_j \circ \tau$ for all pairs $i,j$,
 #! and an object $E = \mathrm{Equalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
 #! The output is the morphism
 #! $u( \tau ): T \rightarrow E$
@@ -1469,7 +1469,7 @@ DeclareOperation( "IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsInt
 ##
 ####################################
 
-#! For an integer $n \geq 1$ and a given list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$,
+#! For an integer $n \geq 0$ and a given list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$,
 #! a coequalizer of $D$ consists of three parts:
 #! * an object $C$,
 #! * a morphism $\pi: A \rightarrow C $ such that
@@ -1518,15 +1518,15 @@ DeclareOperation( "IsomorphismFromKernelOfJointPairwiseDifferencesOfMorphismsInt
 #! This is a convenience method.
 #! There are three different ways to use this method:
 #! * The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
-#! * The argument is a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
-#! * The arguments are morphisms $\beta_1: B \rightarrow A, \dots, \beta_n: B \rightarrow A$.
+#! * The argument is a nonempty list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
+#! * The arguments are morphisms $\beta_1: B \rightarrow A, \dots, \beta_n: B \rightarrow A$ with $n \geq 1$.
 #! The output is the coequalizer $\mathrm{Coequalizer}(D)$.
 #! @Returns an object
 DeclareGlobalFunction( "Coequalizer" );
 
 #! @Description
 #! The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the coequalizer $\mathrm{Coequalizer}(D)$.
 #! @Returns an object
 #! @Arguments A, D
@@ -1535,7 +1535,7 @@ DeclareOperation( "CoequalizerOp",
 
 #! @Description
 #! The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the projection
 #! $\pi: A \rightarrow \mathrm{Coequalizer}( D )$.
 #! @Returns a morphism in $\mathrm{Hom}( A, \mathrm{Coequalizer}( D ) )$.
@@ -1546,7 +1546,7 @@ DeclareOperation( "ProjectionOntoCoequalizer",
 #! @Description
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$,
 #! and an object $C = \mathrm{Coequalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the projection
 #! $\pi: A \rightarrow C$.
 #! @Returns a morphism in $\mathrm{Hom}( A, C )$.
@@ -1556,7 +1556,7 @@ DeclareOperation( "ProjectionOntoCoequalizerWithGivenCoequalizer",
 
 #! @Description
 #! The arguments are an object $A$ and a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the composition $\mu: B \rightarrow \mathrm{Coequalizer}(D)$
 #! of $\beta_1$ and the projection $\pi: A \rightarrow \mathrm{Coequalizer}( D )$.
 #! @Returns a morphism in $\mathrm{Hom}( B, \mathrm{Coequalizer}( D ) )$.
@@ -1567,7 +1567,7 @@ DeclareOperation( "MorphismFromSourceToCoequalizer",
 #! @Description
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$
 #! and an object $C = \mathrm{Coequalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! The output is the composition $\mu: B \rightarrow C$
 #! of $\beta_1$ and the projection $\pi: A \rightarrow C$.
 #! @Returns a morphism in $\mathrm{Hom}( B, C )$.
@@ -1579,7 +1579,7 @@ DeclareOperation( "MorphismFromSourceToCoequalizerWithGivenCoequalizer",
 #! The arguments are an object $A$, a list of morphisms $D = ( \beta_i: B \rightarrow A )_{i = 1 \dots n}$, a test object $T$,
 #! and a morphism $\tau: A \rightarrow T $ such that
 #! $\tau \circ \beta_i \sim_{B,T} \tau \circ \beta_j$ for all pairs $i,j$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
 #! The output is the morphism
 #! $u( \tau ): \mathrm{Coequalizer}(D) \rightarrow T$
@@ -1594,7 +1594,7 @@ DeclareOperation( "UniversalMorphismFromCoequalizer",
 #! a morphism $\tau: A \rightarrow T $ such that
 #! $\tau \circ \beta_i \sim_{B,T} \tau \circ \beta_j$,
 #! and an object $C = \mathrm{Coequalizer}(D)$.
-#! For convenience, the object $A$ can be omitted and is automatically derived from $D$ in that case.
+#! For convenience, the object $A$ can be omitted and is automatically derived from $D$, which has to be nonempty.
 #! For convenience, the test object <A>T</A> can be omitted and is automatically derived from <A>tau</A> in that case.
 #! The output is the morphism
 #! $u( \tau ): C \rightarrow T$
