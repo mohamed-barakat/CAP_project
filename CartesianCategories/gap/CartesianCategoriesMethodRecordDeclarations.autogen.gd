@@ -279,6 +279,44 @@ DeclareOperation( "AddCartesianRightUnitorWithGivenDirectProduct",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `DirectProductOnMorphismAndObject`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( alpha, b ) \mapsto \mathtt{DirectProductOnMorphismAndObject}(alpha, b)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddDirectProductOnMorphismAndObject",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddDirectProductOnMorphismAndObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `DirectProductOnMorphismAndObjectWithGivenDirectProducts`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( s, alpha, b, r ) \mapsto \mathtt{DirectProductOnMorphismAndObjectWithGivenDirectProducts}(s, alpha, b, r)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddDirectProductOnMorphismAndObjectWithGivenDirectProducts",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddDirectProductOnMorphismAndObjectWithGivenDirectProducts",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `DirectProductOnMorphisms`.
 #! Optionally, a weight (default: 100) can be specified which should roughly correspond
 #! to the computational complexity of the function (lower weight = less complex = faster execution).
@@ -309,6 +347,44 @@ DeclareOperation( "AddDirectProductOnMorphismsWithGivenDirectProducts",
 
 #! @Arguments C, F, weight
 DeclareOperation( "AddDirectProductOnMorphismsWithGivenDirectProducts",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `DirectProductOnObjectAndMorphism`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( a, beta ) \mapsto \mathtt{DirectProductOnObjectAndMorphism}(a, beta)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddDirectProductOnObjectAndMorphism",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddDirectProductOnObjectAndMorphism",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `DirectProductOnObjectAndMorphismWithGivenDirectProducts`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( s, a, beta, r ) \mapsto \mathtt{DirectProductOnObjectAndMorphismWithGivenDirectProducts}(s, a, beta, r)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddDirectProductOnObjectAndMorphismWithGivenDirectProducts",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddDirectProductOnObjectAndMorphismWithGivenDirectProducts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 #! @EndGroup
 

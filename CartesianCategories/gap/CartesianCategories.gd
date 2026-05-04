@@ -38,6 +38,44 @@ DeclareOperation( "DirectProductOnMorphismsWithGivenDirectProducts",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
+#! The arguments are a morphism $\alpha: a \rightarrow a'$ and an object $b$.
+#! The output is the direct product $\alpha \times \mathrm{id}_b$.
+#! @Returns a morphism in $\mathrm{Hom}(a \times b, a' \times b)$
+#! @Arguments alpha, b
+DeclareOperation( "DirectProductOnMorphismAndObject",
+                  [ IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $s = a \times b$,
+#! a morphism $\alpha: a \rightarrow a'$,
+#! an object $b$
+#! and an object $r = a' \times b$.
+#! The output is the direct product $\alpha \times \mathrm{id}_b$.
+#! @Returns a morphism in $\mathrm{Hom}(a \times b, a' \times b)$
+#! @Arguments s, alpha, b, r
+DeclareOperation( "DirectProductOnMorphismAndObjectWithGivenDirectProducts",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $a$ and a morphism $\beta: b \rightarrow b'$.
+#! The output is the direct product $\mathrm{id}_a \times \beta$.
+#! @Returns a morphism in $\mathrm{Hom}(a \times b, a \times b')$
+#! @Arguments a, beta
+DeclareOperation( "DirectProductOnObjectAndMorphism",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an object $s = a \times b$,
+#! an object $a$,
+#! a morphism $\beta: b \rightarrow b'$
+#! and an object $r = a \times b'$.
+#! The output is the direct product $\mathrm{id}_a \times \beta$.
+#! @Returns a morphism in $\mathrm{Hom}(a \times b, a \times b')$
+#! @Arguments s, a, beta, r
+DeclareOperation( "DirectProductOnObjectAndMorphismWithGivenDirectProducts",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
 #! The arguments are three objects $a,b,c$.
 #! The output is the associator $\alpha_{a,(b,c)}: a \times (b \times c) \rightarrow (a \times b) \times c$.
 #! @Returns a morphism in $\mathrm{Hom}( a \times (b \times c), (a \times b) \times c )$.

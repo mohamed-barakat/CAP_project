@@ -58,6 +58,56 @@ DirectProductOnMorphismsWithGivenDirectProducts := rec(
   dual_with_given_objects_reversed := true,
 ),
 
+DirectProductOnMorphismAndObject := rec(
+  filter_list := [ "category", "morphism", "object" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "alpha", "b" ],
+  output_source_getter_string := "BinaryDirectProduct( cat, Source( alpha ), b )",
+  output_source_getter_preconditions := [ [ "DirectProduct", 1 ] ],
+  output_range_getter_string := "BinaryDirectProduct( cat, Range( alpha ), b )",
+  output_range_getter_preconditions := [ [ "DirectProduct", 1 ] ],
+  with_given_object_position := "both",
+  dual_operation := "CoproductOnMorphismAndObject",
+  dual_arguments_reversed := false,
+),
+
+DirectProductOnMorphismAndObjectWithGivenDirectProducts := rec(
+  filter_list := [ "category", "object", "morphism", "object", "object" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "s", "alpha", "b", "r" ],
+  output_source_getter_string := "s",
+  output_source_getter_preconditions := [ ],
+  output_range_getter_string := "r",
+  output_range_getter_preconditions := [ ],
+  dual_operation := "CoproductOnMorphismAndObjectWithGivenCoproducts",
+  dual_with_given_objects_reversed := true,
+),
+
+DirectProductOnObjectAndMorphism := rec(
+  filter_list := [ "category", "object", "morphism" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "a", "beta" ],
+  output_source_getter_string := "BinaryDirectProduct( cat, a, Source( beta ) )",
+  output_source_getter_preconditions := [ [ "DirectProduct", 1 ] ],
+  output_range_getter_string := "BinaryDirectProduct( cat, a, Range( beta ) )",
+  output_range_getter_preconditions := [ [ "DirectProduct", 1 ] ],
+  with_given_object_position := "both",
+  dual_operation := "CoproductOnObjectAndMorphism",
+  dual_arguments_reversed := false,
+),
+
+DirectProductOnObjectAndMorphismWithGivenDirectProducts := rec(
+  filter_list := [ "category", "object", "object", "morphism", "object" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "s", "a", "beta", "r" ],
+  output_source_getter_string := "s",
+  output_source_getter_preconditions := [ ],
+  output_range_getter_string := "r",
+  output_range_getter_preconditions := [ ],
+  dual_operation := "CoproductOnObjectAndMorphismWithGivenCoproducts",
+  dual_with_given_objects_reversed := true,
+),
+
 CartesianAssociatorRightToLeft := rec(
   filter_list := [ "category", "object", "object", "object" ],
   input_arguments_names := [ "cat", "a", "b", "c" ],

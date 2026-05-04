@@ -8,6 +8,72 @@
 
 
 ##
+AddDerivationToCAP( CoproductOnMorphismsWithGivenCoproducts,
+                    "CoproductOnMorphismsWithGivenCoproducts via CoproductOnMorphismAndObjectWithGivenCoproducts and CoproductOnIdentityAndMorphismWithGivenCoproducts and the functoriality of the coproduct",
+                    [ [ CoproductOnMorphismAndObjectWithGivenCoproducts, 1 ],
+                      [ CoproductOnObjectAndMorphismWithGivenCoproducts, 1 ],
+                      [ Coproduct, 4 ],
+                      [ PreCompose, 1 ],
+                    ],
+                    
+  function( cat, source, alpha, beta, range )
+    local alpha_source, alpha_range, beta_source, beta_range, alpha_times_id_source_beta, id_range_alpha_times_beta;
+    
+    alpha_source := Source( alpha );
+    alpha_range := Range( alpha );
+    
+    beta_source := Source( beta );
+    beta_range := Range( beta );
+    
+    # α ⊔ Id_Source(β)
+    alpha_times_id_source_beta := CoproductOnMorphismAndObjectWithGivenCoproducts( cat,
+                                        BinaryCoproduct( cat, alpha_source, beta_source ),
+                                        alpha,
+                                        beta_source,
+                                        BinaryCoproduct( cat, alpha_range, beta_source ) );
+    
+    # Id_Range(α) ⊔ β
+    id_range_alpha_times_beta := CoproductOnObjectAndMorphismWithGivenCoproducts( cat,
+                                        BinaryCoproduct( cat, alpha_range, beta_source ),
+                                        alpha_range,
+                                        beta,
+                                        BinaryCoproduct( cat, alpha_range, beta_range ) );
+    
+    # The functoriality of the bifunctor '⊔':
+    #
+    # α ⊔ β = (α · Id_Range(α)) ⊔ (Id_Source(β) · β)
+    #       = (α ⊔ Id_Source(β)) · (Id_Range(α) ⊔ β)
+    return PreCompose( cat, alpha_times_id_source_beta, id_range_alpha_times_beta );
+    
+end );
+
+##
+AddDerivationToCAP( CoproductOnMorphismAndObjectWithGivenCoproducts,
+                    "CoproductOnMorphismAndObjectWithGivenCoproducts via CoproductOnMorphismsWithGivenCoproducts",
+                    [ [ CoproductOnMorphismsWithGivenCoproducts, 1 ],
+                      [ IdentityMorphism, 1 ],
+                    ],
+                    
+  function( cat, source, alpha, b, range )
+    
+    return CoproductOnMorphismsWithGivenCoproducts( cat, source, alpha, IdentityMorphism( cat, b ), range );
+    
+end );
+
+##
+AddDerivationToCAP( CoproductOnObjectAndMorphismWithGivenCoproducts,
+                    "CoproductOnObjectAndMorphismWithGivenCoproducts via CoproductOnMorphismsWithGivenCoproducts",
+                    [ [ CoproductOnMorphismsWithGivenCoproducts, 1 ],
+                      [ IdentityMorphism, 1 ],
+                    ],
+                    
+  function( cat, source, a, beta, range )
+    
+    return CoproductOnMorphismsWithGivenCoproducts( cat, source, IdentityMorphism( cat, a ), beta, range );
+    
+end );
+
+##
 AddDerivationToCAP( CocartesianAssociatorLeftToRightWithGivenCoproducts,
                     "CocartesianAssociatorLeftToRightWithGivenCoproducts as the inverse of CocartesianAssociatorRightToLeftWithGivenCoproducts",
                     [ [ InverseForMorphisms, 1 ],

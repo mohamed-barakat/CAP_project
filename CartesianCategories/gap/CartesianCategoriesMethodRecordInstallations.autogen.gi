@@ -497,6 +497,79 @@ AddDerivationToCAP( CartesianRightUnitor,
     
 end : is_with_given_derivation := true );
 
+## DirectProductOnMorphismAndObject
+InstallMethod( AddDirectProductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "DirectProductOnMorphismAndObject", category, func, -1 );
+    
+end );
+
+InstallMethod( AddDirectProductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "DirectProductOnMorphismAndObject", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## DirectProductOnMorphismAndObjectWithGivenDirectProducts
+InstallMethod( AddDirectProductOnMorphismAndObjectWithGivenDirectProducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "DirectProductOnMorphismAndObjectWithGivenDirectProducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddDirectProductOnMorphismAndObjectWithGivenDirectProducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "DirectProductOnMorphismAndObjectWithGivenDirectProducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( DirectProductOnMorphismAndObjectWithGivenDirectProducts,
+                    "DirectProductOnMorphismAndObjectWithGivenDirectProducts by calling DirectProductOnMorphismAndObject with the WithGiven argument(s) dropped",
+                    [
+                        [ DirectProductOnMorphismAndObject, 1 ],
+                    ],
+  function( cat, s, alpha, b, r )
+    
+    return DirectProductOnMorphismAndObject( cat, alpha, b );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( DirectProductOnMorphismAndObject,
+                    "DirectProductOnMorphismAndObject by calling DirectProductOnMorphismAndObjectWithGivenDirectProducts with the WithGiven object(s)",
+                    [
+                        [ DirectProductOnMorphismAndObjectWithGivenDirectProducts, 1 ],
+                        [ DirectProduct, 2 ],
+                    ],
+  function( cat, alpha, b )
+    
+    return DirectProductOnMorphismAndObjectWithGivenDirectProducts( cat, BinaryDirectProduct( cat, Source( alpha ), b ), alpha, b, BinaryDirectProduct( cat, Range( alpha ), b ) );
+    
+end : is_with_given_derivation := true );
+
 ## DirectProductOnMorphisms
 InstallMethod( AddDirectProductOnMorphisms,
                [ IsCapCategory, IsFunction ],
@@ -567,5 +640,78 @@ AddDerivationToCAP( DirectProductOnMorphisms,
   function( cat, alpha, beta )
     
     return DirectProductOnMorphismsWithGivenDirectProducts( cat, BinaryDirectProduct( cat, Source( alpha ), Source( beta ) ), alpha, beta, BinaryDirectProduct( cat, Range( alpha ), Range( beta ) ) );
+    
+end : is_with_given_derivation := true );
+
+## DirectProductOnObjectAndMorphism
+InstallMethod( AddDirectProductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "DirectProductOnObjectAndMorphism", category, func, -1 );
+    
+end );
+
+InstallMethod( AddDirectProductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "DirectProductOnObjectAndMorphism", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## DirectProductOnObjectAndMorphismWithGivenDirectProducts
+InstallMethod( AddDirectProductOnObjectAndMorphismWithGivenDirectProducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "DirectProductOnObjectAndMorphismWithGivenDirectProducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddDirectProductOnObjectAndMorphismWithGivenDirectProducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "DirectProductOnObjectAndMorphismWithGivenDirectProducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( DirectProductOnObjectAndMorphismWithGivenDirectProducts,
+                    "DirectProductOnObjectAndMorphismWithGivenDirectProducts by calling DirectProductOnObjectAndMorphism with the WithGiven argument(s) dropped",
+                    [
+                        [ DirectProductOnObjectAndMorphism, 1 ],
+                    ],
+  function( cat, s, a, beta, r )
+    
+    return DirectProductOnObjectAndMorphism( cat, a, beta );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( DirectProductOnObjectAndMorphism,
+                    "DirectProductOnObjectAndMorphism by calling DirectProductOnObjectAndMorphismWithGivenDirectProducts with the WithGiven object(s)",
+                    [
+                        [ DirectProductOnObjectAndMorphismWithGivenDirectProducts, 1 ],
+                        [ DirectProduct, 2 ],
+                    ],
+  function( cat, a, beta )
+    
+    return DirectProductOnObjectAndMorphismWithGivenDirectProducts( cat, BinaryDirectProduct( cat, a, Source( beta ) ), a, beta, BinaryDirectProduct( cat, a, Range( beta ) ) );
     
 end : is_with_given_derivation := true );
