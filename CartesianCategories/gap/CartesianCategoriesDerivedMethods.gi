@@ -8,6 +8,72 @@
 
 
 ##
+AddDerivationToCAP( DirectProductOnMorphismsWithGivenDirectProducts,
+                    "DirectProductOnMorphismsWithGivenDirectProducts via DirectProductOnMorphismAndObjectWithGivenDirectProducts and DirectProductOnIdentityAndMorphismWithGivenDirectProducts and the functoriality of the direct product",
+                    [ [ DirectProductOnMorphismAndObjectWithGivenDirectProducts, 1 ],
+                      [ DirectProductOnObjectAndMorphismWithGivenDirectProducts, 1 ],
+                      [ DirectProduct, 4 ],
+                      [ PreCompose, 1 ],
+                    ],
+                    
+  function( cat, source, alpha, beta, range )
+    local alpha_source, alpha_range, beta_source, beta_range, alpha_times_id_source_beta, id_range_alpha_times_beta;
+    
+    alpha_source := Source( alpha );
+    alpha_range := Range( alpha );
+    
+    beta_source := Source( beta );
+    beta_range := Range( beta );
+    
+    # α × Id_Source(β)
+    alpha_times_id_source_beta := DirectProductOnMorphismAndObjectWithGivenDirectProducts( cat,
+                                        BinaryDirectProduct( cat, alpha_source, beta_source ),
+                                        alpha,
+                                        beta_source,
+                                        BinaryDirectProduct( cat, alpha_range, beta_source ) );
+    
+    # Id_Range(α) × β
+    id_range_alpha_times_beta := DirectProductOnObjectAndMorphismWithGivenDirectProducts( cat,
+                                        BinaryDirectProduct( cat, alpha_range, beta_source ),
+                                        alpha_range,
+                                        beta,
+                                        BinaryDirectProduct( cat, alpha_range, beta_range ) );
+    
+    # The functoriality of the bifunctor '×':
+    #
+    # α × β = (α · Id_Range(α)) × (Id_Source(β) · β)
+    #       = (α × Id_Source(β)) · (Id_Range(α) × β)
+    return PreCompose( cat, alpha_times_id_source_beta, id_range_alpha_times_beta );
+    
+end );
+
+##
+AddDerivationToCAP( DirectProductOnMorphismAndObjectWithGivenDirectProducts,
+                    "DirectProductOnMorphismAndObjectWithGivenDirectProducts via DirectProductOnMorphismsWithGivenDirectProducts",
+                    [ [ DirectProductOnMorphismsWithGivenDirectProducts, 1 ],
+                      [ IdentityMorphism, 1 ],
+                    ],
+                    
+  function( cat, source, alpha, b, range )
+    
+    return DirectProductOnMorphismsWithGivenDirectProducts( cat, source, alpha, IdentityMorphism( cat, b ), range );
+    
+end );
+
+##
+AddDerivationToCAP( DirectProductOnObjectAndMorphismWithGivenDirectProducts,
+                    "DirectProductOnObjectAndMorphismWithGivenDirectProducts via DirectProductOnMorphismsWithGivenDirectProducts",
+                    [ [ DirectProductOnMorphismsWithGivenDirectProducts, 1 ],
+                      [ IdentityMorphism, 1 ],
+                    ],
+                    
+  function( cat, source, a, beta, range )
+    
+    return DirectProductOnMorphismsWithGivenDirectProducts( cat, source, IdentityMorphism( cat, a ), beta, range );
+    
+end );
+
+##
 AddDerivationToCAP( CartesianAssociatorLeftToRightWithGivenDirectProducts,
                     "CartesianAssociatorLeftToRightWithGivenDirectProducts as the inverse of CartesianAssociatorRightToLeftWithGivenDirectProducts",
                     [ [ InverseForMorphisms, 1 ],

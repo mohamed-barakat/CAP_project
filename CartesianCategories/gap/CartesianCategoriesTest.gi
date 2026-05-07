@@ -355,6 +355,11 @@ InstallGlobalFunction( "CartesianCategoriesTest",
               a_tensor_b_op, alpha_tensor_beta_op,
               b_tensor_a_op, beta_tensor_alpha_op,
               
+              id_a_tensor_beta,     alpha_tensor_id_b,
+              id_b_tensor_alpha,    beta_tensor_id_a,
+              id_a_tensor_beta_op,  alpha_tensor_id_b_op,
+              id_b_tensor_alpha_op, beta_tensor_id_a_op,
+              
               left_unitor_a,    left_unitor_inverse_a,    right_unitor_a,    right_unitor_inverse_a,
               left_unitor_b,    left_unitor_inverse_b,    right_unitor_b,    right_unitor_inverse_a_op,
               left_unitor_a_op, left_unitor_inverse_a_op, right_unitor_a_op, right_unitor_inverse_b,
@@ -422,6 +427,32 @@ InstallGlobalFunction( "CartesianCategoriesTest",
             
             Assert( 0, IsCongruentForMorphisms( alpha_tensor_beta, Opposite( alpha_tensor_beta_op ) ) );
             Assert( 0, IsCongruentForMorphisms( beta_tensor_alpha, Opposite( beta_tensor_alpha_op ) ) );
+            
+        fi;
+        
+        if CanCompute( cat, "DirectProductOnMorphismAndObject" ) then
+            
+            alpha_tensor_id_b := DirectProductOnMorphismAndObject( alpha, b );
+            beta_tensor_id_a := DirectProductOnMorphismAndObject( beta, a );
+            
+            alpha_tensor_id_b_op := CoproductOnMorphismAndObject( opposite, alpha_op, b_op );
+            beta_tensor_id_a_op := CoproductOnMorphismAndObject( opposite, beta_op, a_op );
+            
+            Assert( 0, IsCongruentForMorphisms( alpha_tensor_id_b_op, Opposite( opposite, alpha_tensor_id_b ) ) );
+            Assert( 0, IsCongruentForMorphisms( beta_tensor_id_a_op, Opposite( opposite, beta_tensor_id_a ) ) );
+            
+        fi;
+        
+        if CanCompute( cat, "DirectProductOnObjectAndMorphism" ) then
+            
+            id_b_tensor_alpha := DirectProductOnObjectAndMorphism( b, alpha );
+            id_a_tensor_beta := DirectProductOnObjectAndMorphism( a, beta );
+            
+            id_b_tensor_alpha_op := CoproductOnObjectAndMorphism( opposite, b_op, alpha_op );
+            id_a_tensor_beta_op := CoproductOnObjectAndMorphism( opposite, a_op, beta_op );
+            
+            Assert( 0, IsCongruentForMorphisms( id_b_tensor_alpha_op, Opposite( opposite, id_b_tensor_alpha ) ) );
+            Assert( 0, IsCongruentForMorphisms( id_a_tensor_beta_op, Opposite( opposite, id_a_tensor_beta ) ) );
             
         fi;
         

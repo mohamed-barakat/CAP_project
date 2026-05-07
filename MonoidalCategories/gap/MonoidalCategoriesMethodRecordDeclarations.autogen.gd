@@ -241,6 +241,44 @@ DeclareOperation( "AddRightUnitorWithGivenTensorProduct",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `TensorProductOnMorphismAndObject`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( alpha, b ) \mapsto \mathtt{TensorProductOnMorphismAndObject}(alpha, b)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddTensorProductOnMorphismAndObject",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddTensorProductOnMorphismAndObject",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `TensorProductOnMorphismAndObjectWithGivenTensorProducts`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( s, alpha, b, r ) \mapsto \mathtt{TensorProductOnMorphismAndObjectWithGivenTensorProducts}(s, alpha, b, r)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddTensorProductOnMorphismAndObjectWithGivenTensorProducts",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddTensorProductOnMorphismAndObjectWithGivenTensorProducts",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `TensorProductOnMorphisms`.
 #! Optionally, a weight (default: 100) can be specified which should roughly correspond
 #! to the computational complexity of the function (lower weight = less complex = faster execution).
@@ -271,6 +309,44 @@ DeclareOperation( "AddTensorProductOnMorphismsWithGivenTensorProducts",
 
 #! @Arguments C, F, weight
 DeclareOperation( "AddTensorProductOnMorphismsWithGivenTensorProducts",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `TensorProductOnObjectAndMorphism`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( a, beta ) \mapsto \mathtt{TensorProductOnObjectAndMorphism}(a, beta)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddTensorProductOnObjectAndMorphism",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddTensorProductOnObjectAndMorphism",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `TensorProductOnObjectAndMorphismWithGivenTensorProducts`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( s, a, beta, r ) \mapsto \mathtt{TensorProductOnObjectAndMorphismWithGivenTensorProducts}(s, a, beta, r)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddTensorProductOnObjectAndMorphismWithGivenTensorProducts",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddTensorProductOnObjectAndMorphismWithGivenTensorProducts",
                   [ IsCapCategory, IsFunction, IsInt ] );
 #! @EndGroup
 

@@ -497,6 +497,79 @@ AddDerivationToCAP( CocartesianRightUnitor,
     
 end : is_with_given_derivation := true );
 
+## CoproductOnMorphismAndObject
+InstallMethod( AddCoproductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoproductOnMorphismAndObject", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoproductOnMorphismAndObject,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoproductOnMorphismAndObject", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## CoproductOnMorphismAndObjectWithGivenCoproducts
+InstallMethod( AddCoproductOnMorphismAndObjectWithGivenCoproducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoproductOnMorphismAndObjectWithGivenCoproducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoproductOnMorphismAndObjectWithGivenCoproducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoproductOnMorphismAndObjectWithGivenCoproducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( CoproductOnMorphismAndObjectWithGivenCoproducts,
+                    "CoproductOnMorphismAndObjectWithGivenCoproducts by calling CoproductOnMorphismAndObject with the WithGiven argument(s) dropped",
+                    [
+                        [ CoproductOnMorphismAndObject, 1 ],
+                    ],
+  function( cat, s, alpha, b, r )
+    
+    return CoproductOnMorphismAndObject( cat, alpha, b );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( CoproductOnMorphismAndObject,
+                    "CoproductOnMorphismAndObject by calling CoproductOnMorphismAndObjectWithGivenCoproducts with the WithGiven object(s)",
+                    [
+                        [ CoproductOnMorphismAndObjectWithGivenCoproducts, 1 ],
+                        [ Coproduct, 2 ],
+                    ],
+  function( cat, alpha, b )
+    
+    return CoproductOnMorphismAndObjectWithGivenCoproducts( cat, BinaryCoproduct( cat, Source( alpha ), b ), alpha, b, BinaryCoproduct( cat, Range( alpha ), b ) );
+    
+end : is_with_given_derivation := true );
+
 ## CoproductOnMorphisms
 InstallMethod( AddCoproductOnMorphisms,
                [ IsCapCategory, IsFunction ],
@@ -567,5 +640,78 @@ AddDerivationToCAP( CoproductOnMorphisms,
   function( cat, alpha, beta )
     
     return CoproductOnMorphismsWithGivenCoproducts( cat, BinaryCoproduct( cat, Source( alpha ), Source( beta ) ), alpha, beta, BinaryCoproduct( cat, Range( alpha ), Range( beta ) ) );
+    
+end : is_with_given_derivation := true );
+
+## CoproductOnObjectAndMorphism
+InstallMethod( AddCoproductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoproductOnObjectAndMorphism", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoproductOnObjectAndMorphism,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoproductOnObjectAndMorphism", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## CoproductOnObjectAndMorphismWithGivenCoproducts
+InstallMethod( AddCoproductOnObjectAndMorphismWithGivenCoproducts,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoproductOnObjectAndMorphismWithGivenCoproducts", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoproductOnObjectAndMorphismWithGivenCoproducts,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoproductOnObjectAndMorphismWithGivenCoproducts", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( CoproductOnObjectAndMorphismWithGivenCoproducts,
+                    "CoproductOnObjectAndMorphismWithGivenCoproducts by calling CoproductOnObjectAndMorphism with the WithGiven argument(s) dropped",
+                    [
+                        [ CoproductOnObjectAndMorphism, 1 ],
+                    ],
+  function( cat, s, a, beta, r )
+    
+    return CoproductOnObjectAndMorphism( cat, a, beta );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( CoproductOnObjectAndMorphism,
+                    "CoproductOnObjectAndMorphism by calling CoproductOnObjectAndMorphismWithGivenCoproducts with the WithGiven object(s)",
+                    [
+                        [ CoproductOnObjectAndMorphismWithGivenCoproducts, 1 ],
+                        [ Coproduct, 2 ],
+                    ],
+  function( cat, a, beta )
+    
+    return CoproductOnObjectAndMorphismWithGivenCoproducts( cat, BinaryCoproduct( cat, a, Source( beta ) ), a, beta, BinaryCoproduct( cat, a, Range( beta ) ) );
     
 end : is_with_given_derivation := true );

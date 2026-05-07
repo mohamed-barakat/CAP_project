@@ -35,6 +35,44 @@ DeclareOperation( "TensorProductOnMorphismsWithGivenTensorProducts",
                   [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryMorphism, IsCapCategoryObject ] );
 
 #! @Description
+#! The arguments are a morphism $\alpha: a \rightarrow a'$ and an object $b$.
+#! The output is the tensor product $\alpha \otimes \mathrm{id}_b$.
+#! @Returns a morphism in $\mathrm{Hom}(a \otimes b, a' \otimes b)$
+#! @Arguments alpha, b
+DeclareOperation( "TensorProductOnMorphismAndObject",
+                  [ IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $s = a \otimes b$,
+#! a morphism $\alpha: a \rightarrow a'$,
+#! an object $b$
+#! and an object $r = a' \otimes b$.
+#! The output is the tensor product $\alpha \otimes \mathrm{id}_b$.
+#! @Returns a morphism in $\mathrm{Hom}(a \otimes b, a' \otimes b)$
+#! @Arguments s, alpha, b, r
+DeclareOperation( "TensorProductOnMorphismAndObjectWithGivenTensorProducts",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject, IsCapCategoryObject ] );
+
+#! @Description
+#! The arguments are an object $a$ and a morphism $\beta: b \rightarrow b'$.
+#! The output is the tensor product $\mathrm{id}_a \otimes \beta$.
+#! @Returns a morphism in $\mathrm{Hom}(a \otimes b, a \otimes b')$
+#! @Arguments a, beta
+DeclareOperation( "TensorProductOnObjectAndMorphism",
+                  [ IsCapCategoryObject, IsCapCategoryMorphism ] );
+
+#! @Description
+#! The arguments are an object $s = a \otimes b$,
+#! an object $a$,
+#! a morphism $\beta: b \rightarrow b'$
+#! and an object $r = a \otimes b'$.
+#! The output is the tensor product $\mathrm{id}_a \otimes \beta$.
+#! @Returns a morphism in $\mathrm{Hom}(a \otimes b, a \otimes b')$
+#! @Arguments s, a, beta, r
+DeclareOperation( "TensorProductOnObjectAndMorphismWithGivenTensorProducts",
+                  [ IsCapCategoryObject, IsCapCategoryObject, IsCapCategoryMorphism, IsCapCategoryObject ] );
+
+#! @Description
 #! The arguments are three objects $a,b,c$.
 #! The output is the associator $\alpha_{a,(b,c)}: a \otimes (b \otimes c) \rightarrow (a \otimes b) \otimes c$.
 #! @Returns a morphism in $\mathrm{Hom}( a \otimes (b \otimes c), (a \otimes b) \otimes c )$.
