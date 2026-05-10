@@ -251,6 +251,8 @@ DeclareGlobalFunction( "CapJitTypedExpression" );
 
 #! @Description
 #!   Computes a fixpoint of <A>func</A> with regard to equality given by <A>predicate</A>, starting with <A>initial_value</A>.
+#!   More precisely, <C>CapFixpoint</C>( <A>predicate</A>, <A>func</A>, <A>initial_value</A> ) terminates and
+#!   returns $y$ once <A>predicate</A>( $x$, $y$ ) returns <C>true</C>, where $y$ := <A>func</A>( $x$ ).
 #!   If no such fixpoint exists, the execution does not terminate.
 #! @Arguments predicate, func, initial_value
 DeclareGlobalFunction( "CapFixpoint" );

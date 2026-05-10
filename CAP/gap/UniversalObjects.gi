@@ -819,6 +819,203 @@ end );
 
 ####################################
 ##
+## CoequalizerOfIdentityAndAutomorphisms
+##
+####################################
+
+####################################
+## Convenience methods
+####################################
+
+##
+InstallGlobalFunction( CoequalizerOfIdentityAndAutomorphisms,
+  
+  function( arg )
+    
+    if IsCapCategory( arg[1] ) then
+        
+        return CallFuncList( CoequalizerOfIdentityAndAutomorphismsOp, arg );
+        
+    fi;
+    
+    if Length( arg ) = 1 and
+       IsList( arg[1] ) and
+       ForAll( arg[1], IsCapCategoryMorphism ) then
+       
+       return CoequalizerOfIdentityAndAutomorphismsOp( CapCategory( arg[1][1] ), arg[1] );
+       
+     fi;
+    
+    if Length( arg ) = 2 and
+       IsCapCategoryObject( arg[1] ) and
+       IsList( arg[2] ) and
+       ForAll( arg[2], IsCapCategoryMorphism ) then
+       
+       return CoequalizerOfIdentityAndAutomorphismsOp( CapCategory( arg[1] ), arg[1], arg[2] );
+       
+     fi;
+    
+    return CoequalizerOfIdentityAndAutomorphismsOp( CapCategory( arg[ 1 ] ), arg );
+    
+end );
+
+##
+InstallOtherMethod( CoequalizerOfIdentityAndAutomorphismsOp,
+        [ IsList ],
+        
+  function ( list_of_morphisms )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return CoequalizerOfIdentityAndAutomorphismsOp( CapCategory( list_of_morphisms[1] ), list_of_morphisms );
+    
+end );
+
+InstallOtherMethod( CoequalizerOfIdentityAndAutomorphismsOp,
+        [ IsCapCategory, IsList ],
+        
+  function ( cat, list_of_morphisms )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return CoequalizerOfIdentityAndAutomorphismsOp( cat, Range( list_of_morphisms[1] ), list_of_morphisms );
+    
+end );
+
+##
+InstallOtherMethod( ProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+        [ IsList ],
+        
+  function ( list_of_morphisms )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( CapCategory( list_of_morphisms[1] ), list_of_morphisms );
+    
+end );
+
+InstallOtherMethod( ProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+        [ IsCapCategory, IsList ],
+        
+  function ( cat, list_of_morphisms )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, Range( list_of_morphisms[1] ), list_of_morphisms );
+    
+end );
+
+##
+InstallOtherMethod( ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+        [ IsList, IsCapCategoryObject ],
+        
+  function ( list_of_morphisms, E )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( CapCategory( list_of_morphisms[1] ), list_of_morphisms, E );
+    
+end );
+
+InstallOtherMethod( ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+        [ IsCapCategory, IsList, IsCapCategoryObject ],
+        
+  function ( cat, list_of_morphisms, E )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat, Range( list_of_morphisms[1] ), list_of_morphisms, E );
+    
+end );
+
+##
+InstallOtherMethod( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+        [ IsList, IsCapCategoryMorphism ],
+        
+  function ( list_of_morphisms, tau )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms( CapCategory( list_of_morphisms[1] ), list_of_morphisms, tau );
+    
+end );
+
+InstallOtherMethod( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+        [ IsCapCategory, IsList, IsCapCategoryMorphism ],
+        
+  function ( cat, list_of_morphisms, tau )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms( cat, Range( list_of_morphisms[1] ), list_of_morphisms, tau );
+    
+end );
+
+##
+InstallOtherMethod( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+        [ IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
+        
+  function ( list_of_morphisms, tau, E )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( CapCategory( list_of_morphisms[1] ), list_of_morphisms, tau, E );
+    
+end );
+
+InstallOtherMethod( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+        [ IsCapCategory, IsList, IsCapCategoryMorphism, IsCapCategoryObject ],
+        
+  function ( cat, list_of_morphisms, tau, E )
+    
+    if IsEmpty( list_of_morphisms ) then
+        
+        Error( "the list of morphisms must not be empty" );
+        
+    fi;
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat, Range( list_of_morphisms[1] ), list_of_morphisms, tau, E );
+    
+end );
+
+####################################
+##
 ## Pushout
 ##
 ####################################

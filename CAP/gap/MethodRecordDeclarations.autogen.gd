@@ -279,6 +279,63 @@ DeclareOperation( "AddCoequalizerFunctorialWithGivenCoequalizers",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `CoequalizerOfIdentityAndAutomorphisms`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms ) \mapsto \mathtt{CoequalizerOfIdentityAndAutomorphisms}(Y, automorphisms)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `CoequalizerOfIdentityAndAutomorphismsFunctorial`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( automorphisms, mu, automorphismsp ) \mapsto \mathtt{CoequalizerOfIdentityAndAutomorphismsFunctorial}(automorphisms, mu, automorphismsp)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphismsFunctorial",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphismsFunctorial",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( P, automorphisms, mu, automorphismsp, Pp ) \mapsto \mathtt{CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers}(P, automorphisms, mu, automorphismsp, Pp)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddCoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `CoimageObject`.
 #! Optionally, a weight (default: 100) can be specified which should roughly correspond
 #! to the computational complexity of the function (lower weight = less complex = faster execution).
@@ -2426,6 +2483,44 @@ DeclareOperation( "AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms ) \mapsto \mathtt{IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer}(Y, automorphisms)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddIsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms ) \mapsto \mathtt{IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms}(Y, automorphisms)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddIsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddIsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct`.
 #! Optionally, a weight (default: 100) can be specified which should roughly correspond
 #! to the computational complexity of the function (lower weight = less complex = faster execution).
@@ -3851,6 +3946,44 @@ DeclareOperation( "AddProjectionOntoCoequalizer",
 #! @Description
 #! The arguments are a category $C$ and a function $F$.
 #! This operation adds the given function $F$
+#! to the category for the basic operation `ProjectionOntoCoequalizerOfIdentityAndAutomorphisms`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms ) \mapsto \mathtt{ProjectionOntoCoequalizerOfIdentityAndAutomorphisms}(Y, automorphisms)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms, P ) \mapsto \mathtt{ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer}(Y, automorphisms, P)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
 #! to the category for the basic operation `ProjectionOntoCoequalizerWithGivenCoequalizer`.
 #! Optionally, a weight (default: 100) can be specified which should roughly correspond
 #! to the computational complexity of the function (lower weight = less complex = faster execution).
@@ -4812,6 +4945,44 @@ DeclareOperation( "AddUniversalMorphismFromCoequalizer",
 
 #! @Arguments C, F, weight
 DeclareOperation( "AddUniversalMorphismFromCoequalizer",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms, T, tau ) \mapsto \mathtt{UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms}(Y, automorphisms, T, tau)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms",
+                  [ IsCapCategory, IsFunction, IsInt ] );
+#! @EndGroup
+
+
+#! @BeginGroup
+#! @Description
+#! The arguments are a category $C$ and a function $F$.
+#! This operation adds the given function $F$
+#! to the category for the basic operation `UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer`.
+#! Optionally, a weight (default: 100) can be specified which should roughly correspond
+#! to the computational complexity of the function (lower weight = less complex = faster execution).
+#! $F: ( Y, automorphisms, T, tau, P ) \mapsto \mathtt{UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer}(Y, automorphisms, T, tau, P)$.
+#! @Returns nothing
+#! @Arguments C, F
+DeclareOperation( "AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
+                  [ IsCapCategory, IsFunction ] );
+
+#! @Arguments C, F, weight
+DeclareOperation( "AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer",
                   [ IsCapCategory, IsFunction, IsInt ] );
 #! @EndGroup
 

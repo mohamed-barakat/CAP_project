@@ -92,8 +92,17 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithEqualizers := Concaten
     ]
 );
 
-CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithCoequalizers := Concatenation(
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithCoequalizersOfIdentityAndAutomorphisms := Concatenation(
     ListOfDefiningOperations( "IsCapCategory" ),
+    [
+        "CoequalizerOfIdentityAndAutomorphisms",
+        "ProjectionOntoCoequalizerOfIdentityAndAutomorphisms",
+        "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms",
+    ]
+);
+
+CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsCategoryWithCoequalizers := Concatenation(
+    ListOfDefiningOperations( "IsCategoryWithCoequalizersOfIdentityAndAutomorphisms" ),
     [
         "Coequalizer",
         "ProjectionOntoCoequalizer",

@@ -2083,6 +2083,129 @@ IsomorphismFromCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproductToCoequ
   dual_operation := "IsomorphismFromEqualizerToKernelOfJointPairwiseDifferencesOfMorphismsIntoDirectProduct",
 ),
 
+CoequalizerOfIdentityAndAutomorphisms := rec(
+  filter_list := [ "category", "object", "list_of_morphisms" ],
+  input_arguments_names := [ "cat", "Y", "automorphisms" ],
+  return_type := "object",
+  #dual_operation := "EqualizerOfIdentityAndAutomorphisms",
+  
+  pre_function := function( cat, cobase, diagram )
+    local current_morphism;
+    
+    for current_morphism in diagram{[ 1 .. Length( diagram ) ]} do
+        
+        if not IsEndomorphism( cat, current_morphism ) then
+            return [ false, "the given morphisms of the coequalizer diagram must be endomorphisms" ];
+        fi;
+        
+    od;
+    
+    for current_morphism in diagram{[ 1 .. Length( diagram ) ]} do
+        
+        if not IsEqualForObjects( cat, Range( current_morphism ), cobase ) then
+            return [ false, "the given morphisms of the coequalizer diagram must have equal ranges" ];
+        fi;
+        
+    od;
+    
+    return [ true ];
+  end,
+  compatible_with_congruence_of_morphisms := false,
+  functorial := "CoequalizerOfIdentityAndAutomorphismsFunctorial",
+),
+
+ProjectionOntoCoequalizerOfIdentityAndAutomorphisms := rec(
+  filter_list := [ "category", "object", "list_of_morphisms" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "Y", "automorphisms" ],
+  output_source_getter_string := "Y",
+  output_source_getter_preconditions := [ ],
+  with_given_object_position := "Range",
+  #dual_operation := "EmbeddingOfEqualizerOfIdentityAndAutomorphisms",
+  
+  pre_function := "CoequalizerOfIdentityAndAutomorphisms",
+  compatible_with_congruence_of_morphisms := false,
+),
+
+ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer := rec(
+  filter_list := [ "category", "object", "list_of_morphisms", "object" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "Y", "automorphisms", "P" ],
+  output_source_getter_string := "Y",
+  output_source_getter_preconditions := [ ],
+  output_range_getter_string := "P",
+  output_range_getter_preconditions := [ ],
+  #dual_operation := "EmbeddingOfEqualizerOfIdentityAndAutomorphismsWithGivenEqualizer",
+  compatible_with_congruence_of_morphisms := false,
+),
+
+UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms := rec(
+  filter_list := [ "category", "object", "list_of_morphisms", "object", "morphism" ],
+  input_arguments_names := [ "cat", "Y", "automorphisms", "T", "tau" ],
+  output_range_getter_string := "T",
+  output_range_getter_preconditions := [ ],
+  with_given_object_position := "Source",
+  return_type := "morphism",
+  #dual_operation := "UniversalMorphismIntoEqualizerOfIdentityAndAutomorphisms",
+  
+  pre_function := function( cat, cobase, diagram, test_object, tau )
+    local current_morphism, current_morphism_position;
+    
+    for current_morphism in diagram{[ 1 .. Length( diagram ) ]} do
+        
+        if not IsEndomorphism( cat, current_morphism ) then
+            return [ false, "the given morphisms of the coequalizer diagram must be endomorphisms" ];
+        fi;
+        
+    od;
+    
+    for current_morphism in diagram{[ 1 .. Length( diagram ) ]} do
+        
+        if not IsEqualForObjects( cat, Range( current_morphism ), cobase ) then
+            return [ false, "the given morphisms of the coequalizer diagram must have equal ranges" ];
+        fi;
+        
+    od;
+    
+    for current_morphism_position in [ 1 .. Length( diagram ) ] do
+        
+        if not IsEqualForObjects( cat, Range( diagram[ current_morphism_position ] ), Source( tau ) ) then
+            return [ false, Concatenation( "in diagram position ", String( current_morphism_position ), ": range and source are not equal" ) ];
+        fi;
+        
+    od;
+    
+    return [ true ];
+  end,
+  compatible_with_congruence_of_morphisms := false,
+),
+
+UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer := rec(
+  filter_list := [ "category", "object", "list_of_morphisms", "object", "morphism", "object" ],
+  input_arguments_names := [ "cat", "Y", "automorphisms", "T", "tau", "P" ],
+  output_source_getter_string := "P",
+  output_source_getter_preconditions := [ ],
+  output_range_getter_string := "T",
+  output_range_getter_preconditions := [ ],
+  return_type := "morphism",
+  #dual_operation := "UniversalMorphismIntoEqualizerOfIdentityAndAutomorphismsWithGivenEqualizer",
+  compatible_with_congruence_of_morphisms := false,
+),
+
+IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer := rec(
+  filter_list := [ "category", "object", "list_of_morphisms" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "Y", "automorphisms" ],
+  #dual_operation := "IsomorphismFromEqualizerOfIdentityAndAutomorphismsToEqualizer",
+),
+
+IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms := rec(
+  filter_list := [ "category", "object", "list_of_morphisms" ],
+  return_type := "morphism",
+  input_arguments_names := [ "cat", "Y", "automorphisms" ],
+  #dual_operation := "IsomorphismFromEqualizerOfIdentityAndAutomorphismsToEqualizer",
+),
+
 Pushout := rec(
   filter_list := [ "category", "list_of_morphisms" ],
   input_arguments_names := [ "cat", "morphisms" ],
@@ -2989,6 +3112,33 @@ CoequalizerFunctorialWithGivenCoequalizers := rec(
   return_type := "morphism",
   dual_operation := "EqualizerFunctorialWithGivenEqualizers",
   dual_arguments_reversed := true,
+  compatible_with_congruence_of_morphisms := false,
+),
+
+CoequalizerOfIdentityAndAutomorphismsFunctorial := rec(
+  filter_list := [ "category", "list_of_morphisms", "morphism", "list_of_morphisms" ],
+  input_arguments_names := [ "cat", "automorphisms", "mu", "automorphismsp" ],
+  return_type := "morphism",
+  output_source_getter_string := "CoequalizerOfIdentityAndAutomorphisms( cat, Source( mu ), automorphisms )",
+  output_source_getter_preconditions := [ [ "CoequalizerOfIdentityAndAutomorphisms", 1 ] ],
+  output_range_getter_string := "CoequalizerOfIdentityAndAutomorphisms( cat, Range( mu ), automorphismsp )",
+  output_range_getter_preconditions := [ [ "CoequalizerOfIdentityAndAutomorphisms", 1 ] ],
+  with_given_object_position := "both",
+  #dual_operation := "EqualizerOfIdentityAndAutomorphismsFunctorial",
+  #dual_arguments_reversed := true,
+  compatible_with_congruence_of_morphisms := false,
+),
+
+CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers := rec(
+  filter_list := [ "category", "object", "list_of_morphisms", "morphism", "list_of_morphisms", "object" ],
+  input_arguments_names := [ "cat", "P", "automorphisms", "mu", "automorphismsp", "Pp" ],
+  output_source_getter_string := "P",
+  output_source_getter_preconditions := [ ],
+  output_range_getter_string := "Pp",
+  output_range_getter_preconditions := [ ],
+  return_type := "morphism",
+  #dual_operation := "EqualizerOfIdentityAndAutomorphismsFunctorialWithGivenEqualizers",
+  #dual_arguments_reversed := true,
   compatible_with_congruence_of_morphisms := false,
 ),
 

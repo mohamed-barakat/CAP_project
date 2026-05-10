@@ -424,6 +424,104 @@ AddDerivationToCAP( CoequalizerFunctorial,
     
 end : is_with_given_derivation := true );
 
+## CoequalizerOfIdentityAndAutomorphisms
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoequalizerOfIdentityAndAutomorphisms", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoequalizerOfIdentityAndAutomorphisms", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## CoequalizerOfIdentityAndAutomorphismsFunctorial
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphismsFunctorial,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorial", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphismsFunctorial,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorial", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers", category, func, -1 );
+    
+end );
+
+InstallMethod( AddCoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers,
+                    "CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers by calling CoequalizerOfIdentityAndAutomorphismsFunctorial with the WithGiven argument(s) dropped",
+                    [
+                        [ CoequalizerOfIdentityAndAutomorphismsFunctorial, 1 ],
+                    ],
+  function( cat, P, automorphisms, mu, automorphismsp, Pp )
+    
+    return CoequalizerOfIdentityAndAutomorphismsFunctorial( cat, automorphisms, mu, automorphismsp );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( CoequalizerOfIdentityAndAutomorphismsFunctorial,
+                    "CoequalizerOfIdentityAndAutomorphismsFunctorial by calling CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers with the WithGiven object(s)",
+                    [
+                        [ CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers, 1 ],
+                        [ CoequalizerOfIdentityAndAutomorphisms, 2 ],
+                    ],
+  function( cat, automorphisms, mu, automorphismsp )
+    
+    return CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers( cat, CoequalizerOfIdentityAndAutomorphisms( cat, Source( mu ), automorphisms ), automorphisms, mu, automorphismsp, CoequalizerOfIdentityAndAutomorphisms( cat, Range( mu ), automorphismsp ) );
+    
+end : is_with_given_derivation := true );
+
 ## CoimageObject
 InstallMethod( AddCoimageObject,
                [ IsCapCategory, IsFunction ],
@@ -3757,6 +3855,56 @@ InstallMethod( AddIsomorphismFromCoequalizerOfCoproductDiagramToPushout,
     )
 );
 
+## IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer
+InstallMethod( AddIsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer", category, func, -1 );
+    
+end );
+
+InstallMethod( AddIsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms
+InstallMethod( AddIsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms", category, func, -1 );
+    
+end );
+
+InstallMethod( AddIsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
 ## IsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct
 InstallMethod( AddIsomorphismFromCoequalizerToCokernelOfJointPairwiseDifferencesOfMorphismsFromCoproduct,
                [ IsCapCategory, IsFunction ],
@@ -6001,6 +6149,79 @@ InstallMethod( AddProjectionOntoCoequalizer,
     )
 );
 
+## ProjectionOntoCoequalizerOfIdentityAndAutomorphisms
+InstallMethod( AddProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphisms", category, func, -1 );
+    
+end );
+
+InstallMethod( AddProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphisms", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer
+InstallMethod( AddProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer", category, func, -1 );
+    
+end );
+
+InstallMethod( AddProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+                    "ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer by calling ProjectionOntoCoequalizerOfIdentityAndAutomorphisms with the WithGiven argument(s) dropped",
+                    [
+                        [ ProjectionOntoCoequalizerOfIdentityAndAutomorphisms, 1 ],
+                    ],
+  function( cat, Y, automorphisms, P )
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat, Y, automorphisms );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( ProjectionOntoCoequalizerOfIdentityAndAutomorphisms,
+                    "ProjectionOntoCoequalizerOfIdentityAndAutomorphisms by calling ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer with the WithGiven object(s)",
+                    [
+                        [ ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer, 1 ],
+                        [ Coequalizer, 1 ],
+                    ],
+  function( cat, Y, automorphisms )
+    
+    return ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat, Y, automorphisms, Coequalizer( cat, Y, automorphisms ) );
+    
+end : is_with_given_derivation := true );
+
 ## ProjectionOntoCoequalizerWithGivenCoequalizer
 InstallMethod( AddProjectionOntoCoequalizerWithGivenCoequalizer,
                [ IsCapCategory, IsFunction ],
@@ -7344,6 +7565,79 @@ InstallMethod( AddUniversalMorphismFromCoequalizer,
         end
     )
 );
+
+## UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms
+InstallMethod( AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms", category, func, -1 );
+    
+end );
+
+InstallMethod( AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+## UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer
+InstallMethod( AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+               [ IsCapCategory, IsFunction ],
+               
+  function( category, func )
+    
+    AddCapOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer", category, func, -1 );
+    
+end );
+
+InstallMethod( AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+               [ IsCapCategory, IsFunction, IsInt ],
+               
+    FunctionWithNamedArguments(
+        [
+            [ "IsPrecompiledDerivation", false ],
+        ],
+        function( CAP_NAMED_ARGUMENTS, category, func, weight )
+            
+            AddCapOperation( "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer", category, func, weight : IsPrecompiledDerivation := CAP_NAMED_ARGUMENTS.IsPrecompiledDerivation );
+            
+        end
+    )
+);
+
+AddDerivationToCAP( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer,
+                    "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer by calling UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms with the WithGiven argument(s) dropped",
+                    [
+                        [ UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms, 1 ],
+                    ],
+  function( cat, Y, automorphisms, T, tau, P )
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms( cat, Y, automorphisms, T, tau );
+        
+end : is_with_given_derivation := true );
+
+AddDerivationToCAP( UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms,
+                    "UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms by calling UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer with the WithGiven object(s)",
+                    [
+                        [ UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer, 1 ],
+                        [ Coequalizer, 1 ],
+                    ],
+  function( cat, Y, automorphisms, T, tau )
+    
+    return UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat, Y, automorphisms, T, tau, Coequalizer( cat, Y, automorphisms ) );
+    
+end : is_with_given_derivation := true );
 
 ## UniversalMorphismFromCoequalizerWithGivenCoequalizer
 InstallMethod( AddUniversalMorphismFromCoequalizerWithGivenCoequalizer,

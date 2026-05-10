@@ -17,8 +17,10 @@ Perform( ListKnownCategoricalProperties( op ), Display );
 #! IsAdditiveMonoidalCategory
 #! IsBraidedMonoidalCategory
 #! IsCategoryWithCoequalizers
+#! IsCategoryWithCoequalizersOfIdentityAndAutomorphisms
 #! IsCategoryWithCokernels
 #! IsCategoryWithEqualizers
+#! IsCategoryWithEqualizersOfIdentityAndAutomorphisms
 #! IsCategoryWithInitialObject
 #! IsCategoryWithKernels
 #! IsCategoryWithTerminalObject

@@ -1668,6 +1668,104 @@ end
     ;
     
     ##
+    AddCoequalizerOfIdentityAndAutomorphisms( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1;
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := AsInteger( Y_1 );
+    deduped_2_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_1_1 := Concatenation( [ HomalgIdentityMatrix( deduped_3_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    return AsCapCategoryObject( cat_1, deduped_3_1 - RowRankOfMatrix( UnionOfRows( deduped_4_1, deduped_3_1, deduped_1_1{[ 1 .. deduped_2_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_3_1, deduped_1_1{[ 2 .. deduped_2_1 ]} ) ) );
+end
+########
+        
+    , 2925 : IsPrecompiledDerivation := true );
+    
+    ##
+    AddCoequalizerOfIdentityAndAutomorphismsFunctorial( cat,
+        
+########
+function ( cat_1, automorphisms_1, mu_1, automorphismsp_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1;
+    deduped_8_1 := UnderlyingRing( cat_1 );
+    deduped_7_1 := AsInteger( Range( mu_1 ) );
+    deduped_6_1 := AsInteger( Source( mu_1 ) );
+    deduped_5_1 := Sum( [ 1, Length( automorphismsp_1 ) ] );
+    deduped_4_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_7_1, deduped_8_1 ) ], List( automorphismsp_1, AsHomalgMatrix ) );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_6_1, deduped_8_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := UniqueLeftDivide( SyzygiesOfColumns( UnionOfRows( deduped_8_1, deduped_6_1, deduped_2_1{[ 1 .. deduped_4_1 - 1 ]} ) - UnionOfRows( deduped_8_1, deduped_6_1, deduped_2_1{[ 2 .. deduped_4_1 ]} ) ), AsHomalgMatrix( mu_1 ) * SyzygiesOfColumns( UnionOfRows( deduped_8_1, deduped_7_1, deduped_3_1{[ 1 .. deduped_5_1 - 1 ]} ) - UnionOfRows( deduped_8_1, deduped_7_1, deduped_3_1{[ 2 .. deduped_5_1 ]} ) ) );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 11903 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.CoequalizerOfIdentityAndAutomorphismsFunctorial :=
+        
+########
+function ( cat_1, automorphisms_1, mu_1, automorphismsp_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1;
+    deduped_9_1 := UnderlyingRing( cat_1 );
+    deduped_8_1 := AsInteger( Range( mu_1 ) );
+    deduped_7_1 := AsInteger( Source( mu_1 ) );
+    deduped_6_1 := Sum( [ 1, Length( automorphismsp_1 ) ] );
+    deduped_5_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_4_1 := Concatenation( [ HomalgIdentityMatrix( deduped_8_1, deduped_9_1 ) ], List( automorphismsp_1, AsHomalgMatrix ) );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_7_1, deduped_9_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_2_1 := UnionOfRows( deduped_9_1, deduped_8_1, deduped_4_1{[ 1 .. deduped_6_1 - 1 ]} ) - UnionOfRows( deduped_9_1, deduped_8_1, deduped_4_1{[ 2 .. deduped_6_1 ]} );
+    deduped_1_1 := UnionOfRows( deduped_9_1, deduped_7_1, deduped_3_1{[ 1 .. deduped_5_1 - 1 ]} ) - UnionOfRows( deduped_9_1, deduped_7_1, deduped_3_1{[ 2 .. deduped_5_1 ]} );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, deduped_7_1 - RowRankOfMatrix( deduped_1_1 ) ), UniqueLeftDivide( SyzygiesOfColumns( deduped_1_1 ), AsHomalgMatrix( mu_1 ) * SyzygiesOfColumns( deduped_2_1 ) ), AsCapCategoryObject( cat_1, deduped_8_1 - RowRankOfMatrix( deduped_2_1 ) ) );
+end
+########
+        
+    ;
+    
+    ##
+    AddCoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers( cat,
+        
+########
+function ( cat_1, P_1, automorphisms_1, mu_1, automorphismsp_1, Pp_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1;
+    deduped_8_1 := UnderlyingRing( cat_1 );
+    deduped_7_1 := AsInteger( Range( mu_1 ) );
+    deduped_6_1 := AsInteger( Source( mu_1 ) );
+    deduped_5_1 := Sum( [ 1, Length( automorphismsp_1 ) ] );
+    deduped_4_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_7_1, deduped_8_1 ) ], List( automorphismsp_1, AsHomalgMatrix ) );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_6_1, deduped_8_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := UniqueLeftDivide( SyzygiesOfColumns( UnionOfRows( deduped_8_1, deduped_6_1, deduped_2_1{[ 1 .. deduped_4_1 - 1 ]} ) - UnionOfRows( deduped_8_1, deduped_6_1, deduped_2_1{[ 2 .. deduped_4_1 ]} ) ), AsHomalgMatrix( mu_1 ) * SyzygiesOfColumns( UnionOfRows( deduped_8_1, deduped_7_1, deduped_3_1{[ 1 .. deduped_5_1 - 1 ]} ) - UnionOfRows( deduped_8_1, deduped_7_1, deduped_3_1{[ 2 .. deduped_5_1 ]} ) ) );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 6052 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.CoequalizerOfIdentityAndAutomorphismsFunctorialWithGivenCoequalizers :=
+        
+########
+function ( cat_1, P_1, automorphisms_1, mu_1, automorphismsp_1, Pp_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1, deduped_7_1, deduped_8_1, deduped_9_1;
+    deduped_9_1 := UnderlyingRing( cat_1 );
+    deduped_8_1 := AsInteger( Range( mu_1 ) );
+    deduped_7_1 := AsInteger( Source( mu_1 ) );
+    deduped_6_1 := Sum( [ 1, Length( automorphismsp_1 ) ] );
+    deduped_5_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_4_1 := Concatenation( [ HomalgIdentityMatrix( deduped_8_1, deduped_9_1 ) ], List( automorphismsp_1, AsHomalgMatrix ) );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_7_1, deduped_9_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_2_1 := UnionOfRows( deduped_9_1, deduped_8_1, deduped_4_1{[ 1 .. deduped_6_1 - 1 ]} ) - UnionOfRows( deduped_9_1, deduped_8_1, deduped_4_1{[ 2 .. deduped_6_1 ]} );
+    deduped_1_1 := UnionOfRows( deduped_9_1, deduped_7_1, deduped_3_1{[ 1 .. deduped_5_1 - 1 ]} ) - UnionOfRows( deduped_9_1, deduped_7_1, deduped_3_1{[ 2 .. deduped_5_1 ]} );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, deduped_7_1 - RowRankOfMatrix( deduped_1_1 ) ), UniqueLeftDivide( SyzygiesOfColumns( deduped_1_1 ), AsHomalgMatrix( mu_1 ) * SyzygiesOfColumns( deduped_2_1 ) ), AsCapCategoryObject( cat_1, deduped_8_1 - RowRankOfMatrix( deduped_2_1 ) ) );
+end
+########
+        
+    ;
+    
+    ##
     AddCoevaluationForDual( cat,
         
 ########
@@ -4715,6 +4813,76 @@ function ( cat_1, D_1 )
     deduped_6_1 := deduped_8_1 - RowRankOfMatrix( UnionOfRows( deduped_10_1, deduped_8_1, deduped_7_1{[ 1 .. deduped_11_1 - 1 ]} ) - UnionOfRows( deduped_10_1, deduped_8_1, deduped_7_1{[ 2 .. deduped_11_1 ]} ) );
     deduped_5_1 := AsCapCategoryObject( cat_1, deduped_6_1 );
     return AsCapCategoryMorphism( cat_1, deduped_5_1, HomalgIdentityMatrix( deduped_6_1, deduped_10_1 ), deduped_5_1 );
+end
+########
+        
+    ;
+    
+    ##
+    AddIsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := UnderlyingRing( cat_1 );
+    deduped_4_1 := AsInteger( Y_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_4_1, deduped_5_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := HomalgIdentityMatrix( deduped_4_1 - RowRankOfMatrix( UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) ), deduped_5_1 );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 3025 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.IsomorphismFromCoequalizerOfIdentityAndAutomorphismsToCoequalizer :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1;
+    deduped_6_1 := UnderlyingRing( cat_1 );
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_6_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_2_1 := deduped_5_1 - RowRankOfMatrix( UnionOfRows( deduped_6_1, deduped_5_1, deduped_3_1{[ 1 .. deduped_4_1 - 1 ]} ) - UnionOfRows( deduped_6_1, deduped_5_1, deduped_3_1{[ 2 .. deduped_4_1 ]} ) );
+    deduped_1_1 := AsCapCategoryObject( cat_1, deduped_2_1 );
+    return AsCapCategoryMorphism( cat_1, deduped_1_1, HomalgIdentityMatrix( deduped_2_1, deduped_6_1 ), deduped_1_1 );
+end
+########
+        
+    ;
+    
+    ##
+    AddIsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := UnderlyingRing( cat_1 );
+    deduped_4_1 := AsInteger( Y_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_4_1, deduped_5_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := HomalgIdentityMatrix( deduped_4_1 - RowRankOfMatrix( UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) ), deduped_5_1 );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 3025 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.IsomorphismFromCoequalizerToCoequalizerOfIdentityAndAutomorphisms :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1, deduped_6_1;
+    deduped_6_1 := UnderlyingRing( cat_1 );
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_3_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_6_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_2_1 := deduped_5_1 - RowRankOfMatrix( UnionOfRows( deduped_6_1, deduped_5_1, deduped_3_1{[ 1 .. deduped_4_1 - 1 ]} ) - UnionOfRows( deduped_6_1, deduped_5_1, deduped_3_1{[ 2 .. deduped_4_1 ]} ) );
+    deduped_1_1 := AsCapCategoryObject( cat_1, deduped_2_1 );
+    return AsCapCategoryMorphism( cat_1, deduped_1_1, HomalgIdentityMatrix( deduped_2_1, deduped_6_1 ), deduped_1_1 );
 end
 ########
         
@@ -8234,6 +8402,74 @@ end
     ;
     
     ##
+    AddProjectionOntoCoequalizerOfIdentityAndAutomorphisms( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := SyzygiesOfColumns( UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) );
+    return AsCapCategoryMorphism( cat_1, Y_1, morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 5750 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.ProjectionOntoCoequalizerOfIdentityAndAutomorphisms :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_1_1 := UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} );
+    return AsCapCategoryMorphism( cat_1, Y_1, SyzygiesOfColumns( deduped_1_1 ), AsCapCategoryObject( cat_1, deduped_5_1 - RowRankOfMatrix( deduped_1_1 ) ) );
+end
+########
+        
+    ;
+    
+    ##
+    AddProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1, P_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := SyzygiesOfColumns( UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) );
+    return AsCapCategoryMorphism( cat_1, Y_1, morphism_attr_1_1, AsCapCategoryObject( cat_1, NumberColumns( morphism_attr_1_1 ) ) );
+end
+########
+        
+    , 2925 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.ProjectionOntoCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1, P_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_1_1 := UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} );
+    return AsCapCategoryMorphism( cat_1, Y_1, SyzygiesOfColumns( deduped_1_1 ), AsCapCategoryObject( cat_1, deduped_5_1 - RowRankOfMatrix( deduped_1_1 ) ) );
+end
+########
+        
+    ;
+    
+    ##
     AddProjectionOntoCoequalizerWithGivenCoequalizer( cat,
         
 ########
@@ -10351,6 +10587,74 @@ function ( cat_1, Y_1, morphisms_1, T_1, tau_1 )
     deduped_2_1 := AsInteger( Y_1 );
     deduped_1_1 := UnionOfRows( deduped_3_1, deduped_2_1, deduped_4_1{[ 1 .. deduped_5_1 - 1 ]} ) - UnionOfRows( deduped_3_1, deduped_2_1, deduped_4_1{[ 2 .. deduped_5_1 ]} );
     return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, deduped_2_1 - RowRankOfMatrix( deduped_1_1 ) ), UniqueLeftDivide( SyzygiesOfColumns( deduped_1_1 ), AsHomalgMatrix( tau_1 ) ), Range( tau_1 ) );
+end
+########
+        
+    ;
+    
+    ##
+    AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1, T_1, tau_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := UniqueLeftDivide( SyzygiesOfColumns( UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) ), AsHomalgMatrix( tau_1 ) );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, Range( tau_1 ) );
+end
+########
+        
+    , 5851 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.UniversalMorphismFromCoequalizerOfIdentityAndAutomorphisms :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1, T_1, tau_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := UnderlyingRing( cat_1 );
+    deduped_4_1 := AsInteger( Y_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_4_1, deduped_5_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_1_1 := UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 2 .. deduped_3_1 ]} );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, deduped_4_1 - RowRankOfMatrix( deduped_1_1 ) ), UniqueLeftDivide( SyzygiesOfColumns( deduped_1_1 ), AsHomalgMatrix( tau_1 ) ), Range( tau_1 ) );
+end
+########
+        
+    ;
+    
+    ##
+    AddUniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer( cat,
+        
+########
+function ( cat_1, Y_1, automorphisms_1, T_1, tau_1, P_1 )
+    local morphism_attr_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := AsInteger( Y_1 );
+    deduped_4_1 := UnderlyingRing( cat_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_5_1, deduped_4_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    morphism_attr_1_1 := UniqueLeftDivide( SyzygiesOfColumns( UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_4_1, deduped_5_1, deduped_2_1{[ 2 .. deduped_3_1 ]} ) ), AsHomalgMatrix( tau_1 ) );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, NumberRows( morphism_attr_1_1 ) ), morphism_attr_1_1, Range( tau_1 ) );
+end
+########
+        
+    , 3026 : IsPrecompiledDerivation := true );
+    
+    ##
+    cat!.cached_precompiled_functions.UniversalMorphismFromCoequalizerOfIdentityAndAutomorphismsWithGivenCoequalizer :=
+        
+########
+function ( cat_1, Y_1, automorphisms_1, T_1, tau_1, P_1 )
+    local deduped_1_1, deduped_2_1, deduped_3_1, deduped_4_1, deduped_5_1;
+    deduped_5_1 := UnderlyingRing( cat_1 );
+    deduped_4_1 := AsInteger( Y_1 );
+    deduped_3_1 := Sum( [ 1, Length( automorphisms_1 ) ] );
+    deduped_2_1 := Concatenation( [ HomalgIdentityMatrix( deduped_4_1, deduped_5_1 ) ], List( automorphisms_1, AsHomalgMatrix ) );
+    deduped_1_1 := UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 1 .. deduped_3_1 - 1 ]} ) - UnionOfRows( deduped_5_1, deduped_4_1, deduped_2_1{[ 2 .. deduped_3_1 ]} );
+    return AsCapCategoryMorphism( cat_1, AsCapCategoryObject( cat_1, deduped_4_1 - RowRankOfMatrix( deduped_1_1 ) ), UniqueLeftDivide( SyzygiesOfColumns( deduped_1_1 ), AsHomalgMatrix( tau_1 ) ), Range( tau_1 ) );
 end
 ########
         
