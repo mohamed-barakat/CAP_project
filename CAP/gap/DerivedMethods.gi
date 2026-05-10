@@ -3555,6 +3555,8 @@ AddFinalDerivationBundle( "Adding BasisOfExternalHom and CoefficientsOfMorphism 
   end
 );
 
+## Final methods for InitialObject
+
 ##
 AddFinalDerivationBundle( "InitialObject as the empty coproduct",
                     [ [ Coproduct, 1 ],
@@ -3585,6 +3587,8 @@ AddFinalDerivationBundle( "InitialObject as the empty coproduct",
 end
 ] : CategoryFilter := cat -> IsBound( cat!.supports_empty_limits ) and cat!.supports_empty_limits = true );
 
+## Final methods for TerminalObject
+
 ##
 AddFinalDerivationBundle( "TerminalObject as the empty direct product",
                     [ [ DirectProduct, 1 ],
@@ -3614,6 +3618,8 @@ AddFinalDerivationBundle( "TerminalObject as the empty direct product",
     
   end
 ] : CategoryFilter := cat -> IsBound( cat!.supports_empty_limits ) and cat!.supports_empty_limits = true );
+
+## Final methods for ZeroObject
 
 ##
 AddFinalDerivationBundle( "ZeroObject as the empty direct product",
