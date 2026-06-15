@@ -12,6 +12,12 @@ ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesTensorProductOnObjects
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategories.gd" );
 ReadPackage( "MonoidalCategories", "gap/MonoidalCategoriesMethodRecordDeclarations.autogen.gd" );
 
+## Strict Monoidal
+
+ReadPackage( "MonoidalCategories", "gap/StrictMonoidalCategoriesProperties.gd" );
+ReadPackage( "MonoidalCategories", "gap/StrictMonoidalCategories.gd" );
+ReadPackage( "MonoidalCategories", "gap/StrictMonoidalCategoriesMethodRecordDeclarations.autogen.gd" );
+
 ## Additive Monoidal
 
 ReadPackage( "MonoidalCategories", "gap/AdditiveMonoidalCategories.gd" );
