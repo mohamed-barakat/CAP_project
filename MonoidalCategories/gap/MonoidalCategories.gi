@@ -4,8 +4,6 @@
 # Implementations
 #
 
-InstallTrueMethod( IsMonoidalCategory, IsStrictMonoidalCategory );
-
 ##
 AddDerivationToCAP( AssociatorRightToLeft,
                     "calling the WithGiven operation in a skeletal setting",

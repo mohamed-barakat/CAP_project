@@ -19,6 +19,8 @@ is called a <Emph>monoidal category</Emph>, if
 The corresponding GAP property is given by
 <C>IsMonoidalCategory</C>.
 
+@Section Strict Monoidal Categories
+
 @Section Additive Monoidal Categories
 
 @Section Braided Monoidal Categories

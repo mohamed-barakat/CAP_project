@@ -24,10 +24,3 @@ CAP_INTERNAL_CONSTRUCTIVE_CATEGORIES_RECORD.IsMonoidalCategory  :=
 DeclareProperty( "IsMonoidalCategory", IsCapCategory );
 
 AddCategoricalProperty( [ "IsMonoidalCategory", "IsMonoidalCategory" ] );
-
-#! @Description
-#!  The property of the category <A>C</A> being strict monoidal.
-#! @Arguments C
-DeclareProperty( "IsStrictMonoidalCategory", IsCapCategory );
-
-AddCategoricalProperty( [ "IsStrictMonoidalCategory", "IsStrictMonoidalCategory" ] );
